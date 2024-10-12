@@ -1,3 +1,0 @@
-mainblue : #3A5ADB
-darkblue : #040948
-text: #f1f1f1
