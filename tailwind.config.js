@@ -11,6 +11,9 @@ export default {
         baseDark: "#040948",
         bgDark: "#202020",
       },
+      backgroundImage: {
+        "banner-hero": "url('/src/assets/Banners/parabolic.svg')",
+      },
     },
   },
   plugins: [],
