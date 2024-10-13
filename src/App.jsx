@@ -1,11 +1,10 @@
-import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomeRoutes from "./routes/Home/HomeRoutes";
 
 const App = () => {
-  return (
-    <div className="flex justify-center items-center w-full h-screen text-[200px] animate-pulse font-semibold font-afacad bg-clip-text text-transparent bg-gradient-to-r from-[#040948] to-[#3A5ADB]">
-      goalBoard
-    </div>
-  );
+  const router = createBrowserRouter([HomeRoutes]);
+
+  return <RouterProvider router={router} />;
 };
 
 export default App;

@@ -6,6 +6,11 @@ export default {
       fontFamily: {
         afacad: ["Afacad", "sans-serif"],
       },
+      colors: {
+        base: "#3A5ADB",
+        baseDark: "#040948",
+        bgDark: "#202020",
+      },
     },
   },
   plugins: [],
