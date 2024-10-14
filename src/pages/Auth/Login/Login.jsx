@@ -72,7 +72,7 @@ const Login = () => {
           >
             Henüz kayıt olmadın mı?
           </Link>
-          <button className="px-4 py-2 rounded-md bg-primary text-white font-semibold border border-transparent hover:border hover:border-base hover:bg-white hover:text-base">
+          <button className="px-4 py-2 rounded-md bg-primary text-white font-semibold border border-transparent hover:border hover:border-primary hover:bg-white hover:text-primary">
             Giriş Yap
           </button>
         </form>

@@ -86,18 +86,6 @@ export const loginService = createAsyncThunk(
   }
 );
 
-export const getUserByID = createAsyncThunk("auth/getUserByID", async (id) => {
-  try {
-    const usersRef = doc(db, "users", id);
-
-    const userDoc = await getDoc(usersRef);
-
-    return userDoc.data();
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 export const setUserService = createAsyncThunk("auth/setUser", async (data) => {
   try {
     return data;

@@ -68,30 +68,32 @@ const CreateTeam = () => {
   };
 
   return (
-    <div className="flex flex-grow justify-start items-start w-full container mx-auto mt-24 flex-col gap-y-4">
-      <h1 className="text-5xl font-semibold text-primary">Takım Oluştur</h1>
-      <p className="text-sm text-zinc-700">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias velit
-        deserunt numquam saepe consequatur cumque, illo, quaerat dolores
-        molestiae officiis exercitationem fugit iusto eius soluta earum
-        assumenda aliquid eos. Itaque minus accusantium ad quis velit! Ea facere
-        deleniti tempora nihil sed ut, nam iste eaque rerum beatae ipsam quas
-        tenetur?
-      </p>
-      <form
-        className="w-1/2 flex items-center gap-x-5"
-        onSubmit={handleSubmit(createTeam)}
-      >
-        <input
-          type="text"
-          className="w-full border bg-white rounded-md px-4 py-2 outline-none"
-          placeholder="Takım adı..."
-          {...register("teamName", { required: true })}
-        />
-        <button className="bg-primary text-lg text-white px-6 py-3 flex justify-center items-center rounded-md">
-          <IoMdAdd />
-        </button>
-      </form>
+    <div className="flex flex-grow justify-start items-start w-full container mx-auto flex-col gap-y-4 p-4 ">
+      <div className="bg-white p-12 flex flex-col gap-y-5 rounded-md border">
+        <h1 className="text-5xl font-semibold text-primary">Takım Oluştur</h1>
+        <p className="text-sm text-zinc-700">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias velit
+          deserunt numquam saepe consequatur cumque, illo, quaerat dolores
+          molestiae officiis exercitationem fugit iusto eius soluta earum
+          assumenda aliquid eos. Itaque minus accusantium ad quis velit! Ea
+          facere deleniti tempora nihil sed ut, nam iste eaque rerum beatae
+          ipsam quas tenetur?
+        </p>
+        <form
+          className="w-1/2 flex items-center gap-x-5"
+          onSubmit={handleSubmit(createTeam)}
+        >
+          <input
+            type="text"
+            className="w-full border bg-white rounded-md px-4 py-2 outline-none"
+            placeholder="Takım adı..."
+            {...register("teamName", { required: true })}
+          />
+          <button className="bg-primary text-lg text-white px-6 py-3 flex justify-center items-center rounded-md">
+            <IoMdAdd />
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

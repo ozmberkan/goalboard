@@ -33,8 +33,6 @@ const App = () => {
                 teams: userDoc.data().teams || [],
               })
             );
-          } else {
-            toast.error("Kullanıcı Bulunamıyor");
           }
         } catch (error) {
           toast.error("Kullancı Bulunamıyor");
