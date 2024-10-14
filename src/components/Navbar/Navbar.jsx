@@ -9,7 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { logoutUser } from "~/redux/slices/userSlice";
 
 const Navbar = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user, status } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const exit = async () => {
@@ -26,18 +26,26 @@ const Navbar = () => {
     <div className="w-full p-4">
       <div className="container mx-auto bg-white border py-4 rounded-full px-10 flex justify-between items-center">
         <Link to="/">
-          <img src={Logo} className="w-32" />
+          <img src={Logo} className="w-32" alt="GoalBoard Logo" />
         </Link>
         <div className="flex gap-x-5 items-center">
-          {!user ? (
+          {status === "pending" && (
             <div className="flex gap-x-1 items-center">
               <Skeleton className="px-4 py-2 rounded-full w-24 h-[36px]" />
             </div>
-          ) : (
+          )}
+
+          {status === "success" && user && (
             <div className="flex gap-x-3 items-center">
               <Link
+                to="/create-team"
+                className="font-medium text-sm bg-primary text-white px-4 py-2 rounded-full"
+              >
+                Takım Oluştur
+              </Link>
+              <Link
                 to="/profile"
-                className="font-medium text-sm bg-primary text-white  px-4 py-2 rounded-full"
+                className="font-medium text-sm bg-primary text-white px-4 py-2 rounded-full"
               >
                 Profilim
               </Link>
@@ -49,7 +57,8 @@ const Navbar = () => {
               </button>
             </div>
           )}
-          {!user && (
+
+          {status === "idle" && !user && (
             <div className="flex gap-x-5 items-center">
               <Link to="/about" className="font-medium text-sm">
                 Hakkımızda

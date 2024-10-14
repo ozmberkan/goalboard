@@ -30,6 +30,7 @@ const App = () => {
                 premium: userDoc.data().premium || false,
                 role: userDoc.data().role || "user",
                 notification: userDoc.data().notification || [],
+                teams: userDoc.data().teams || [],
               })
             );
           } else {
@@ -43,8 +44,6 @@ const App = () => {
 
     return () => unsubscribe();
   }, [dispatch]);
-
-  console.log(user);
 
   const router = createBrowserRouter([HomeRoutes, AuthRoutes]);
   return <RouterProvider router={router} />;

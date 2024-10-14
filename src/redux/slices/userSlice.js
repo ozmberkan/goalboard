@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { auth, db } from "~/firebase/firebase";
 
 const initialState = {
-  user: null || [],
+  user: null,
   status: "idle" || "loading" || "success" || "failed",
   errorMessage: "",
 };
@@ -38,6 +38,7 @@ export const registerService = createAsyncThunk(
         premium: false,
         role: "user",
         notification: [],
+        teams: [],
       };
 
       const userRef = doc(db, "users", user.uid);
@@ -74,6 +75,7 @@ export const loginService = createAsyncThunk(
         premium: userDoc.data().premium || false,
         role: userDoc.data().role || "user",
         notification: userDoc.data().notification || [],
+        teams: userDoc.data().teams || [],
       };
 
       return userData;
@@ -83,6 +85,18 @@ export const loginService = createAsyncThunk(
     }
   }
 );
+
+export const getUserByID = createAsyncThunk("auth/getUserByID", async (id) => {
+  try {
+    const usersRef = doc(db, "users", id);
+
+    const userDoc = await getDoc(usersRef);
+
+    return userDoc.data();
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 export const setUserService = createAsyncThunk("auth/setUser", async (data) => {
   try {
