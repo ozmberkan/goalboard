@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { loginScheme } from "~/validation/scheme";
 import { LoginInput } from "~/data/data";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { loginService } from "~/redux/slices/userSlice";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -14,14 +17,15 @@ const Login = () => {
     resolver: zodResolver(loginScheme),
   });
 
+  const dispatch = useDispatch();
+
   const loginHandle = (data) => {
     try {
-      console.log(data);
+      dispatch(loginService(data));
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message);
     }
   };
-
   return (
     <div className="container mx-auto bg-white border rounded-xl p-5 flex shadow-lg">
       <div className="w-[40%] flex justify-center items-center ">
@@ -29,7 +33,10 @@ const Login = () => {
       </div>
       <div className="w-[60%]  flex flex-col gap-y-5 items-start justify-start p-12">
         <div className="flex flex-col gap-y-5">
-          <h1 className="text-5xl font-bold text-base">Giriş Yap</h1>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-base">
+            Giriş Yap
+          </h1>
+
           <p className="text-zinc-400 text-sm">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
             delectus earum unde incidunt voluptate at. Veritatis dolorem

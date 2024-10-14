@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { RegisterInput } from "~/data/data";
 import { registerScheme } from "~/validation/scheme";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useDispatch } from "react-redux";
+import { registerService } from "~/redux/slices/userSlice";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const {
@@ -13,12 +16,13 @@ const Register = () => {
   } = useForm({
     resolver: zodResolver(registerScheme),
   });
+  const dispatch = useDispatch();
 
   const registerHandle = (data) => {
     try {
-      console.log(data);
+      dispatch(registerService(data));
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -26,7 +30,9 @@ const Register = () => {
     <div className="container mx-auto  bg-white border rounded-xl p-5 flex shadow-lg">
       <div className="w-[60%] flex flex-col gap-y-6 items-start justify-start p-12">
         <div className="flex flex-col gap-y-5">
-          <h1 className="text-5xl font-bold text-base">Kayıt Ol</h1>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-base">
+            Kayıt Ol
+          </h1>
           <p className="text-zinc-400 text-sm">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
             delectus earum unde incidunt voluptate at. Veritatis dolorem
