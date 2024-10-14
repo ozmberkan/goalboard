@@ -31,3 +31,15 @@ export const footerTabs = [
   { id: 3, label: "Lisans", to: "/license" },
   { id: 4, label: "İletişim", to: "/contact" },
 ];
+
+export const RegisterInput = [
+  { id: 1, type: "text", placeholder: "Kullanıcı Adı", name: "username" },
+  { id: 2, type: "text", placeholder: "İsim Soyisim", name: "displayName" },
+  { id: 3, type: "email", placeholder: "E-Posta", name: "email" },
+  { id: 4, type: "password", placeholder: "Parola", name: "password" },
+];
+
+export const LoginInput = [
+  { id: 1, type: "email", placeholder: "E-Posta", name: "email" },
+  { id: 2, type: "password", placeholder: "Parola", name: "password" },
+];
