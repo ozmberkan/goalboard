@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "~/assets/Logo/SVG/goalBoardTextDark.svg";
 
 const AuthNavbar = () => {
@@ -22,23 +22,27 @@ const AuthNavbar = () => {
           <img src={Logo} className="w-32" />
         </Link>
         <div className="flex gap-x-1 items-center">
-          <Link
-            to="/"
-            className="font-medium text-sm bg-base text-white px-4 py-2 rounded-full"
-          >
-            Anasayfa
-          </Link>
-
-          <Link
-            to={
-              location && location.pathname.includes("login")
-                ? "/register"
-                : "/login"
+          <NavLink
+            to="/register"
+            className={({ isActive }) =>
+              isActive
+                ? "bg-base text-white px-4 py-2 rounded-full text-sm"
+                : "bg-white text-black px-4 py-2 rounded-full text-sm"
             }
-            className="font-medium text-sm text-black px-4 py-2 rounded-full"
           >
-            {buttonText}
-          </Link>
+            Kayıt Ol
+          </NavLink>
+
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              isActive
+                ? "bg-base text-white px-4 py-2 rounded-full text-sm"
+                : "bg-white text-black px-4 py-2 rounded-full text-sm"
+            }
+          >
+            Giriş Yap
+          </NavLink>
         </div>
       </div>
     </div>
