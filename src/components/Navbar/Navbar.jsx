@@ -35,12 +35,20 @@ const Navbar = () => {
             <Skeleton className="px-4 py-2 rounded-full w-24 h-[36px]" />
           ) : (
             user && (
-              <button
-                onClick={exit}
-                className="font-medium text-sm bg-red-500 text-white px-4 py-2 rounded-full"
-              >
-                Çıkış Yap!
-              </button>
+              <div className="flex gap-x-3 items-center">
+                <Link
+                  to="/profile"
+                  className="font-medium text-sm bg-primary text-white  px-4 py-2 rounded-full"
+                >
+                  Profilim
+                </Link>
+                <button
+                  onClick={exit}
+                  className="font-medium text-sm bg-red-500 text-white px-4 py-2 rounded-full"
+                >
+                  Çıkış Yap!
+                </button>
+              </div>
             )
           )}
 
@@ -54,7 +62,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/register"
-                className="font-medium text-sm bg-base text-white px-4 py-2 rounded-full"
+                className="font-medium text-sm bg-primary text-white px-4 py-2 rounded-full"
               >
                 Başla!
               </Link>

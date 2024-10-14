@@ -31,7 +31,7 @@ const Register = () => {
     <div className="container mx-auto  bg-white border rounded-xl p-5 flex shadow-lg">
       <div className="w-[60%] flex flex-col gap-y-6 items-start justify-start p-12">
         <div className="flex flex-col gap-y-5">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-base">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">
             Kayıt Ol
           </h1>
           <p className="text-zinc-400 text-sm">
@@ -58,10 +58,13 @@ const Register = () => {
             </p>
           ))}
 
-          <Link to="/login" className="text-base font-semibold underline pb-3">
+          <Link
+            to="/login"
+            className="text-primary font-semibold underline pb-3"
+          >
             Hesabın var mı ?
           </Link>
-          <button className="px-4 py-2 rounded-md bg-base text-white font-semibold border border-transparent hover:border hover:border-base hover:bg-white hover:text-base">
+          <button className="px-4 py-2 rounded-md bg-primary text-white font-semibold border border-transparent hover:border hover:border-primary hover:bg-white hover:text-primary">
             Kayıt ol
           </button>
         </form>

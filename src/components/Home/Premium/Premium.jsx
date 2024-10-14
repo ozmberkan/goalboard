@@ -5,7 +5,7 @@ const Premium = () => {
   return (
     <div className="w-full flex justify-center items-start p-12">
       <div className="bg-white p-4 rounded-md border w-full h-[300px] flex relative overflow-hidden">
-        <MdVerified className="absolute -right-24 -top-5 -rotate-[15deg] text-[400px] text-base/75 drop-shadow-2xl z-0" />
+        <MdVerified className="absolute -right-24 -top-5 -rotate-[15deg] text-[400px] text-primary/75 drop-shadow-2xl z-0" />
         <div className="w-[80%] p-3 flex flex-col gap-y-5 z-10">
           <h1 className="text-4xl font-bold">Premium Avantajları</h1>
           <p className="text-zinc-400">
@@ -23,12 +23,12 @@ const Premium = () => {
             {statistics.map((stat) => (
               <div
                 key={stat.id}
-                className="px-6 py-2 rounded-md bg-baseDark text-white"
+                className="px-6 py-2 rounded-md bg-primaryDark text-white"
               >
                 {stat.label}
               </div>
             ))}
-            <button className="px-4 py-2 rounded-md bg-base text-white font-semibold border border-transparent hover:border hover:border-base hover:bg-white hover:text-base">
+            <button className="px-4 py-2 rounded-md bg-primary text-white font-semibold border border-transparent hover:border hover:border-primary hover:bg-white hover:text-primary">
               Premium'a geç!
             </button>
           </div>

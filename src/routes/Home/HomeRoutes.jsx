@@ -1,5 +1,6 @@
 import HomeLayout from "~/layouts/HomeLayout";
 import Home from "~/pages/Home/Home";
+import Profile from "~/pages/Profile/Profile";
 
 const HomeRoutes = {
   path: "/",
@@ -8,6 +9,10 @@ const HomeRoutes = {
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
     },
   ],
 };

@@ -12,7 +12,7 @@ const Hero = () => {
           büyük projeleri yönetin, goalBoard sayesinde her şey kontrolünüz
           altında. Hedeflerinizi bir adım öteye taşımanın zamanı geldi!
         </p>
-        <button className="px-4 py-2 rounded-full text-lg bg-white text-base font-semibold">
+        <button className="px-5 py-2 rounded-full text-lg bg-white text-primary font-semibold">
           Detaylara Git
         </button>
       </div>

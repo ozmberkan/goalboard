@@ -5,7 +5,7 @@ const Features = () => {
   return (
     <div className="w-full h-[500px] flex justify-center items-start p-12 gap-y-5 flex-col">
       <div className="">
-        <h1 className="text-3xl font-semibold text-baseDark">
+        <h1 className="text-3xl font-semibold text-primaryDark">
           goalBoard sizlere ne sunuyor?
         </h1>
       </div>

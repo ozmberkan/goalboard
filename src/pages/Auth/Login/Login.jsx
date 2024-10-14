@@ -39,7 +39,7 @@ const Login = () => {
       </div>
       <div className="w-[60%]  flex flex-col gap-y-5 items-start justify-start p-12">
         <div className="flex flex-col gap-y-5">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-base">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary">
             Giriş Yap
           </h1>
 
@@ -68,11 +68,11 @@ const Login = () => {
           ))}
           <Link
             to="/register"
-            className="text-base font-semibold underline pb-3"
+            className="text-primary font-semibold underline pb-3"
           >
             Henüz kayıt olmadın mı?
           </Link>
-          <button className="px-4 py-2 rounded-md bg-base text-white font-semibold border border-transparent hover:border hover:border-base hover:bg-white hover:text-base">
+          <button className="px-4 py-2 rounded-md bg-primary text-white font-semibold border border-transparent hover:border hover:border-base hover:bg-white hover:text-base">
             Giriş Yap
           </button>
         </form>
