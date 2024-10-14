@@ -2,9 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { auth } from "~/firebase/firebase";
+import { auth, db } from "~/firebase/firebase";
 
 const initialState = {
   user: null,
@@ -24,7 +26,25 @@ export const registerService = createAsyncThunk(
 
       const user = userCredential.user;
 
-      return user;
+      await updateProfile(user, {
+        displayName: data.displayName,
+      });
+
+      const userData = {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        username: data.username,
+        premium: false,
+        role: "user",
+        notification: [],
+      };
+
+      const userRef = doc(db, "users", user.uid);
+
+      await setDoc(userRef, userData);
+
+      return userData;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.message);
@@ -44,7 +64,19 @@ export const loginService = createAsyncThunk(
 
       const user = userCredential.user;
 
-      return user;
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+
+      const userData = {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        username: data.username,
+        premium: userDoc.data().premium || false,
+        role: userDoc.data().role || "user",
+        notification: userDoc.data().notification || [],
+      };
+
+      return userData;
     } catch (error) {
       toast.error(error.message);
       return rejectWithValue(error.message);
@@ -52,10 +84,23 @@ export const loginService = createAsyncThunk(
   }
 );
 
+export const setUserService = createAsyncThunk("auth/setUser", async (data) => {
+  try {
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logoutUser: (state) => {
+      state.user = null;
+      state.status = "idle";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerService.fulfilled, (state, action) => {
@@ -83,10 +128,23 @@ export const userSlice = createSlice({
       .addCase(loginService.pending, (state) => {
         state.status = "loading";
         state.errorMessage = "";
+      })
+      .addCase(setUserService.fulfilled, (state, action) => {
+        state.status = "success";
+        state.user = action.payload;
+        state.errorMessage = "";
+      })
+      .addCase(setUserService.rejected, (state, action) => {
+        state.status = "failed";
+        state.errorMessage = action.payload;
+      })
+      .addCase(setUserService.pending, (state) => {
+        state.status = "loading";
+        state.errorMessage = "";
       });
   },
 });
 
-export const {} = userSlice.actions;
+export const { setUser, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

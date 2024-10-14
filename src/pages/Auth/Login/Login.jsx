@@ -1,6 +1,6 @@
 import RegisterSVG from "~/assets/Register/Register.svg";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginScheme } from "~/validation/scheme";
 import { LoginInput } from "~/data/data";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,15 +17,21 @@ const Login = () => {
     resolver: zodResolver(loginScheme),
   });
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const loginHandle = (data) => {
+  const loginHandle = async (data) => {
     try {
       dispatch(loginService(data));
+
+      toast.success("Giriş başarılı");
+
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     }
   };
+
   return (
     <div className="container mx-auto bg-white border rounded-xl p-5 flex shadow-lg">
       <div className="w-[40%] flex justify-center items-center ">

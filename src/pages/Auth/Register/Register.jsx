@@ -21,6 +21,7 @@ const Register = () => {
   const registerHandle = (data) => {
     try {
       dispatch(registerService(data));
+      toast.success("Kayıt başarılı");
     } catch (error) {
       toast.error(error.message);
     }
