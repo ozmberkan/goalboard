@@ -28,7 +28,7 @@ const Login = () => {
         <img src={RegisterSVG} className="drop-shadow-xl w-[550px]" />
       </div>
       <div className="w-[60%]  flex flex-col gap-y-5 items-start justify-start p-12">
-        <h1 className="text-5xl font-bold text-base">Giriş Yap</h1>
+        <h1 className="text-[45px] font-bold text-base">Giriş Yap</h1>
         <p className="text-zinc-400">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
           delectus earum unde incidunt voluptate at. Veritatis dolorem
