@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 import { auth, db } from "~/firebase/firebase";
 
 const initialState = {
-  user: null,
-  status: "idle",
+  user: null || [],
+  status: "idle" || "loading" || "success" || "failed",
   errorMessage: "",
 };
 
@@ -103,6 +103,10 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(registerService.pending, (state) => {
+        state.status = "loading";
+        state.errorMessage = "";
+      })
       .addCase(registerService.fulfilled, (state, action) => {
         state.status = "success";
         state.user = action.payload;
@@ -112,7 +116,7 @@ export const userSlice = createSlice({
         state.status = "failed";
         state.errorMessage = action.payload || "Registration failed";
       })
-      .addCase(registerService.pending, (state) => {
+      .addCase(loginService.pending, (state) => {
         state.status = "loading";
         state.errorMessage = "";
       })
@@ -125,7 +129,7 @@ export const userSlice = createSlice({
         state.status = "failed";
         state.errorMessage = action.payload || "Registration failed";
       })
-      .addCase(loginService.pending, (state) => {
+      .addCase(setUserService.pending, (state) => {
         state.status = "loading";
         state.errorMessage = "";
       })
@@ -137,14 +141,10 @@ export const userSlice = createSlice({
       .addCase(setUserService.rejected, (state, action) => {
         state.status = "failed";
         state.errorMessage = action.payload;
-      })
-      .addCase(setUserService.pending, (state) => {
-        state.status = "loading";
-        state.errorMessage = "";
       });
   },
 });
 
-export const { setUser, logoutUser } = userSlice.actions;
+export const { logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

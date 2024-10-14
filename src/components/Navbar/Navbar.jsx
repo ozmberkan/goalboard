@@ -9,7 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { logoutUser } from "~/redux/slices/userSlice";
 
 const Navbar = () => {
-  const { user, status } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const exit = async () => {
@@ -22,8 +22,6 @@ const Navbar = () => {
     }
   };
 
-  console.log(status);
-
   return (
     <div className="w-full p-4">
       <div className="container mx-auto bg-white border py-4 rounded-full px-10 flex justify-between items-center">
@@ -31,28 +29,27 @@ const Navbar = () => {
           <img src={Logo} className="w-32" />
         </Link>
         <div className="flex gap-x-5 items-center">
-          {user === null ? (
-            <Skeleton className="px-4 py-2 rounded-full w-24 h-[36px]" />
+          {!user ? (
+            <div className="flex gap-x-1 items-center">
+              <Skeleton className="px-4 py-2 rounded-full w-24 h-[36px]" />
+            </div>
           ) : (
-            user && (
-              <div className="flex gap-x-3 items-center">
-                <Link
-                  to="/profile"
-                  className="font-medium text-sm bg-primary text-white  px-4 py-2 rounded-full"
-                >
-                  Profilim
-                </Link>
-                <button
-                  onClick={exit}
-                  className="font-medium text-sm bg-red-500 text-white px-4 py-2 rounded-full"
-                >
-                  Çıkış Yap!
-                </button>
-              </div>
-            )
+            <div className="flex gap-x-3 items-center">
+              <Link
+                to="/profile"
+                className="font-medium text-sm bg-primary text-white  px-4 py-2 rounded-full"
+              >
+                Profilim
+              </Link>
+              <button
+                onClick={exit}
+                className="font-medium text-sm bg-red-500 text-white px-4 py-2 rounded-full"
+              >
+                Çıkış Yap!
+              </button>
+            </div>
           )}
-
-          {status === "idle" && (
+          {!user && (
             <div className="flex gap-x-5 items-center">
               <Link to="/about" className="font-medium text-sm">
                 Hakkımızda
