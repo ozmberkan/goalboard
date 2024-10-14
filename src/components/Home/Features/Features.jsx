@@ -1,4 +1,4 @@
-import React from "react";
+import { features } from "~/data/data";
 import FeatureBox from "./FeatureBox";
 
 const Features = () => {
@@ -9,10 +9,10 @@ const Features = () => {
           goalBoard sizlere ne sunuyor?
         </h1>
       </div>
-      <div className="flex gap-x-5">
-        <FeatureBox />
-        <FeatureBox />
-        <FeatureBox />
+      <div className="flex gap-x-5 w-full">
+        {features.map((feature) => (
+          <FeatureBox key={feature.id} feature={feature} />
+        ))}
       </div>
     </div>
   );

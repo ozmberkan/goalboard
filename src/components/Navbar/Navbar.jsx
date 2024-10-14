@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { navTabs } from "~/data/data";
 import Logo from "~/assets/Logo/SVG/goalBoardTextDark.svg";
 
 const Navbar = () => {
@@ -10,19 +9,13 @@ const Navbar = () => {
           <img src={Logo} className="w-32" />
         </Link>
         <div className="flex gap-x-5 items-center">
-          {navTabs.map((tab) => (
-            <Link
-              key={tab.id}
-              to={tab.to}
-              className={`font-medium text-sm text-bgDark ${
-                tab.label === "Başla!"
-                  ? "bg-base text-white px-4 py-2 rounded-full"
-                  : ""
-              }`}
-            >
-              {tab.label}
-            </Link>
-          ))}
+          <Link
+            to="/register"
+            className={`font-medium text-sm bg-base text-white px-4 py-2 rounded-full
+            `}
+          >
+            Başla!
+          </Link>
         </div>
       </div>
     </div>
