@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <div className="h-[400px] bg-banner-hero bg-no-repeat bg-cover bg-center w-full flex justify-center items-center flex-col">
       <div className="w-2/3 flex justify-center items-center flex-col gap-y-6">
-        <h1 className="text-white text-[50px] font-bold text-center">
+        <h1 className="text-white text-[40px] font-bold text-center">
           goalBoard ile hedeflerinizi belirleyin ve takip edin.
         </h1>
         <p className="text-white text-center text-lg">

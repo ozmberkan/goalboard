@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        afacad: ["Afacad", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
       colors: {
         base: "#3A5ADB",
@@ -13,6 +13,7 @@ export default {
       },
       backgroundImage: {
         "banner-hero": "url('/src/assets/Banners/parabolic.svg')",
+        noise: "url('/src/assets/noise.svg')",
       },
     },
   },

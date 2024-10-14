@@ -14,7 +14,7 @@ const Navbar = () => {
             <Link
               key={tab.id}
               to={tab.to}
-              className={`font-medium text-lg text-bgDark ${
+              className={`font-medium text-sm text-bgDark ${
                 tab.label === "Başla!"
                   ? "bg-base text-white px-4 py-2 rounded-full"
                   : ""
