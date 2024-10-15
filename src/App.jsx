@@ -43,6 +43,7 @@ const App = () => {
     return () => unsubscribe();
   }, [dispatch]);
 
+  console.log(user);
   const router = createBrowserRouter([HomeRoutes, AuthRoutes]);
   return <RouterProvider router={router} />;
 };

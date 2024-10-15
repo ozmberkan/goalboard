@@ -58,10 +58,7 @@ const Register = () => {
             </p>
           ))}
 
-          <Link
-            to="/login"
-            className="text-primary font-semibold underline pb-3"
-          >
+          <Link to="/login" className="text-primary underline pb-3">
             Hesabın var mı ?
           </Link>
           <button className="px-4 py-2 rounded-md bg-primary text-white font-semibold border border-transparent hover:border hover:border-primary hover:bg-white hover:text-primary">

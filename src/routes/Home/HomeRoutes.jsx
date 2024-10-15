@@ -4,6 +4,7 @@ import Contact from "~/pages/Footer/Contact";
 import Home from "~/pages/Home/Home";
 import Profile from "~/pages/Profile/Profile";
 import CreateTeam from "~/pages/Teams/CreateTeam";
+import TeamDetail from "~/pages/Teams/TeamDetail/TeamDetail";
 
 const HomeRoutes = {
   path: "/",
@@ -28,6 +29,10 @@ const HomeRoutes = {
     {
       path: "/create-team",
       element: <CreateTeam />,
+    },
+    {
+      path: "/team/:id",
+      element: <TeamDetail />,
     },
   ],
 };

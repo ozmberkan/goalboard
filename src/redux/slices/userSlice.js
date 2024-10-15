@@ -71,7 +71,7 @@ export const loginService = createAsyncThunk(
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
-        username: data.username,
+        username: userDoc.data().username,
         premium: userDoc.data().premium || false,
         role: userDoc.data().role || "user",
         notification: userDoc.data().notification || [],
@@ -91,6 +91,17 @@ export const setUserService = createAsyncThunk("auth/setUser", async (data) => {
     return data;
   } catch (error) {
     console.log(error.message);
+  }
+});
+
+export const getUserByID = createAsyncThunk("auth/getUserByID", async (id) => {
+  try {
+    const userRef = doc(db, "users", id);
+
+    const userData = await getDoc(userRef);
+    return userData.data();
+  } catch (error) {
+    console.log(error);
   }
 });
 
@@ -141,6 +152,19 @@ export const userSlice = createSlice({
         state.errorMessage = "";
       })
       .addCase(setUserService.rejected, (state, action) => {
+        state.status = "failed";
+        state.errorMessage = action.payload;
+      })
+      .addCase(getUserByID.pending, (state) => {
+        state.status = "loading";
+        state.errorMessage = "";
+      })
+      .addCase(getUserByID.fulfilled, (state, action) => {
+        state.status = "success";
+        state.user = action.payload;
+        state.errorMessage = "";
+      })
+      .addCase(getUserByID.rejected, (state, action) => {
         state.status = "failed";
         state.errorMessage = action.payload;
       });

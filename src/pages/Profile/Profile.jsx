@@ -1,6 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { db } from "~/firebase/firebase";
 
 const Profile = () => {
@@ -26,6 +27,8 @@ const Profile = () => {
     fetchTeams();
   }, []);
 
+  console.log(user);
+
   return (
     <div className="flex flex-grow w-full  container mx-auto ">
       <div className="w-full h-full bg-white rounded-md border p-5 flex flex-col gap-y-5">
@@ -35,12 +38,13 @@ const Profile = () => {
         </h2>
         <div className="w-full  h-24 rounded-md  grid grid-cols-4">
           {filteredTeam.map((item) => (
-            <div
+            <Link
+              to={`/team/${item.id}`}
               key={item.id}
               className="bg-primary rounded-md text-white flex justify-center items-center font-semibold"
             >
               {item.teamName}
-            </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -66,10 +66,7 @@ const Login = () => {
               </span>
             </p>
           ))}
-          <Link
-            to="/register"
-            className="text-primary font-semibold underline pb-3"
-          >
+          <Link to="/register" className="text-primary  underline pb-3">
             Henüz kayıt olmadın mı?
           </Link>
           <button className="px-4 py-2 rounded-md bg-primary text-white font-semibold border border-transparent hover:border hover:border-primary hover:bg-white hover:text-primary">
