@@ -12,15 +12,19 @@ import {
 } from "@headlessui/react";
 import { FaChevronDown } from "react-icons/fa";
 import { FaBell } from "react-icons/fa";
+import { TiThMenu } from "react-icons/ti";
+import { useMediaQuery } from "react-responsive";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const [user, setUser] = useState(true);
   const [dropdown, setDropdown] = useState(false);
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   return (
     <div className="flex flex-col">
       <Starter />
-      <div className="py-6 px-14 border-b bg-white border-neutral-300 flex justify-between items-center">
+      <div className="py-6 lg:px-14 px-5 border-b bg-white border-neutral-300 flex justify-between items-center">
         <Link to="/">
           <img src={Logo} className="w-32" />
         </Link>
@@ -53,9 +57,10 @@ const Navbar = () => {
                 <>
                   <MenuButton
                     onClick={() => setDropdown(true)}
-                    className="px-4 py-1 flex items-center gap-x-2 transition-all duration-300 rounded-md border-2 border-primary font-medium text-primary hover:bg-primary hover:border-transparent hover:text-white"
+                    className="lg:px-4 lg:py-1 py-2 px-4 flex items-center gap-x-2 transition-all duration-300 rounded-md border-2 border-primary font-medium text-primary hover:bg-primary hover:border-transparent hover:text-white"
                   >
-                    <span>Profilim</span> <FaChevronDown />
+                    {isTabletOrMobile ? <FaUser /> : <span>Profilim</span>}{" "}
+                    <FaChevronDown />
                   </MenuButton>
                   <Transition
                     show={open}
