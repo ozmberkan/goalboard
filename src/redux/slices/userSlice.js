@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { auth, db } from "~/firebase/firebase";
 import toast from "react-hot-toast";
-import { auth } from "~/firebase/firebase";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -12,7 +14,7 @@ const initialState = {
   errorMessage: "",
 };
 
-export const signUpService = createAsyncThunk("auth/signUp", async () => {
+export const signUpService = createAsyncThunk("auth/signUp", async (data) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -21,12 +23,26 @@ export const signUpService = createAsyncThunk("auth/signUp", async () => {
     );
 
     const user = userCredential.user;
+
+    const userData = {
+      uid: user.uid,
+      email: user.email,
+      username: data.username,
+      emailVerified: user.emailVerified,
+      premium: false,
+      role: "user",
+      notification: [],
+    };
+
+    const userRef = doc(db, "users", user.uid);
+    await setDoc(userRef, userData);
+
+    return userData;
   } catch (error) {
     toast.error(error);
   }
 });
-
-export const signInService = createAsyncThunk("auth/signIn", async () => {
+export const signInService = createAsyncThunk("auth/signIn", async (data) => {
   try {
     const userCredential = await signInWithEmailAndPassword(
       auth,
@@ -35,6 +51,27 @@ export const signInService = createAsyncThunk("auth/signIn", async () => {
     );
 
     const user = userCredential.user;
+
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+
+    const userData = {
+      uid: user.uid,
+      email: user.email,
+      username: userDoc.data?.username || "Kullanıcı",
+      emailVerified: user.emailVerified,
+      premium: userDoc.data?.premium || false,
+      role: userDoc.data?.role || "user",
+      notification: userDoc.data?.notification || [],
+    };
+
+    return userData;
+  } catch (error) {
+    toast.error(error);
+  }
+});
+export const forgotService = createAsyncThunk("auth/forgot", async (data) => {
+  try {
+    await sendPasswordResetEmail(auth, data.email);
   } catch (error) {
     toast.error(error);
   }

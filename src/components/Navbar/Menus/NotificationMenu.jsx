@@ -8,7 +8,7 @@ import {
 import { FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const NotificationMenu = ({ setUser }) => {
+const NotificationMenu = ({ user }) => {
   return (
     <Menu className="z-20">
       {({ open }) => (
@@ -16,7 +16,7 @@ const NotificationMenu = ({ setUser }) => {
           <MenuButton className="p-2 relative  text-sm rounded-full bg-primary border-2 border-transparent text-white hover:border-primary hover:bg-white hover:text-primary">
             <FaBell />
             <span className="bg-primaryDark absolute -top-2.5 -right-2 text-white px-2 py-0.5 text-xs flex justify-center items-center rounded-full">
-              2
+              {user?.notification?.length}
             </span>
           </MenuButton>
           <Transition

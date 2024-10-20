@@ -9,7 +9,7 @@ import { FaChevronDown, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { profileTabs } from "~/data/data";
 
-const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit }) => {
+const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
   return (
     <Menu className="z-20">
       {({ open }) => (
@@ -36,8 +36,8 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit }) => {
             >
               <MenuItem className="border-b pb-3">
                 <div className="flex flex-col">
-                  <span>M.Berkan Özmen</span>
-                  <span className="text-sm">ozmberkan@gmail.com</span>
+                  <span>{user?.username}</span>
+                  <span className="text-sm">{user?.email}</span>
                 </div>
               </MenuItem>
               {profileTabs.map((tab) => (

@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEnvelope, FaHome, FaLock } from "react-icons/fa";
 import SignInIcon from "~/assets/Auth/signin.svg";
 import { useForm } from "react-hook-form";
 import { signInScheme } from "~/validation/scheme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { signInService } from "~/redux/slices/userSlice";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -17,7 +22,11 @@ const SignIn = () => {
 
   const signInHandle = (data) => {
     try {
-      console.log(data);
+      dispatch(signInService(data));
+      toast.success("Giriş Başarılı");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (error) {
       toast.error(error);
     }
@@ -27,8 +36,14 @@ const SignIn = () => {
     <div className=" flex-grow flex w-full">
       <div className="bg-white lg:flex hidden justify-center items-center border-r w-1/2">
         <img src={SignInIcon} className="drop-shadow-xl w-[700px]" />
+        <Link
+          to="/"
+          className="absolute top-5 left-5 p-3 bg-zinc-50 hover:bg-zinc-100 transition-colors duration-300 rounded-md border"
+        >
+          <FaHome />
+        </Link>
       </div>
-      <div className="lg:w-1/2 bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-center justify-start items-center flex-col">
+      <div className="lg:w-1/2 bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-start py-24 justify-start items-center flex-col">
         <div className="lg:w-2/3 lg:h-[10rem]  p-4 flex flex-col lg:items-start items-center justify-center gap-1 mb-5">
           <h1 className="font-extrabold text-[56px] text-primaryDark drop-shadow-md">
             Giriş Yap
@@ -68,13 +83,13 @@ const SignIn = () => {
           <div className="w-full  flex justify-between items-center">
             <Link
               to="/signup"
-              className="lg:text-lg underline font-medium hover:text-zinc-700 text-zinc-900"
+              className="lg:text-lg hover:underline font-medium  text-zinc-900"
             >
               Hesabın yok mu?
             </Link>
             <Link
               to="/forgot-password"
-              className="lg:text-lg underline font-medium hover:text-zinc-700 text-zinc-900"
+              className="lg:text-lg hover:underline font-medium  text-zinc-900"
             >
               Parolamı Unuttum
             </Link>

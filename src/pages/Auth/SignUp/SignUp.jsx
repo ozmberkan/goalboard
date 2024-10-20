@@ -1,13 +1,16 @@
-import React from "react";
-import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import SignUpIcon from "~/assets/Auth/signup.svg";
+import { FaEnvelope, FaHome, FaLock, FaUser } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpScheme } from "~/validation/scheme";
-import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { signUpService } from "~/redux/slices/userSlice";
+import SignUpIcon from "~/assets/Auth/signup.svg";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,9 +21,13 @@ const SignUp = () => {
 
   const signUpHandle = (data) => {
     try {
-      console.log(data);
+      dispatch(signUpService(data));
+      toast.success("Hesabınız başarıyla oluşturuldu.");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (error) {
-      toast.error(error);
+      console.log(error);
     }
   };
 
@@ -28,8 +35,14 @@ const SignUp = () => {
     <div className="flex-grow flex w-full ">
       <div className="bg-white lg:flex hidden justify-center items-center border-r w-1/2">
         <img src={SignUpIcon} className="drop-shadow-xl w-[700px]" />
+        <Link
+          to="/"
+          className="absolute top-5 left-5 p-3 bg-zinc-50 hover:bg-zinc-100 transition-colors duration-300 rounded-md border"
+        >
+          <FaHome />
+        </Link>
       </div>
-      <div className="lg:w-1/2  w-full bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-center justify-start items-center flex-col">
+      <div className="lg:w-1/2 bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-start py-24 justify-start items-center flex-col">
         <div className="lg:w-2/3  lg:h-[10rem] p-4 flex flex-col lg:items-start items-center justify-center gap-1 mb-5">
           <h1 className="font-extrabold text-[56px] text-primaryDark drop-shadow-md">
             Kayıt Ol
@@ -83,7 +96,7 @@ const SignUp = () => {
           <div className="w-full  flex justify-between items-center">
             <Link
               to="/signin"
-              className="lg:text-lg underline font-medium hover:text-zinc-700 text-zinc-900"
+              className="lg:text-lg hover:underline font-medium  text-zinc-900"
             >
               Hesabın var mı ?
             </Link>

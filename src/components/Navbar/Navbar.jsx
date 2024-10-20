@@ -16,7 +16,8 @@ const Navbar = () => {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   const exit = () => {
-    console.log("exit");
+    localStorage.removeItem("user");
+    window.location.reload();
   };
 
   return (
@@ -43,8 +44,7 @@ const Navbar = () => {
                   ))}
                 </div>
                 <Link
-                  to="/signup"
-                  onClick={console.log("basıldı")}
+                  to="/signin"
                   className="px-4 py-1 flex items-center gap-x-2 transition-all duration-300 rounded-md border-2 border-primary font-medium text-primary hover:bg-primary hover:border-transparent hover:text-white"
                 >
                   Hemen Başla
@@ -62,8 +62,9 @@ const Navbar = () => {
               setDropdown={setDropdown}
               isTabletOrMobile={isTabletOrMobile}
               exit={exit}
+              user={user}
             />
-            <NotificationMenu />
+            <NotificationMenu user={user} />
           </div>
         )}
       </div>
