@@ -19,7 +19,7 @@ export const HomeRoute = {
     { path: "contacts", element: <Contacts /> },
     { path: "pricing", element: <Pricing /> },
     { path: "announcements", element: <Announcements /> },
-    { path: "profile", element: <Profile /> },
+    { path: "profile/:username", element: <Profile /> },
     { path: "invites", element: <Invites /> },
     { path: "settings", element: <Settings /> },
     { path: "why-us", element: <WhyUs /> },

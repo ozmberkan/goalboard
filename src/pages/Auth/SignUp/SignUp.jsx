@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpScheme } from "~/validation/scheme";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUpService } from "~/redux/slices/userSlice";
 import SignUpIcon from "~/assets/Auth/signup.svg";
 import toast from "react-hot-toast";
@@ -20,15 +20,18 @@ const SignUp = () => {
     resolver: zodResolver(signUpScheme),
   });
 
-  const signUpHandle = (data) => {
+  const signUpHandle = async (data) => {
     try {
-      dispatch(signUpService(data));
-      toast.success("Hesabınız başarıyla oluşturuldu.");
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
+      const resultAction = await dispatch(signUpService(data));
+
+      if (signUpService.fulfilled.match(resultAction)) {
+        toast.success("Hesabınız başarıyla oluşturuldu.");
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Hata: ", error.message);
     }
   };
 

@@ -42,7 +42,14 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
               </MenuItem>
               {profileTabs.map((tab) => (
                 <MenuItem key={tab.id}>
-                  <Link to={tab.to} className="hover:text-neutral-400">
+                  <Link
+                    to={
+                      tab.to === "/profile"
+                        ? `/profile/${user.username}`
+                        : tab.to
+                    }
+                    className="hover:text-neutral-400"
+                  >
                     {tab.label}
                   </Link>
                 </MenuItem>
