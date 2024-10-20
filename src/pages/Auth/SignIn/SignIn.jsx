@@ -1,7 +1,6 @@
-import React from "react";
-import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import SignInIcon from "~/assets/Auth/SignIn.svg";
+import { FaEnvelope, FaLock } from "react-icons/fa";
+import SignInIcon from "~/assets/Auth/signin.svg";
 
 const SignIn = () => {
   return (
@@ -57,7 +56,7 @@ const SignIn = () => {
             type="submit"
             className="w-full h-12 py-2 rounded-lg bg-primaryDark hover:bg-primaryDark/85 text-white"
           >
-            Kayıt Ol
+            Giriş Yap
           </button>
         </form>
       </div>

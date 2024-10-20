@@ -43,7 +43,7 @@ const ForgotPassword = () => {
             type="submit"
             className="lg:w-full h-12 py-2 rounded-lg bg-primaryDark hover:bg-primaryDark/85 text-white"
           >
-            Kayıt Ol
+            Gönder
           </button>
         </form>
       </div>
