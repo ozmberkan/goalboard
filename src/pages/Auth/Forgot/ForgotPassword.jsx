@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import ForgotIcon from "~/assets/Auth/forgot.svg";
 import { forgotService } from "~/redux/slices/userSlice";
 import { forgotScheme } from "~/validation/scheme";
+import { motion } from "framer-motion";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,12 @@ const ForgotPassword = () => {
 
   return (
     <div className="flex-grow flex w-full ">
-      <div className="bg-white lg:flex hidden justify-center items-center border-r w-1/2">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="bg-white lg:flex hidden justify-center items-center border-r w-1/2"
+      >
         <img src={ForgotIcon} className="drop-shadow-xl w-[700px]" />
         <Link
           to="/"
@@ -43,8 +49,13 @@ const ForgotPassword = () => {
         >
           <FaHome />
         </Link>
-      </div>
-      <div className="lg:w-1/2 bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-start py-24 justify-start items-center flex-col">
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="lg:w-1/2 bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-start py-24 justify-start items-center flex-col"
+      >
         <div className="lg:w-2/3  lg:h-[10rem] p-4 flex flex-col lg:items-start items-center justify-center gap-1 mb-5">
           <h1 className="font-extrabold lg:text-[56px] text-[45px] text-primaryDark drop-shadow-md text-center lg:text-left">
             Parolamı Unuttum
@@ -85,7 +96,7 @@ const ForgotPassword = () => {
             Gönder
           </button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

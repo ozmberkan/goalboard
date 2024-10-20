@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { signUpService } from "~/redux/slices/userSlice";
 import SignUpIcon from "~/assets/Auth/signup.svg";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,12 @@ const SignUp = () => {
 
   return (
     <div className="flex-grow flex w-full ">
-      <div className="bg-white lg:flex hidden justify-center items-center border-r w-1/2">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="bg-white lg:flex hidden justify-center items-center border-r w-1/2"
+      >
         <img src={SignUpIcon} className="drop-shadow-xl w-[700px]" />
         <Link
           to="/"
@@ -41,8 +47,13 @@ const SignUp = () => {
         >
           <FaHome />
         </Link>
-      </div>
-      <div className="lg:w-1/2 bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-start py-24 justify-start items-center flex-col">
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="lg:w-1/2 bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-start py-24 justify-start items-center flex-col"
+      >
         <div className="lg:w-2/3  lg:h-[10rem] p-4 flex flex-col lg:items-start items-center justify-center gap-1 mb-5">
           <h1 className="font-extrabold text-[56px] text-primaryDark drop-shadow-md">
             Kayıt Ol
@@ -108,7 +119,7 @@ const SignUp = () => {
             Kayıt Ol
           </button>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };
