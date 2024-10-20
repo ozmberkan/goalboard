@@ -11,7 +11,7 @@ import { navTabs } from "~/data/data";
 
 const MobileMenu = ({ setDropdown }) => {
   return (
-    <Menu>
+    <Menu className="z-20">
       {({ open }) => (
         <>
           <MenuButton

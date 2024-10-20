@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const NotificationMenu = ({ setUser }) => {
   return (
-    <Menu>
+    <Menu className="z-20">
       {({ open }) => (
         <>
           <MenuButton className="p-2 relative  text-sm rounded-full bg-primary border-2 border-transparent text-white hover:border-primary hover:bg-white hover:text-primary">

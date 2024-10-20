@@ -8,6 +8,7 @@ import Profile from "~/pages/Profile/Profile";
 import Invites from "~/pages/Invites/Invites";
 import Settings from "~/pages/Settings/Settings";
 import WhyUs from "~/pages/WhyUs/WhyUs";
+import Services from "~/pages/Services/Services";
 
 export const HomeRoute = {
   path: "/",
@@ -22,5 +23,6 @@ export const HomeRoute = {
     { path: "invites", element: <Invites /> },
     { path: "settings", element: <Settings /> },
     { path: "why-us", element: <WhyUs /> },
+    { path: "services", element: <Services /> },
   ],
 };

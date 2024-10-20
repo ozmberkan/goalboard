@@ -11,7 +11,7 @@ import { profileTabs } from "~/data/data";
 
 const ProfileMenu = ({ setDropdown, isTabletOrMobile, setUser }) => {
   return (
-    <Menu>
+    <Menu className="z-20">
       {({ open }) => (
         <>
           <MenuButton

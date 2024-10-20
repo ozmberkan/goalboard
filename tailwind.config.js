@@ -10,6 +10,9 @@ export default {
         primary: "#3A5ADB",
         primaryDark: "#040948",
       },
+      backgroundImage: {
+        "auth-bg": "url('~/assets/Auth/bg.svg')",
+      },
     },
   },
   plugins: [],
