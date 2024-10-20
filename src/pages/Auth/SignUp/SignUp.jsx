@@ -2,8 +2,28 @@ import React from "react";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import SignUpIcon from "~/assets/Auth/signup.svg";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signUpScheme } from "~/validation/scheme";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(signUpScheme),
+  });
+
+  const signUpHandle = (data) => {
+    try {
+      console.log(data);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   return (
     <div className="flex-grow flex w-full ">
       <div className="bg-white lg:flex hidden justify-center items-center border-r w-1/2">
@@ -19,35 +39,45 @@ const SignUp = () => {
             at.
           </p>
         </div>
-        <form className="lg:w-2/3 px-4 flex flex-col gap-y-4 ">
+        <form
+          className="lg:w-2/3 px-4 flex flex-col gap-y-4"
+          onSubmit={handleSubmit(signUpHandle)}
+        >
           <div className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4">
-            <span className="text-primary">
+            <span
+              className={`text-primary ${errors.username && "text-red-500"}`}
+            >
               <FaUser size={18} />
             </span>
             <input
               className="flex-1 h-12 outline-none rounded-lg"
               placeholder="Kullanıcı Adı Giriniz.."
               type="text"
+              {...register("username")}
             />
           </div>
           <div className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4">
-            <span className="text-primary">
+            <span className={`text-primary ${errors.email && "text-red-500"}`}>
               <FaEnvelope size={18} />
             </span>
             <input
               className="flex-1 h-12 outline-none rounded-lg"
               placeholder="E-Posta Giriniz.."
               type="email"
+              {...register("email")}
             />
           </div>
           <div className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4">
-            <span className="text-primary">
+            <span
+              className={`text-primary ${errors.password && "text-red-500"}`}
+            >
               <FaLock size={18} />
             </span>
             <input
               className="flex-1 h-12 outline-none rounded-lg"
               placeholder="Parola Giriniz.."
               type="password"
+              {...register("password")}
             />
           </div>
           <div className="w-full  flex justify-between items-center">

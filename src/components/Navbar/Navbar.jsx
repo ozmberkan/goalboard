@@ -8,11 +8,16 @@ import { useMediaQuery } from "react-responsive";
 import ProfileMenu from "./Menus/ProfileMenu";
 import NotificationMenu from "./Menus/NotificationMenu";
 import MobileMenu from "./Menus/MobileMenu";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const [user, setUser] = useState(true);
+  const { user } = useSelector((store) => store.user);
   const [dropdown, setDropdown] = useState(false);
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+
+  const exit = () => {
+    console.log("exit");
+  };
 
   return (
     <div className="flex flex-col">
@@ -56,7 +61,7 @@ const Navbar = () => {
             <ProfileMenu
               setDropdown={setDropdown}
               isTabletOrMobile={isTabletOrMobile}
-              setUser={setUser}
+              exit={exit}
             />
             <NotificationMenu />
           </div>

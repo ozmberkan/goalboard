@@ -9,7 +9,7 @@ import { FaChevronDown, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { profileTabs } from "~/data/data";
 
-const ProfileMenu = ({ setDropdown, isTabletOrMobile, setUser }) => {
+const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit }) => {
   return (
     <Menu className="z-20">
       {({ open }) => (
@@ -49,7 +49,7 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, setUser }) => {
               ))}
               <MenuItem>
                 <button
-                  onClick={() => setUser(false)}
+                  onClick={exit}
                   className="text-red-500 pt-4 border-t hover:text-red-400 flex"
                 >
                   Çıkış Yap
