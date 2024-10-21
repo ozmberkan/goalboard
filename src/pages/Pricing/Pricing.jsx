@@ -14,7 +14,7 @@ const Pricing = () => {
       >
         <MdCancel />
       </Link>
-      <img src={Bubble} className="absolute top-0 z-0" />
+      <img src={Bubble} className="absolute top-0 z-0 lg:w-auto w-full" />
       <div className="flex flex-col gap-y-3 items-center justify-center z-10 lg:mt-0 mt-12">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
