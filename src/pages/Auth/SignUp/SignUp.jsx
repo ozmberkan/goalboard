@@ -9,10 +9,14 @@ import SignUpIcon from "~/assets/Auth/signup.svg";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { SignUpInput } from "~/data/data";
+import { useEffect } from "react";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { status } = useSelector((store) => store.user);
+
   const {
     register,
     handleSubmit,
@@ -23,18 +27,23 @@ const SignUp = () => {
 
   const signUpHandle = async (data) => {
     try {
-      const resultAction = await dispatch(signUpService(data));
-
-      if (signUpService.fulfilled.match(resultAction)) {
-        toast.success("Hesabınız başarıyla oluşturuldu.");
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      }
+      dispatch(signUpService(data));
     } catch (error) {
       console.log("Hata: ", error.message);
     }
   };
+
+  useEffect(() => {
+    if (status === "failed") {
+      toast.error("Kullanıcı adı veya şifre hatalı!");
+    }
+    if (status === "success") {
+      toast.success("Başarıyla kayıt oldunuz!");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }, [status]);
 
   return (
     <div className="flex-grow flex w-full ">

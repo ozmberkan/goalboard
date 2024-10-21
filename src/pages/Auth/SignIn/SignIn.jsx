@@ -5,14 +5,17 @@ import { useForm } from "react-hook-form";
 import { signInScheme } from "~/validation/scheme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signInService } from "~/redux/slices/userSlice";
 import { motion } from "framer-motion";
 import { SignInButtons, SignInInput } from "~/data/data";
+import { useEffect } from "react";
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { status } = useSelector((store) => store.user);
 
   const {
     register,
@@ -25,14 +28,22 @@ const SignIn = () => {
   const signInHandle = (data) => {
     try {
       dispatch(signInService(data));
-      toast.success("Giriş Başarılı");
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
     } catch (error) {
       toast.error(error);
     }
   };
+
+  useEffect(() => {
+    if (status === "failed") {
+      toast.error("Kullanıcı adı veya şifre hatalı!");
+    }
+    if (status === "success") {
+      toast.success("Başarıyla giriş yaptınız, yönleniyorsunuz...");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }, [status]);
 
   return (
     <div className=" flex-grow flex w-full">
@@ -68,23 +79,23 @@ const SignIn = () => {
           className="lg:w-2/3 px-4 flex flex-col gap-y-6 "
           onSubmit={handleSubmit(signInHandle)}
         >
-          {SignInInput.map((input) => (
+          {SignInInput.map((Input) => (
             <div
-              key={input.id}
+              key={Input.id}
               className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4"
             >
               <span
                 className={`text-primary ${
-                  errors[input.name] && "text-red-500"
+                  errors[Input.name] && "text-red-500"
                 }`}
               >
-                <input.type size={18} />
+                <Input.icon size={18} />
               </span>
               <input
                 className="flex-1 h-12 outline-none rounded-lg"
-                placeholder={input.placeholder}
-                type={input.type}
-                {...register(input.name)}
+                placeholder={Input.placeholder}
+                type={Input.type}
+                {...register(Input.name)}
               />
             </div>
           ))}

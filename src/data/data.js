@@ -5,6 +5,7 @@ import {
   FaLinkedin,
   FaLock,
   FaTwitter,
+  FaUser,
 } from "react-icons/fa";
 
 export const starterTabs = [
@@ -56,7 +57,7 @@ export const SignInInput = [
     id: 1,
     placeholder: "E-Posta Giriniz..",
     name: "email",
-    type: "email",
+    type: "text",
     icon: FaEnvelope,
   },
   {
@@ -73,7 +74,7 @@ export const SignUpInput = [
     placeholder: "Kullanıcı Adı Giriniz..",
     name: "username",
     type: "text",
-    icon: FaEnvelope,
+    icon: FaUser,
   },
   {
     id: 2,

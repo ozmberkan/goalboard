@@ -14,19 +14,56 @@ const initialState = {
   errorMessage: "",
 };
 
-export const signUpService = createAsyncThunk("auth/signUp", async (data) => {
-  try {
-    const usersRef = collection(db, "users");
-    const querySnapshot = await getDocs(usersRef);
+export const signUpService = createAsyncThunk(
+  "auth/signUp",
+  async (data, { rejectWithValue }) => {
+    try {
+      const usersRef = collection(db, "users");
+      const querySnapshot = await getDocs(usersRef);
 
-    const isUsernameTaken = querySnapshot.docs.some((doc) => {
-      return doc.data().username === data.username;
-    });
+      const isUsernameTaken = querySnapshot.docs.some((doc) => {
+        return doc.data().username === data.username;
+      });
 
-    if (isUsernameTaken) {
-      throw new Error("Kullanıcı adı zaten alınmış.");
-    } else {
-      const userCredential = await createUserWithEmailAndPassword(
+      if (isUsernameTaken) {
+        throw new Error("Kullanıcı adı zaten alınmış.");
+      } else {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          data.email,
+          data.password
+        );
+
+        const user = userCredential.user;
+
+        const userData = {
+          uid: user.uid,
+          email: user.email,
+          username: data.username,
+          emailVerified: user.emailVerified,
+          premium: false,
+          role: "user",
+          notification: [],
+          teams: [],
+        };
+
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, userData);
+
+        return userData;
+      }
+    } catch (error) {
+      toast.error(error.message || "Bir hata oluştu");
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const signInService = createAsyncThunk(
+  "auth/signIn",
+  async (data, { rejectWithValue }) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
         auth,
         data.email,
         data.password
@@ -34,63 +71,38 @@ export const signUpService = createAsyncThunk("auth/signUp", async (data) => {
 
       const user = userCredential.user;
 
+      const userRef = doc(db, "users", user.uid);
+
+      const userDoc = await getDoc(userRef);
+
       const userData = {
         uid: user.uid,
         email: user.email,
-        username: data.username,
         emailVerified: user.emailVerified,
-        premium: false,
-        role: "user",
-        notification: [],
+        username: userDoc.data()?.username || "Kullanıcı",
+        premium: userDoc.data()?.premium || false,
+        role: userDoc.data()?.role || "user",
+        notification: userDoc.data()?.notification || [],
+        teams: userDoc.data().teams || [],
       };
 
-      const userRef = doc(db, "users", user.uid);
-      await setDoc(userRef, userData);
-
       return userData;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
-  } catch (error) {
-    toast.error(error.message || "Bir hata oluştu");
-    throw error;
   }
-});
-
-export const signInService = createAsyncThunk("auth/signIn", async (data) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      data.email,
-      data.password
-    );
-
-    const user = userCredential.user;
-
-    const userRef = doc(db, "users", user.uid);
-
-    const userDoc = await getDoc(userRef);
-
-    const userData = {
-      uid: user.uid,
-      email: user.email,
-      emailVerified: user.emailVerified,
-      username: userDoc.data()?.username || "Kullanıcı",
-      premium: userDoc.data()?.premium || false,
-      role: userDoc.data()?.role || "user",
-      notification: userDoc.data()?.notification || [],
-    };
-
-    return userData;
-  } catch (error) {
-    toast.error(error);
+);
+export const forgotService = createAsyncThunk(
+  "auth/forgot",
+  async (data, { rejectWithValue }) => {
+    try {
+      await sendPasswordResetEmail(auth, data.email);
+    } catch (error) {
+      toast.error(error);
+      return rejectWithValue(error.message);
+    }
   }
-});
-export const forgotService = createAsyncThunk("auth/forgot", async (data) => {
-  try {
-    await sendPasswordResetEmail(auth, data.email);
-  } catch (error) {
-    toast.error(error);
-  }
-});
+);
 
 export const getUserByID = createAsyncThunk("auth/getUserByID", async (id) => {
   try {

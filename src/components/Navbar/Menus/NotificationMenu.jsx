@@ -13,7 +13,7 @@ const NotificationMenu = ({ user }) => {
     <Menu className="z-20">
       {({ open }) => (
         <>
-          <MenuButton className="p-2 relative  text-sm rounded-full bg-primary border-2 border-transparent text-white hover:border-primary hover:bg-white hover:text-primary">
+          <MenuButton className="p-2 relative  lg:text-lg text-sm rounded-full bg-primary border-2 border-transparent text-white hover:border-primary hover:bg-white hover:text-primary">
             <FaBell />
             <span className="bg-primaryDark absolute -top-2.5 -right-2 text-white px-2 py-0.5 text-xs flex justify-center items-center rounded-full">
               {user?.notification?.length}
