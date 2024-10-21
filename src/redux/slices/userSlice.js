@@ -41,6 +41,7 @@ export const signUpService = createAsyncThunk(
           email: user.email,
           username: data.username,
           emailVerified: user.emailVerified,
+          photoURL: "",
           premium: false,
           role: "user",
           notification: [],
@@ -82,6 +83,7 @@ export const signInService = createAsyncThunk(
         username: userDoc.data()?.username || "Kullanıcı",
         premium: userDoc.data()?.premium || false,
         role: userDoc.data()?.role || "user",
+        photoURL: userDoc.data()?.photoURL || "",
         notification: userDoc.data()?.notification || [],
         teams: userDoc.data().teams || [],
       };

@@ -81,10 +81,10 @@ const ForgotPassword = () => {
             />
           </div>
 
-          <div className="w-full  flex justify-between items-center">
+          <div className="w-full  flex justify-between items-center ">
             <Link
               to="/signin"
-              className="lg:text-lg hover:underline font-medium  text-zinc-900"
+              className="lg:text-lg text-sm hover:underline font-medium  text-zinc-900"
             >
               Parolanı hatırlıyor musun ?
             </Link>

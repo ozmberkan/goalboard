@@ -67,14 +67,22 @@ const SignIn = () => {
         transition={{ duration: 0.5 }}
         className="lg:w-1/2 bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-start py-24 justify-start items-center flex-col"
       >
-        <div className="lg:w-2/3 lg:h-[10rem]  p-4 flex flex-col lg:items-start items-center justify-center gap-1 mb-5">
+        <Link
+          to="/"
+          className="absolute top-5 left-5 p-3 bg-zinc-50 hover:bg-zinc-100 transition-colors duration-300 rounded-md border lg:hidden"
+        >
+          <FaHome />
+        </Link>
+        <div className="lg:w-2/3 lg:h-[10rem]  p-4 flex flex-col lg:items-start items-center justify-center gap-1 mb-5 relative">
           <h1 className="font-extrabold text-[56px] text-primaryDark drop-shadow-md">
             Giriş Yap
           </h1>
+
           <p className="font-bold text-zinc-700 text-lg w-full lg:text-left text-center">
             Hemen giriş yap ve hedefine ulaşmak için ilk adımı at.
           </p>
         </div>
+
         <form
           className="lg:w-2/3 px-4 flex flex-col gap-y-6 "
           onSubmit={handleSubmit(signInHandle)}
@@ -100,12 +108,12 @@ const SignIn = () => {
             </div>
           ))}
 
-          <div className="w-full  flex justify-between items-center">
+          <div className="w-full  flex justify-between items-center gap-x-4">
             {SignInButtons.map((button) => (
               <Link
                 key={button.id}
                 to={button.to}
-                className="lg:text-lg hover:underline font-medium  text-zinc-900"
+                className="lg:text-lg text-sm hover:underline font-medium  text-zinc-900"
               >
                 {button.label}
               </Link>

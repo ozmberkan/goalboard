@@ -67,6 +67,12 @@ const SignUp = () => {
         transition={{ duration: 0.5 }}
         className="lg:w-1/2 bg-auth-bg bg-center bg-no-repeat bg-cover flex lg:justify-start py-24 justify-start items-center flex-col"
       >
+        <Link
+          to="/"
+          className="absolute top-5 left-5 p-3 bg-zinc-50 hover:bg-zinc-100 transition-colors duration-300 rounded-md border lg:hidden"
+        >
+          <FaHome />
+        </Link>
         <div className="lg:w-2/3  lg:h-[10rem] p-4 flex flex-col lg:items-start items-center justify-center gap-1 mb-5">
           <h1 className="font-extrabold text-[56px] text-primaryDark drop-shadow-md">
             Kayıt Ol
@@ -103,7 +109,7 @@ const SignUp = () => {
           <div className="w-full  flex justify-between items-center">
             <Link
               to="/signin"
-              className="lg:text-lg hover:underline font-medium  text-zinc-900"
+              className="lg:text-lg text-sm hover:underline font-medium  text-zinc-900"
             >
               Hesabın var mı ?
             </Link>
