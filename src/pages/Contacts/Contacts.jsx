@@ -34,11 +34,11 @@ const Contacts = () => {
 
   return (
     <div className="flex-grow p-4 flex">
-      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative z-10 overflow-hidden">
+      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
         <h1 className="text-4xl font-bold text-primary">İletişim</h1>
 
         <form
-          className="w-1/2 grid grid-cols-1 gap-5"
+          className="lg:w-1/2 grid grid-cols-1 gap-5"
           onSubmit={handleSubmit(contactHandle)}
         >
           {ContactsInput.map((input) => (

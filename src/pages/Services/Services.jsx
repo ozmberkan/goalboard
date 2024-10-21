@@ -3,7 +3,7 @@ import React from "react";
 const Services = () => {
   return (
     <div className="flex-grow p-4 flex">
-      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative z-10 overflow-hidden">
+      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
         <h1 className="text-4xl font-bold text-primary ">Hizmetlerimiz</h1>
         <p className="font-medium text-lg text-zinc-700">
           GoalBoard olarak, projelerinizi başarıya ulaştırmanıza yardımcı olmak

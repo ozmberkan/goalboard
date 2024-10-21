@@ -5,11 +5,7 @@ import Case from "~/assets/case.png";
 const WhyUs = () => {
   return (
     <div className="flex-grow p-4 flex ">
-      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative z-10 overflow-hidden">
-        <img
-          src={Case}
-          className="absolute right-12 -z-10 opacity-30 -rotate-12 w-[600px]"
-        />
+      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative lg:z-10 overflow-hidden">
         <h1 className="text-4xl font-bold text-primary ">Neden goalBoard?</h1>
         <p className="font-medium text-lg text-zinc-700">
           GoalBoard, ekiplerin hedeflerine ulaşmalarını kolaylaştırmak için

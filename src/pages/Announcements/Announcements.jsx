@@ -1,7 +1,7 @@
 const Announcements = () => {
   return (
     <div className="flex-grow p-4 flex ">
-      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative z-10 overflow-hidden">
+      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
         <h1 className="text-4xl font-bold text-primary ">Duyurular</h1>
         <p className="font-medium text-lg text-zinc-700">
           Merhaba GoalBoard kullanıcıları! Sizlerle heyecan verici gelişmeleri
@@ -12,7 +12,7 @@ const Announcements = () => {
           kullanıcı deneyimi sunmak için pek çok yenilik ve geliştirme sizleri
           bekliyor.
         </p>
-        <div className="py-2 w-full  flex gap-5">
+        <div className="py-2 w-full lg:flex grid grid-cols-1 gap-5">
           <p className="bg-orange-100 text-orange-500 rounded-md font-semibold  text-sm px-4 py-2 ">
             Görev atama süreçleri daha hızlı ve sezgisel hale getiriliyor
           </p>

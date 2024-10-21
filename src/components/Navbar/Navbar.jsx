@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
-import { navTabs, profileTabs } from "~/data/data";
-import Logo from "~/assets/Logos/goalBoardTextDark.svg";
+import { navTabs } from "~/data/data";
 import { useState } from "react";
-import Starter from "./children/Starter";
-
 import { useMediaQuery } from "react-responsive";
+import { useSelector } from "react-redux";
 import ProfileMenu from "./Menus/ProfileMenu";
 import NotificationMenu from "./Menus/NotificationMenu";
 import MobileMenu from "./Menus/MobileMenu";
-import { useSelector } from "react-redux";
+import Starter from "./children/Starter";
+import Logo from "~/assets/Logos/goalBoardTextDark.svg";
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.user);
@@ -32,7 +31,7 @@ const Navbar = () => {
           <>
             {!isTabletOrMobile && (
               <>
-                <div className="flex items-center gap-x-4">
+                <div className="flex items-center gap-x-4 ">
                   {navTabs.map((tab) => (
                     <Link
                       key={tab.id}
