@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { signInService } from "~/redux/slices/userSlice";
 import { motion } from "framer-motion";
+import { SignInButtons, SignInInput } from "~/data/data";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -67,43 +68,37 @@ const SignIn = () => {
           className="lg:w-2/3 px-4 flex flex-col gap-y-6 "
           onSubmit={handleSubmit(signInHandle)}
         >
-          <div className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4">
-            <span className={`text-primary ${errors.email && "text-red-500"}`}>
-              <FaEnvelope size={18} />
-            </span>
-            <input
-              className="flex-1 h-12 outline-none rounded-lg"
-              placeholder="E-Posta Giriniz.."
-              type="email"
-              {...register("email")}
-            />
-          </div>
-          <div className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4">
-            <span
-              className={`text-primary ${errors.password && "text-red-500"}`}
+          {SignInInput.map((input) => (
+            <div
+              key={input.id}
+              className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4"
             >
-              <FaLock size={18} />
-            </span>
-            <input
-              className="flex-1 h-12 outline-none rounded-lg"
-              placeholder="Parola Giriniz.."
-              type="password"
-              {...register("password")}
-            />
-          </div>
+              <span
+                className={`text-primary ${
+                  errors[input.name] && "text-red-500"
+                }`}
+              >
+                <input.type size={18} />
+              </span>
+              <input
+                className="flex-1 h-12 outline-none rounded-lg"
+                placeholder={input.placeholder}
+                type={input.type}
+                {...register(input.name)}
+              />
+            </div>
+          ))}
+
           <div className="w-full  flex justify-between items-center">
-            <Link
-              to="/signup"
-              className="lg:text-lg hover:underline font-medium  text-zinc-900"
-            >
-              Hesabın yok mu?
-            </Link>
-            <Link
-              to="/forgot-password"
-              className="lg:text-lg hover:underline font-medium  text-zinc-900"
-            >
-              Parolamı Unuttum
-            </Link>
+            {SignInButtons.map((button) => (
+              <Link
+                key={button.id}
+                to={button.to}
+                className="lg:text-lg hover:underline font-medium  text-zinc-900"
+              >
+                {button.label}
+              </Link>
+            ))}
           </div>
           <button
             type="submit"

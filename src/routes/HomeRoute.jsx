@@ -17,7 +17,6 @@ export const HomeRoute = {
     { path: "/", element: <Home /> },
     { path: "about", element: <About /> },
     { path: "contacts", element: <Contacts /> },
-    { path: "pricing", element: <Pricing /> },
     { path: "announcements", element: <Announcements /> },
     { path: "profile/:username", element: <Profile /> },
     { path: "invites", element: <Invites /> },

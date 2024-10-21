@@ -8,6 +8,7 @@ import { signUpService } from "~/redux/slices/userSlice";
 import SignUpIcon from "~/assets/Auth/signup.svg";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import { SignUpInput } from "~/data/data";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -70,43 +71,26 @@ const SignUp = () => {
           className="lg:w-2/3 px-4 flex flex-col gap-y-4"
           onSubmit={handleSubmit(signUpHandle)}
         >
-          <div className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4">
-            <span
-              className={`text-primary ${errors.username && "text-red-500"}`}
+          {SignUpInput.map((input) => (
+            <div
+              key={input.id}
+              className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4"
             >
-              <FaUser size={18} />
-            </span>
-            <input
-              className="flex-1 h-12 outline-none rounded-lg"
-              placeholder="Kullanıcı Adı Giriniz.."
-              type="text"
-              {...register("username")}
-            />
-          </div>
-          <div className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4">
-            <span className={`text-primary ${errors.email && "text-red-500"}`}>
-              <FaEnvelope size={18} />
-            </span>
-            <input
-              className="flex-1 h-12 outline-none rounded-lg"
-              placeholder="E-Posta Giriniz.."
-              type="email"
-              {...register("email")}
-            />
-          </div>
-          <div className="bg-white drop-shadow-md pl-4 rounded-lg border flex items-center gap-x-4">
-            <span
-              className={`text-primary ${errors.password && "text-red-500"}`}
-            >
-              <FaLock size={18} />
-            </span>
-            <input
-              className="flex-1 h-12 outline-none rounded-lg"
-              placeholder="Parola Giriniz.."
-              type="password"
-              {...register("password")}
-            />
-          </div>
+              <span
+                className={`text-primary ${
+                  errors[input.name] && "text-red-500"
+                }`}
+              >
+                <input.icon size={18} />
+              </span>
+              <input
+                className="flex-1 h-12 outline-none rounded-lg"
+                placeholder={input.placeholder}
+                type={input.type}
+                {...register(input.name)}
+              />
+            </div>
+          ))}
           <div className="w-full  flex justify-between items-center">
             <Link
               to="/signin"
