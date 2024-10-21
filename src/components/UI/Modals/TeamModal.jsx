@@ -25,9 +25,9 @@ const TeamModal = ({ setIsTeamModal }) => {
         return;
       }
       dispatch(createTeam({ teamName: data.teamName, id: user.uid }));
+      dispatch(getUserByID(user.uid));
       toast.success("Takım başarıyla oluşturuldu!");
       setIsTeamModal(false);
-      dispatch(getUserByID(user.uid));
     } catch (error) {
       console.log(error);
       toast.error("Takım oluşturulurken bir hata oluştu." + error);
@@ -51,7 +51,7 @@ const TeamModal = ({ setIsTeamModal }) => {
           className="bg-gradient-to-br from-primary to-primaryDark  p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
         >
           <div className="relative z-10 flex items-start flex-col gap-y-3 justify-start">
-            <h3 className="text-3xl font-bold text-center mb-2 text-white">
+            <h3 className="lg:text-3xl text-2xl font-bold text-center mb-2 text-white">
               Takım Oluştur
             </h3>
             <p className="text-left ">
@@ -64,17 +64,17 @@ const TeamModal = ({ setIsTeamModal }) => {
               </span>
             </p>
             <form
-              className="flex gap-2  py-4 border-t border-zinc-500 w-full"
+              className="flex gap-2  py-4 border-t border-zinc-500 w-full "
               onSubmit={handleSubmit(createTeamHandle)}
             >
               <input
-                className="flex-1 px-4 py-2 rounded-md border text-sm outline-none text-black"
+                className="px-4 lg:w-full w-full py-2 rounded-md border text-sm outline-none text-black"
                 placeholder="Takım Adı Giriniz.."
                 {...register("teamName", { required: true })}
               />
               <button
                 type="submit"
-                className="w-10 h-10 flex justify-center items-center text-white"
+                className="lg:w-10 lg:h-10 flex justify-center items-center text-white"
               >
                 <IoMdAddCircle size={30} />
               </button>

@@ -3,6 +3,7 @@ import {
   arrayUnion,
   collection,
   doc,
+  getDoc,
   getDocs,
   setDoc,
   updateDoc,
@@ -12,6 +13,7 @@ import moment from "moment";
 
 const initialState = {
   teams: [],
+  currentTeam: null,
   status: "idle",
   errorMessage: "",
 };
@@ -52,17 +54,35 @@ export const createTeam = createAsyncThunk(
   }
 );
 
-export const getAllTeams = createAsyncThunk("teams/getAllTeams", async () => {
-  try {
-    const teamsRef = collection(db, "teams");
-    const teamsSnapshot = await getDocs(teamsRef);
-    const teams = teamsSnapshot.docs.map((doc) => doc.data());
-    return teams;
-  } catch (error) {
-    console.log(error);
-    return thunkAPI.rejectWithValue(error.message);
+export const getTeamByID = createAsyncThunk(
+  "teams/getTeamByID",
+  async (id, { rejectWithValue }) => {
+    try {
+      const teamsRef = doc(db, "teams", id);
+      const teamDoc = await getDoc(teamsRef);
+
+      return teamDoc.data();
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
+
+export const getAllTeams = createAsyncThunk(
+  "teams/getAllTeams",
+  async (_, thunkAPI) => {
+    try {
+      const teamsRef = collection(db, "teams");
+      const teamsSnapshot = await getDocs(teamsRef);
+      const teams = teamsSnapshot.docs.map((doc) => doc.data());
+      return teams;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 export const teamsSlice = createSlice({
   name: "teams",
@@ -89,6 +109,17 @@ export const teamsSlice = createSlice({
         state.teams = action.payload;
       })
       .addCase(getAllTeams.rejected, (state, action) => {
+        state.status = "failed";
+        state.errorMessage = action.error.message;
+      })
+      .addCase(getTeamByID.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getTeamByID.fulfilled, (state, action) => {
+        state.status = "success";
+        state.currentTeam = action.payload;
+      })
+      .addCase(getTeamByID.rejected, (state, action) => {
         state.status = "failed";
         state.errorMessage = action.error.message;
       });

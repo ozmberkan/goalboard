@@ -28,31 +28,21 @@ const NotificationMenu = ({ user }) => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <MenuItems anchor="bottom end">
-              <MenuItem className="mt-2 p-5 bg-white rounded-md border border-neutral-300 shadow-lg flex flex-col gap-y-5">
+            <MenuItems anchor="bottom">
+              <MenuItem className="mt-2 lg:p-5 p-3 bg-white rounded-md border border-neutral-300 shadow-lg flex flex-col gap-y-5">
                 <div>
                   <span className="text-sm font-medium pb-2 border-b">
                     Bildirimler
                   </span>
                   <div className="flex flex-col  gap-y-3">
-                    <p className="text-sm text-neutral-400">
-                      <Link
-                        to="/users/Aniltrr"
-                        className="font-medium text-primary"
-                      >
-                        @Anıltrr{" "}
-                      </Link>
-                      sizi takıma davet ediyor.
-                    </p>
-                    <p className="text-sm text-neutral-400">
-                      <Link
-                        to="/users/Aniltrr"
-                        className="font-medium text-primary"
-                      >
-                        @Anıltrr{" "}
-                      </Link>
-                      sizi takıma davet ediyor.
-                    </p>
+                    {user.notification?.map((notification, index) => (
+                      <p key={index} className="text-sm text-neutral-400">
+                        <span className="font-medium text-primary">
+                          @{notification.from}{" "}
+                        </span>
+                        {notification.message}
+                      </p>
+                    ))}
                   </div>
                 </div>
               </MenuItem>

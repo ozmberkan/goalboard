@@ -2,33 +2,60 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiAlertCircle } from "react-icons/fi";
-import { IoMdAddCircle } from "react-icons/io";
 import { useForm } from "react-hook-form";
-import { doc, updateDoc } from "firebase/firestore";
+import { IoMdAddCircle } from "react-icons/io";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  arrayUnion,
+  doc,
+} from "firebase/firestore";
 import { db } from "~/firebase/firebase";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { getUserByID } from "~/redux/slices/userSlice";
+import { nanoid } from "nanoid";
 
-const PhotoEditModal = ({ setIsEditPhoto }) => {
+const InviteModal = ({ setIsInviteModal }) => {
   const modalRoot = document.getElementById("modal");
-  const dispatch = useDispatch();
-
-  const { register, handleSubmit } = useForm();
   const { user } = useSelector((store) => store.user);
+  const { register, handleSubmit } = useForm();
 
-  const updateProfilePhoto = async (data) => {
+  const inviteUser = async (data) => {
     try {
-      console.log(data);
-      const userRef = doc(db, "users", user.uid);
+      const { username } = data;
 
-      await updateDoc(userRef, {
-        photoURL: data.photoURL,
-      });
-      toast.success("Profil fotoğrafı başarıyla güncellendi.");
-      dispatch(getUserByID(user.uid));
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("username", "==", username));
+
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach(async (docSnap) => {
+          const userRef = doc(db, "users", docSnap.id);
+          const userDoc = docSnap.data();
+
+          const notifications = Array.isArray(userDoc.notification)
+            ? userDoc.notification
+            : [];
+
+          await updateDoc(userRef, {
+            notification: arrayUnion({
+              from: user.username,
+              message: "Sizi takıma davet ediyor.",
+              id: nanoid(),
+            }),
+          });
+          toast.success("Davet gönderildi.");
+          setIsInviteModal(false);
+        });
+      } else {
+        toast.error("Kullanıcı bulunamadı.");
+      }
     } catch (error) {
-      toast.error(error);
+      toast.error("Davet gönderilirken bir hata oluştu: ", error);
     }
   };
 
@@ -38,7 +65,7 @@ const PhotoEditModal = ({ setIsEditPhoto }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={() => setIsEditPhoto(false)}
+        onClick={() => setIsInviteModal(false)}
         className="bg-zinc-900/50  p-8 fixed inset-0 z-50 grid place-items-center "
       >
         <motion.div
@@ -50,25 +77,24 @@ const PhotoEditModal = ({ setIsEditPhoto }) => {
         >
           <div className="relative z-10 flex items-start flex-col gap-y-3 justify-start">
             <h3 className="lg:text-3xl text-xl font-bold text-center mb-2 text-white">
-              Profil Fotoğrafı Düzenle
+              Takıma Davet Et
             </h3>
             <p className="text-left ">
               <span className="flex items-center gap-x-3 w-full text-white">
                 <FiAlertCircle size={25} />
                 <span className="text-sm text-white">
-                  Profil fotoğrafınızı düzenlemek için lütfen yeni bir fotoğraf
-                  yükleyin.
+                  Kullanıcı adı girerek takımınıza birini davet edebilirsiniz.
                 </span>
               </span>
             </p>
             <form
               className="flex gap-2  py-4 border-t border-zinc-500 w-full"
-              onSubmit={handleSubmit(updateProfilePhoto)}
+              onSubmit={handleSubmit(inviteUser)}
             >
               <input
                 className=" px-4 lg:w-full w-full py-2 rounded-md border text-sm outline-none text-black"
-                placeholder="Profil Fotoğrafı URL"
-                {...register("photoURL", { required: true })}
+                placeholder="Kullanıcı Adı Giriniz.."
+                {...register("username", { required: true })}
               />
               <button
                 type="submit"
@@ -85,4 +111,4 @@ const PhotoEditModal = ({ setIsEditPhoto }) => {
   );
 };
 
-export default PhotoEditModal;
+export default InviteModal;
