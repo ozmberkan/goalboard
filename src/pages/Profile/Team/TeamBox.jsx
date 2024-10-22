@@ -20,11 +20,15 @@ const TeamBox = ({ team }) => {
               {createdAt}
             </span>
             <div className="text-xs flex justify-center items-center gap-x-1 bg-white border px-2 rounded-full text-zinc-800 font-medium">
-              <FaUsers />
+              <span className="lg:flex hidden">
+                <FaUsers />
+              </span>
               <span>{members.length} Kişi</span>
             </div>
             <div className="text-xs flex justify-center items-center gap-x-1 bg-white border px-2 rounded-full text-zinc-800 font-medium">
-              <FaStar />
+              <span className="lg:flex hidden">
+                <FaStar />
+              </span>
               <span>{projects.length} Proje</span>
             </div>
           </div>

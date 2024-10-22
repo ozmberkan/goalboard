@@ -68,7 +68,7 @@ const Profile = () => {
               </h1>
               <button
                 onClick={() => setIsTeamModal(true)}
-                className="px-4 py-1   flex items-center gap-x-1  lg:text-base text-sm rounded-full bg-primary border-2 border-transparent text-white hover:border-primary hover:bg-white hover:text-primary"
+                className="lg:px-4 px-2 py-1   flex items-center gap-x-1  lg:text-base text-sm rounded-full bg-primary border-2 border-transparent text-white hover:border-primary hover:bg-white hover:text-primary"
               >
                 <RiFunctionAddFill /> Takım Oluştur
               </button>

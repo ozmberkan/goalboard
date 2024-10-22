@@ -1,7 +1,7 @@
 const About = () => {
   return (
     <div className="flex-grow p-4 flex">
-      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
+      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-3 relative  overflow-hidden">
         <h1 className="text-4xl font-bold text-primary ">Hakkımızda</h1>
         <p className="font-medium text-base text-zinc-700">
           <strong>GoalBoard</strong>, projelerinizi daha verimli bir şekilde

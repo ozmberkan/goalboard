@@ -38,7 +38,7 @@ const Invites = () => {
       <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
         <h1 className="text-3xl font-semibold text-primary">Gelen Davetler</h1>
         <div className="flex-grow ">
-          <div className="flex flex-col gap-y-5 w-1/2">
+          <div className="flex flex-col gap-y-5 lg:w-1/2 w-full">
             {user.notification.length > 0 ? (
               _user.notification?.map((noti, i) => (
                 <div
@@ -66,7 +66,7 @@ const Invites = () => {
               ))
             ) : (
               <div className="bg-blue-100 px-4  py-2 rounded-md">
-                <h1 className="text-lg font-semibold text-primary">
+                <h1 className="lg:text-base text-sm font-semibold text-primary">
                   Herhangi bir davetiniz yok.
                 </h1>
               </div>
