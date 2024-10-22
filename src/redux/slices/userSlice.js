@@ -42,7 +42,7 @@ export const signUpService = createAsyncThunk(
           username: data.username,
           emailVerified: user.emailVerified,
           photoURL: "",
-          premium: false,
+          premium: "silver",
           role: "user",
           notification: [],
           teams: [],
@@ -81,7 +81,7 @@ export const signInService = createAsyncThunk(
         email: user.email,
         emailVerified: user.emailVerified,
         username: userDoc.data()?.username || "Kullanıcı",
-        premium: userDoc.data()?.premium || false,
+        premium: userDoc.data()?.premium || "silver",
         role: userDoc.data()?.role || "user",
         photoURL: userDoc.data()?.photoURL || "",
         notification: userDoc.data()?.notification || [],
@@ -110,7 +110,6 @@ export const getUserByID = createAsyncThunk("auth/getUserByID", async (id) => {
   try {
     const userRef = doc(db, "users", id);
     const userDoc = await getDoc(userRef);
-
     return userDoc.data();
   } catch (error) {
     console.log(error);

@@ -53,7 +53,7 @@ const Home = () => {
           {user ? (
             <Link
               to={`/profile/${user.username}`}
-              className="lg:w-full font-medium lg:text-white text-white  bg-primary rounded-md lg:rounded-full 
+              className="lg:w-2/3 font-medium lg:text-white text-white  bg-primary rounded-md lg:rounded-full 
             hover:bg-primaryDark transition-colors duration-300 lg:border-zinc-200 px-4 py-1 lg:px-4 lg:py-2"
             >
               Profilim
@@ -61,8 +61,8 @@ const Home = () => {
           ) : (
             <Link
               to="/signup"
-              className="lg:w-full font-medium lg:text-white text-white  bg-primaryDark rounded-md lg:rounded-full 
-            hover:bg-primary transition-colors duration-300 lg:border-zinc-200 px-4 py-1 lg:px-4 lg:py-2"
+              className="lg:w-2/3 font-medium lg:text-white text-white  bg-primary rounded-md lg:rounded-xl 
+            hover:bg-primaryDark transition-colors duration-300 lg:border-zinc-200 px-4 py-1 lg:px-4 lg:py-2"
             >
               Hemen Başla!
             </Link>

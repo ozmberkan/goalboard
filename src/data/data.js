@@ -96,3 +96,47 @@ export const SignInButtons = [
   { id: 1, label: "Hesabın yok mu ?", to: "/signup" },
   { id: 2, label: "Parolamı Unuttum", to: "/forgot-password" },
 ];
+
+export const pricingCards = [
+  {
+    id: 1,
+    label: "Silver",
+    price: "Ücretsiz",
+    features: [
+      "1 Takım Oluşturma",
+      "5 Kişiye Kadar Takım Daveti",
+      "Sınırsız Görev Yönetimi",
+      "Yorum Yapabilme",
+      "Takvim Entegrasyonu",
+    ],
+  },
+  {
+    id: 2,
+    label: "Gold",
+    price: "49₺",
+    features: [
+      "3 Takım Oluşturma",
+      "7 Kişiye Kadar Takım Daveti",
+      "Sınırsız Görev ve Proje Yönetimi",
+      "Yorum Yapabilme",
+      "Takvim Entegrasyonu",
+      "E-posta Desteği",
+      "Rozet",
+    ],
+  },
+  {
+    id: 3,
+    label: "Platinum",
+    price: "99₺",
+    features: [
+      "5 Takım Oluşturma",
+      "10 Kişiye Kadar Takım Daveti",
+      "Sınırsız Görev, Proje ve Dosya Yönetimi",
+      "Yorum Yapabilme",
+      "Takvim Entegrasyonu",
+      "Özel Destek",
+      "E-posta ve Canlı Sohbet Desteği",
+      "Rozet",
+    ],
+  },
+];

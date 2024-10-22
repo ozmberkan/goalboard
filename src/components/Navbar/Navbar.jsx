@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
 import { RiFunctionAddFill } from "react-icons/ri";
+import { GiPadlockOpen } from "react-icons/gi";
 
 import ProfileMenu from "./Menus/ProfileMenu";
 import NotificationMenu from "./Menus/NotificationMenu";
@@ -18,7 +19,7 @@ import toast from "react-hot-toast";
 const Navbar = () => {
   const { user } = useSelector((store) => store.user);
   const [dropdown, setDropdown] = useState(false);
-  const [isTeamModal, setIsTeamModal] = useState(false);
+ 
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   const exit = async () => {
@@ -60,9 +61,10 @@ const Navbar = () => {
                   </div>
                   <Link
                     to="/signin"
-                    className="px-4 py-1 flex items-center gap-x-2 transition-all duration-300 rounded-md border-2 border-primary font-medium text-primary hover:bg-primary hover:border-transparent hover:text-white"
+                    className="px-4 py-1 font-semibold flex items-center gap-x-2 transition-all duration-300 rounded-md border-2 border-primary  text-primary hover:bg-primary hover:border-transparent hover:text-white"
                   >
-                    Hemen Başla
+                    <GiPadlockOpen />
+                    Giriş Yap
                   </Link>
                 </>
               )}
@@ -75,12 +77,6 @@ const Navbar = () => {
 
           {user && (
             <div className="flex items-center gap-x-5">
-              <button
-                onClick={() => setIsTeamModal(true)}
-                className="p-2  relative  lg:text-xl text-sm rounded-full bg-primary border-2 border-transparent text-white hover:border-primary hover:bg-white hover:text-primary"
-              >
-                <RiFunctionAddFill />
-              </button>
               <NotificationMenu user={user} />
               <ProfileMenu
                 setDropdown={setDropdown}
@@ -92,7 +88,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      {isTeamModal && <TeamModal setIsTeamModal={setIsTeamModal} />}
     </>
   );
 };

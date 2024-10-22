@@ -4,17 +4,18 @@ import PricingCard from "./children/PricingCard";
 import { MdCancel } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { pricingCards } from "~/data/data";
 
 const Pricing = () => {
   return (
-    <div className="flex-grow flex items-center justify-start flex-col relative p-12 lg:p-24 lg:gap-y-5 gap-y-12">
+    <div className="flex-grow flex items-center justify-start flex-col relative p-12 lg:p-20 lg:gap-y-5 gap-y-12">
       <Link
         to="/"
         className="absolute top-6 right-6 p-3 bg-white border rounded-md text-2xl text-zinc-500 z-10 hover:text-zinc-700"
       >
         <MdCancel />
       </Link>
-      <img src={Bubble} className="absolute top-0 z-0 lg:w-auto w-full" />
+      <img src={Bubble} className="absolute top-0 -z-10 lg:w-auto w-full" />
       <div className="flex flex-col gap-y-3 items-center justify-center z-10 lg:mt-0 mt-12">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
@@ -35,11 +36,13 @@ const Pricing = () => {
       </div>
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1.0 }}
         transition={{ duration: 1 }}
-        className="w-full  flex justify-center items-center z-10 lg:p-5 lg:h-[500px]"
+        className=" w-full lg:flex lg:justify-center lg:items-center grid grid-cols-1 gap-6 mt-14 "
       >
-        <PricingCard />
+        {pricingCards.map((card) => (
+          <PricingCard key={card.id} card={card} />
+        ))}
       </motion.div>
     </div>
   );

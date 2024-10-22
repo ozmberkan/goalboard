@@ -35,14 +35,20 @@ const NotificationMenu = ({ user }) => {
                     Bildirimler
                   </span>
                   <div className="flex flex-col  gap-y-3">
-                    {user.notification?.map((notification, index) => (
-                      <p key={index} className="text-sm text-neutral-400">
-                        <span className="font-medium text-primary">
-                          @{notification.from}{" "}
-                        </span>
-                        {notification.message}
+                    {user.notification.length > 0 ? (
+                      user.notification?.map((notification, index) => (
+                        <p key={index} className="text-sm text-neutral-400">
+                          <span className="font-medium text-primary">
+                            @{notification.from}{" "}
+                          </span>
+                          {notification.message}
+                        </p>
+                      ))
+                    ) : (
+                      <p className="text-sm text-neutral-400">
+                        Bildirim kutusu boş
                       </p>
-                    ))}
+                    )}
                   </div>
                 </div>
               </MenuItem>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiAlertCircle } from "react-icons/fi";
@@ -25,7 +25,6 @@ const TeamModal = ({ setIsTeamModal }) => {
         return;
       }
       dispatch(createTeam({ teamName: data.teamName, id: user.uid }));
-      dispatch(getUserByID(user.uid));
       toast.success("Takım başarıyla oluşturuldu!");
       setIsTeamModal(false);
     } catch (error) {
@@ -33,6 +32,10 @@ const TeamModal = ({ setIsTeamModal }) => {
       toast.error("Takım oluşturulurken bir hata oluştu." + error);
     }
   };
+
+  useEffect(() => {
+    dispatch(getUserByID(user.uid));
+  }, [dispatch]);
 
   return ReactDOM.createPortal(
     <AnimatePresence>

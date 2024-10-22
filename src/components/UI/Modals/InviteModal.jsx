@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { nanoid } from "nanoid";
 
-const InviteModal = ({ setIsInviteModal }) => {
+const InviteModal = ({ setIsInviteModal, teamID }) => {
   const modalRoot = document.getElementById("modal");
   const { user } = useSelector((store) => store.user);
   const { register, handleSubmit } = useForm();
@@ -45,6 +45,7 @@ const InviteModal = ({ setIsInviteModal }) => {
             notification: arrayUnion({
               from: user.username,
               message: "Sizi takıma davet ediyor.",
+              teamID: teamID,
               id: nanoid(),
             }),
           });

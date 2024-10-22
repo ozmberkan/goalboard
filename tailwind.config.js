@@ -13,6 +13,7 @@ export default {
       backgroundImage: {
         "auth-bg": "url('~/assets/Auth/bg.svg')",
         "pricing-bg": "url('~/assets/Pricing.svg')",
+        "team-bg": "url('~/assets/TeamBG.svg')",
       },
     },
   },

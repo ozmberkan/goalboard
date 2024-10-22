@@ -74,10 +74,10 @@ const SignUp = () => {
           <FaHome />
         </Link>
         <div className="lg:w-2/3  lg:h-[10rem] p-4 flex flex-col lg:items-start items-center justify-center gap-1 mb-5">
-          <h1 className="font-extrabold text-[56px] text-primaryDark drop-shadow-md">
+          <h1 className="font-extrabold text-[56px] text-white drop-shadow-md">
             Kayıt Ol
           </h1>
-          <p className="font-bold text-zinc-700 text-lg w-full lg:text-left text-center ">
+          <p className="font-bold text-zinc-100 text-lg w-full lg:text-left text-center ">
             Hemen ücretsiz bir hesap oluştur ve hedefine ulaşmak için ilk adımı
             at.
           </p>
@@ -109,14 +109,14 @@ const SignUp = () => {
           <div className="w-full  flex justify-between items-center">
             <Link
               to="/signin"
-              className="lg:text-lg text-sm hover:underline font-medium  text-zinc-900"
+              className="lg:text-base text-sm hover:underline font-medium  text-white"
             >
               Hesabın var mı ?
             </Link>
           </div>
           <button
             type="submit"
-            className="lg:w-full h-12 py-2 rounded-lg bg-primaryDark hover:bg-primaryDark/85 text-white"
+            className="lg:w-full h-12 py-2 rounded-lg bg-white hover:bg-primary hover:text-white shadow-lg text-primary font-medium transition-colors duration-300"
           >
             Kayıt Ol
           </button>
