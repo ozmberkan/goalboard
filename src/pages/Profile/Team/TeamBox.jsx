@@ -1,5 +1,6 @@
 import { FaStar, FaUsers } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { IoArrowForwardCircle } from "react-icons/io5";
 
 const TeamBox = ({ team }) => {
   const { createdAt, members, teamName, teamID, projects } = team;
@@ -12,6 +13,12 @@ const TeamBox = ({ team }) => {
             className="font-bold text-primaryDark text-2xl"
           >
             {teamName}
+          </Link>
+          <Link
+            to={`/dashboard/${teamID}`}
+            className="font-bold text-white hover:text-black text-4xl"
+          >
+            <IoArrowForwardCircle />
           </Link>
         </div>
         <div className="w-full flex gap-x-4">

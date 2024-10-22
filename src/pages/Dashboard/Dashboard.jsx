@@ -17,6 +17,7 @@ import { FaUsers } from "react-icons/fa";
 import ProjectModal from "~/components/UI/Modals/ProjectModal";
 import { RiFileAddFill } from "react-icons/ri";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { getAllProjects } from "~/redux/slices/projectsSlice";
 
 const Dashboard = () => {
   const { teamID } = useParams();
@@ -24,8 +25,8 @@ const Dashboard = () => {
   const { user } = useSelector((store) => store.user);
   const navigate = useNavigate();
   const { currentTeam, status } = useSelector((store) => store.teams);
+  const { projects } = useSelector((store) => store.projects);
   const [isInviteModal, setIsInviteModal] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
 
   const [isProjectModal, setIsProjectModal] = useState(false);
 
@@ -34,6 +35,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (teamID) {
       dispatch(getTeamByID(teamID));
+      dispatch(getAllProjects());
     }
   }, [dispatch]);
 
@@ -62,6 +64,10 @@ const Dashboard = () => {
       </div>
     );
   }
+
+  const teamProjects = projects.filter((project) =>
+    currentTeam?.projects.includes(project.projectID)
+  );
 
   return (
     <>
@@ -104,17 +110,25 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="w-full py-6 h-full flex flex-col gap-y-3">
-            <h1 className="text-2xl font-semibold text-primaryDark">
+            <h1 className="text-3xl font-semibold text-primaryDark ">
               Projeler
             </h1>
-            <div className="w-full h-full grid grid-cols-5 gap-5 ">
-              {currentTeam?.projects.length > 0 ? (
-                currentTeam?.projects.map((project) => (
+            <div className="w-full h-full grid grid-cols-4 gap-5 ">
+              {teamProjects.length > 0 ? (
+                teamProjects.map((project) => (
                   <Link
+                    key={project.projectID}
                     to={`/project/${project.projectID}`}
-                    className="bg-green-500 w-[300px] rounded-xl flex justify-center items-center "
+                    className="bg-project-bg bg-center bg-cover hover:shadow-xl transition-all duration-300 border rounded-xl  p-5 "
                   >
-                    {project.projectName}
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold text-2xl text-zinc-700">
+                        {project.projectName}
+                      </span>
+                      <span className="font-semibold text-sm text-zinc-700 bg-white rounded-full px-4">
+                        {project.lastDate}
+                      </span>
+                    </div>
                   </Link>
                 ))
               ) : (

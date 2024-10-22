@@ -5,7 +5,13 @@ import { FiAlertCircle } from "react-icons/fi";
 import { IoMdAddCircle } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import moment from "moment";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import toast from "react-hot-toast";
 import { db } from "~/firebase/firebase";
 import { nanoid } from "nanoid";
@@ -19,9 +25,12 @@ const ProjectModal = ({ setIsProjectModal, teamID }) => {
     try {
       const formattedDate = moment(data.lastDate).format("DD.MM.YYYY");
 
+      const projectsRef = doc(collection(db, "projects"));
+      const teamsRef = doc(db, "teams", teamID);
+
       const projectData = {
         projectName: data.projectName,
-        projectID: nanoid(),
+        projectID: projectsRef.id,
         lastDate: formattedDate,
         tasks: [],
         testTasks: [],
@@ -29,10 +38,10 @@ const ProjectModal = ({ setIsProjectModal, teamID }) => {
         comments: [],
       };
 
-      const teamRef = doc(db, "teams", teamID);
+      await setDoc(projectsRef, projectData);
 
-      await updateDoc(teamRef, {
-        projects: arrayUnion(projectData),
+      await updateDoc(teamsRef, {
+        projects: arrayUnion(projectsRef.id),
       });
 
       toast.success("Proje başarıyla oluşturuldu!");
