@@ -38,7 +38,7 @@ const SignIn = () => {
       toast.error("Kullanıcı adı veya şifre hatalı!");
     }
     if (status === "success") {
-      toast.success("Başarıyla giriş yaptınız, yönleniyorsunuz...");
+      toast.success("Başarıyla giriş yaptınız, yönlendiriliyorsunuz...");
       setTimeout(() => {
         navigate("/");
       }, 2000);
