@@ -18,6 +18,7 @@ import ProjectModal from "~/components/UI/Modals/ProjectModal";
 import { RiFileAddFill } from "react-icons/ri";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { getAllProjects } from "~/redux/slices/projectsSlice";
+import InviteModal from "~/components/UI/Modals/InviteModal";
 
 const Dashboard = () => {
   const { teamID } = useParams();
@@ -150,6 +151,9 @@ const Dashboard = () => {
           setIsProjectModal={setIsProjectModal}
           teamID={currentTeam.teamID}
         />
+      )}
+      {isInviteModal && (
+        <InviteModal setIsInviteModal={setIsInviteModal} teamID={teamID} />
       )}
     </>
   );
