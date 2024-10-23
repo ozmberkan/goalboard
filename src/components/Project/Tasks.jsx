@@ -52,7 +52,7 @@ const Tasks = ({ projectID }) => {
       const taskToMove = projectData.tasks.find(
         (task) => task.taskID === taskID
       );
-      
+
       const updatedTasks = projectData.tasks.filter(
         (task) => task.taskID !== taskID
       );
@@ -64,6 +64,37 @@ const Tasks = ({ projectID }) => {
         });
 
         toast.success("Görev test aşamasına taşındı!");
+      } else {
+        console.log("erorr");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Bir hata oluştu.");
+    }
+  };
+
+  const completeToTask = async (taskID) => {
+    try {
+      const projectRef = doc(db, "projects", projectID);
+
+      const projectSnap = await getDoc(projectRef);
+      const projectData = projectSnap.data();
+
+      const taskToMove = projectData.testTasks.find(
+        (task) => task.taskID === taskID
+      );
+
+      const updatedTasks = projectData.testTasks.filter(
+        (task) => task.taskID !== taskID
+      );
+
+      if (taskToMove) {
+        await updateDoc(projectRef, {
+          testTasks: updatedTasks,
+          completeTasks: arrayUnion(taskToMove),
+        });
+
+        toast.success("Görev tamamlandı aşamasına taşındı!");
       } else {
         console.log("erorr");
       }
@@ -152,7 +183,7 @@ const Tasks = ({ projectID }) => {
               <span>{task.text}</span>
               <div className="flex gap-x-2">
                 <button
-                  onClick={() => completeTask(task.taskID)}
+                  onClick={() => completeToTask(task.taskID)}
                   className="bg-green-100 text-green-500 px-2 py-1 rounded-md"
                 >
                   <FaCheck />
