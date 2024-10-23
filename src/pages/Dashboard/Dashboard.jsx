@@ -85,7 +85,7 @@ const Dashboard = () => {
                   {currentTeam?.members.length}
                 </span>
               </div>
-              {currentTeam?.createrMember === user.uid && (
+              {currentTeam?.creatorMember === user.uid && (
                 <>
                   <button
                     onClick={() => setIsProjectModal(true)}

@@ -21,16 +21,9 @@ const Profile = () => {
   useEffect(() => {
     if (user?.uid) {
       dispatch(getUserByID(user?.uid));
-      dispatch(getAllTeams());
+      dispatch(getAllTeams(user?.uid));
     }
   }, [dispatch, user?.uid]);
-
-  useEffect(() => {
-    if (teams && user) {
-      const filtered = teams.filter((team) => team.members.includes(user?.uid));
-      setFilteredTeam(filtered);
-    }
-  }, [teams, user]);
 
   return (
     <>
@@ -75,10 +68,8 @@ const Profile = () => {
             </div>
 
             <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-5">
-              {filteredTeam?.length > 0 ? (
-                filteredTeam?.map((team) => (
-                  <TeamBox key={team.teamID} team={team} />
-                ))
+              {teams?.length > 0 ? (
+                teams?.map((team) => <TeamBox key={team.teamID} team={team} />)
               ) : (
                 <div className="bg-primary/10 text-primary px-4 py-2 rounded-md w-full">
                   Henüz herhangi bir takıma dahil olmadınız!

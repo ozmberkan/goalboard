@@ -5,8 +5,10 @@ import {
   doc,
   getDoc,
   getDocs,
+  query,
   setDoc,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import { db } from "~/firebase/firebase";
 import moment from "moment";
@@ -29,7 +31,7 @@ export const createTeam = createAsyncThunk(
 
       const teamData = {
         teamID: teamsRef.id,
-        createrMember: id,
+        creatorMember: id,
         teamName: teamName,
         createdAt,
         members: [],
@@ -71,11 +73,19 @@ export const getTeamByID = createAsyncThunk(
 
 export const getAllTeams = createAsyncThunk(
   "teams/getAllTeams",
-  async (_, thunkAPI) => {
+  async (uid, thunkAPI) => {
     try {
+      if (!uid) {
+        throw new Error("Geçersiz kullanıcı UID");
+      }
+
       const teamsRef = collection(db, "teams");
-      const teamsSnapshot = await getDocs(teamsRef);
-      const teams = teamsSnapshot.docs.map((doc) => doc.data());
+      const q = query(teamsRef, where("creatorMember", "==", uid));
+      const teamsSnapshot = await getDocs(q);
+      const teams = teamsSnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
       return teams;
     } catch (error) {
       console.log(error);

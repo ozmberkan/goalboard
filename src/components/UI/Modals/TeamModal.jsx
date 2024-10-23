@@ -5,7 +5,7 @@ import { FiAlertCircle } from "react-icons/fi";
 import { IoMdAddCircle } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createTeam } from "~/redux/slices/teamsSlice";
+import { createTeam, getAllTeams } from "~/redux/slices/teamsSlice";
 import toast from "react-hot-toast";
 import { getUserByID } from "~/redux/slices/userSlice";
 
@@ -18,13 +18,16 @@ const TeamModal = ({ setIsTeamModal }) => {
 
   const createTeamHandle = (data) => {
     try {
-      if (user.premium === false && user.teams.length >= 1) {
+      if (user.premium === false && user.teams.length >= 2) {
         toast.error(
           "Premium üye olmadığınız için sadece 1 takım oluşturabilirsiniz."
         );
         return;
       }
       dispatch(createTeam({ teamName: data.teamName, id: user.uid }));
+
+      dispatch(getAllTeams());
+
       toast.success("Takım başarıyla oluşturuldu!");
       setIsTeamModal(false);
     } catch (error) {
