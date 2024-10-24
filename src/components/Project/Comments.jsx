@@ -51,17 +51,17 @@ const Comments = ({ projectID }) => {
           <div className="flex gap-x-2">
             <button
               onClick={() => setIsCommentModal(true)}
-              className="bg-green-100 text-green-500 border-green-400 border lg:px-4 lg:py-2 p-1 rounded-md flex items-center gap-x-2"
+              className="bg-green-100 text-green-500 border-green-400 border lg:px-4 lg:py-1 p-1 rounded-md flex items-center gap-x-2"
             >
               <FaRegCommentDots size={20} />
-              <span className="lg:flex hidden">Yeni Yorum Ekle</span>
+              <span className="lg:flex hidden text-sm">Yeni Yorum Ekle</span>
             </button>
             <button
               onClick={cleanComments}
-              className="bg-red-100 text-red-500 border-red-400 border lg:px-4 lg:py-2 p-1 rounded-md flex items-center gap-x-2"
+              className="bg-red-100 text-red-500 border-red-400 border lg:px-4 lg:py-1 p-1 rounded-md flex items-center gap-x-2"
             >
               <MdDeleteOutline size={20} />
-              <span className="lg:flex hidden">Yorumları Temizle</span>
+              <span className="lg:flex hidden text-sm">Yorumları Temizle</span>
             </button>
           </div>
         </div>

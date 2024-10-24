@@ -1,9 +1,7 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import { ContactsInput } from "~/data/data";
 import { db } from "~/firebase/firebase";
-import { contactScheme } from "~/validation/scheme";
 import toast from "react-hot-toast";
 import moment from "moment";
 
@@ -24,7 +22,7 @@ const Contacts = () => {
         name: data.name,
         username: data.username,
         message: data.message,
-        date: moment().format("DD.MM.YYYY HH:mm"),
+        createdAt: moment().format("DD.MM.YYYY HH:mm"),
       });
       reset();
       toast.success("Mesajınız başarıyla gönderildi");
@@ -39,7 +37,7 @@ const Contacts = () => {
         <h1 className="text-4xl font-bold text-primary">İletişim</h1>
 
         <form
-          className="lg:w-1/2 grid grid-cols-1 gap-5"
+          className="lg:w-1/2 grid grid-cols-1 gap-4"
           onSubmit={handleSubmit(contactHandle)}
         >
           {ContactsInput.map((input) => (
@@ -49,13 +47,13 @@ const Contacts = () => {
                   className="border px-4 py-2 rounded-md outline-none"
                   placeholder={input.placeholder}
                   type="text"
-                  {...register(input.name)}
+                  {...register(input.name, { required: true })}
                 />
               ) : (
                 <textarea
                   className="border px-4 py-2 rounded-md outline-none min-h-[75px] max-h-[75px]"
                   placeholder={input.placeholder}
-                  {...register(input.name)}
+                  {...register(input.name, { required: true })}
                 />
               )}
               <span className="text-sm text-red-500">
@@ -64,7 +62,9 @@ const Contacts = () => {
             </div>
           ))}
 
-          <button className="bg-primary p-2 text-white">Gönder</button>
+          <button className="bg-primary p-2 text-white rounded-md border border-transparent hover:border-primary hover:text-primary hover:bg-white">
+            Gönder
+          </button>
         </form>
       </div>
     </div>

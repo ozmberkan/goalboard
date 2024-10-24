@@ -30,7 +30,10 @@ const AdminTeams = () => {
       </div>
       <div className="grid lg:grid-cols-6 grid-cols-1 place-items-center w-full lg:mt-6 py-5 px-4 gap-6">
         {allTeams.map((team) => (
-          <div className=" w-full rounded-md bg-zinc-50 border p-3 ">
+          <div
+            key={team.teamID}
+            className=" w-full rounded-md bg-zinc-50 border p-3 "
+          >
             <div className="w-full ">
               <span className="text-zinc-600 text-xl   font-semibold ">
                 {team.teamName}

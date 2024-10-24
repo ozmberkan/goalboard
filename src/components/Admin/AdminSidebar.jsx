@@ -8,9 +8,9 @@ import { RiFeedbackLine } from "react-icons/ri";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Logo from "~/assets/Logos/DarkLogo.svg";
-import { MdOutlineVerified } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
+import { GoBell } from "react-icons/go";
 
 const AdminSidebar = () => {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
@@ -66,6 +66,14 @@ const AdminSidebar = () => {
             {allFeedbacks.length}
           </span>
           {!isTabletOrMobile && <span>Geri Bildirimler</span>}
+        </Link>
+        <Link
+          to="/admin/notification"
+          className="flex items-center relative gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
+        >
+          <GoBell size={20} />
+
+          {!isTabletOrMobile && <span>Bildirim Gönder</span>}
         </Link>
 
         <Link

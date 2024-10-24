@@ -55,7 +55,7 @@ const ProjectHome = () => {
             {!isTabletOrMobile && <span>Ayarlar</span>}
           </Tab>
         </div>
-        <div className="w-full lg:px-4 px-2 flex flex-col py-3 border-t ">
+        <div className="w-full lg:px-4 px-2 flex flex-col gap-y-2 py-3 border-t ">
           <Tab className="flex items-center gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
             <RiFeedbackLine size={20} />
             {!isTabletOrMobile && <span>Geri Bildirim</span>}
@@ -79,7 +79,7 @@ const ProjectHome = () => {
             <Comments projectID={projectID} />
           </TabPanel>
           <TabPanel className="w-full  flex-grow py-3 px-12">
-            <Archive />
+            <Archive projectID={projectID} />
           </TabPanel>
           <TabPanel className="w-full  flex-grow py-3 px-12">
             <ProjectSettings />

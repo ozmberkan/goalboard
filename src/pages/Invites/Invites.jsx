@@ -1,5 +1,5 @@
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
-import React from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
@@ -14,6 +14,10 @@ const Invites = () => {
   const [animationParent] = useAutoAnimate();
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserByID(user?.uid));
+  }, []);
 
   const confirmInvite = async (noti) => {
     try {
@@ -55,7 +59,25 @@ const Invites = () => {
 
       toast.success("Davet reddedildi.");
       dispatch(getUserByID(user?.uid));
-      dispa;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteNoti = async (noti) => {
+    try {
+      const userRef = doc(db, "users", user.uid);
+
+      const updatedNoti = user.notification.filter(
+        (n) => n.id !== noti.notificationID
+      );
+
+      await updateDoc(userRef, {
+        notification: updatedNoti,
+      });
+
+      toast.success("Bildirim Silindi.");
+      dispatch(getUserByID(user?.uid));
     } catch (error) {
       console.log(error);
     }
@@ -87,20 +109,28 @@ const Invites = () => {
                     </span>
                     <span>{noti.message}</span>
                   </div>
-                  <div className="flex gap-x-4">
-                    <button
-                      onClick={() => confirmInvite(noti)}
-                      className="bg-green-100 text-green-500 px-4 py-2 rounded-md"
-                    >
-                      <FaCheck />
-                    </button>
-                    <button
-                      onClick={() => cancelInvite(noti)}
-                      className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
-                    >
-                      <MdCancel />
-                    </button>
-                  </div>
+                  {noti.message === "Sizi takıma davet ediyor." && (
+                    <div className="flex gap-x-4">
+                      <button
+                        onClick={() => confirmInvite(noti)}
+                        className="bg-green-100 text-green-500 px-4 py-2 rounded-md"
+                      >
+                        <FaCheck />
+                      </button>
+                      <button
+                        onClick={() => cancelInvite(noti)}
+                        className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
+                      >
+                        <MdCancel />
+                      </button>
+                    </div>
+                  )}
+                  <button
+                    onClick={() => deleteNoti(noti)}
+                    className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
+                  >
+                    <MdCancel />
+                  </button>
                 </div>
               ))
             ) : (

@@ -30,12 +30,30 @@ const AdminFeedBacks = () => {
         </div>
       </div>
       <div className="grid lg:grid-cols-1 grid-cols-1 place-items-center w-full lg:mt-6 py-5 px-4 gap-6">
-        {allFeedbacks.map((feedback, i) => (
+        {allFeedbacks?.map((feedback, i) => (
           <div key={i} className=" w-full rounded-md bg-zinc-50 border p-3 ">
             <div className="w-full flex flex-col gap-y-2 ">
-              <div className="w-full border-b py-2 text-zinc-700 flex justify-between items-center">
-                <span>{feedback.username ? feedback.username : "Anonim"}</span>
-                <span>{feedback.date}</span>
+              <div className="w-full border-b py-2 text-zinc-700 flex justify-between">
+                <div className="flex flex-col gap-y-1">
+                  {feedback.username ? (
+                    <span className="text-primary">
+                      {feedback.username ? feedback.username : "Anonim"}
+                    </span>
+                  ) : (
+                    <span className="text-primary">{feedback.name}</span>
+                  )}
+                  {feedback.teamName && (
+                    <>
+                      <span className="text-primary">{feedback.teamName}</span>
+                      <span className="text-primary">
+                        {feedback.projectName}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <span className="text-sm text-zinc-600">
+                  {feedback.createdAt}
+                </span>
               </div>
               <span className="text-zinc-600 text-sm  w-full  font-medium ">
                 {feedback.message}

@@ -38,6 +38,7 @@ const ProjectModal = ({ setIsProjectModal, teamID }) => {
         tasks: [],
         testTasks: [],
         completeTasks: [],
+        archiveTasks: [],
         comments: [],
       };
 

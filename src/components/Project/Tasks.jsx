@@ -18,12 +18,13 @@ import {
   RiStopCircleLine,
 } from "react-icons/ri";
 import { Tooltip } from "react-tooltip";
+import { IoArchive } from "react-icons/io5";
 
 const Tasks = ({ projectID }) => {
   const [animationParent] = useAutoAnimate();
 
   const { register, handleSubmit, reset } = useForm();
-  const { currentProject } = useSelector((store) => store.projects);
+  const { currentProject, status } = useSelector((store) => store.projects);
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
@@ -51,7 +52,7 @@ const Tasks = ({ projectID }) => {
         taskCreatorName: user.username,
         taskCreatorImage: user.photoURL,
         text: data.task,
-        date: formattedDate,
+        createdAt: formattedDate,
       };
 
       await updateDoc(projectRef, {
@@ -90,7 +91,39 @@ const Tasks = ({ projectID }) => {
         toast.success("Görev test aşamasına taşındı!");
         dispatch(getProjectsByID(projectID));
       } else {
-        console.log("erorr");
+        console.log("error");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Bir hata oluştu.");
+    }
+  };
+
+  const fromTestToTask = async (taskID) => {
+    try {
+      const projectRef = doc(db, "projects", projectID);
+
+      const projectSnap = await getDoc(projectRef);
+      const projectData = projectSnap.data();
+
+      const taskToMove = projectData.testTasks.find(
+        (task) => task.taskID === taskID
+      );
+
+      const updatedTasks = projectData.testTasks.filter(
+        (task) => task.taskID !== taskID
+      );
+
+      if (taskToMove) {
+        await updateDoc(projectRef, {
+          testTasks: updatedTasks,
+          tasks: arrayUnion(taskToMove),
+        });
+
+        toast.success("Görev test aşamasına taşındı!");
+        dispatch(getProjectsByID(projectID));
+      } else {
+        console.log("error");
       }
     } catch (error) {
       console.log(error);
@@ -122,7 +155,44 @@ const Tasks = ({ projectID }) => {
         toast.success("Görev tamamlandı aşamasına taşındı!");
         dispatch(getProjectsByID(projectID));
       } else {
-        console.log("erorr");
+        console.log("error");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Bir hata oluştu.");
+    }
+  };
+
+  const archiveToTask = async (taskID) => {
+    try {
+      const projectRef = doc(db, "projects", projectID);
+
+      const projectSnap = await getDoc(projectRef);
+      const projectData = projectSnap.data();
+
+      let taskToMove = projectData.completeTasks.find(
+        (task) => task.taskID === taskID
+      );
+
+      const updatedTasks = projectData.completeTasks.filter(
+        (task) => task.taskID !== taskID
+      );
+
+      if (taskToMove) {
+        taskToMove = {
+          ...taskToMove,
+          archivedDate: moment().format("DD.MM.YYYY HH:mm"),
+        };
+
+        await updateDoc(projectRef, {
+          completeTasks: updatedTasks,
+          archiveTasks: arrayUnion(taskToMove),
+        });
+
+        toast.success("Görev arşive taşındı!");
+        dispatch(getProjectsByID(projectID));
+      } else {
+        console.log("error");
       }
     } catch (error) {
       console.log(error);
@@ -163,7 +233,13 @@ const Tasks = ({ projectID }) => {
             Genel Bakış
           </h1>
           <h1 className="lg:text-xl text-lg font-bold  text-primary flex items-center gap-x-1">
-            {currentProject.projectName}
+            {currentProject?.projectName ? (
+              currentProject.projectName
+            ) : (
+              <div role="status" className="max-w-sm animate-pulse">
+                <div className="h-7 bg-gray-200 rounded-full dark:bg-gray-700 w-32 "></div>
+              </div>
+            )}
           </h1>
         </div>
 
@@ -263,6 +339,13 @@ const Tasks = ({ projectID }) => {
                   </div>
                   <div className="flex gap-x-2">
                     <button
+                      onClick={() => fromTestToTask(task.taskID)}
+                      className="bg-zinc-700 text-zinc-300  hover:bg-zinc-600 px-2 py-1 rounded-md flex items-center gap-x-1"
+                    >
+                      <MdOutlineSettings />
+                      Test
+                    </button>
+                    <button
                       onClick={() => completeToTask(task.taskID)}
                       className="bg-green-500 text-green-200 px-2 py-1 rounded-md flex items-center gap-x-1 hover:bg-green-400"
                     >
@@ -315,6 +398,13 @@ const Tasks = ({ projectID }) => {
                     >
                       <MdCancel />
                       Sil
+                    </button>
+                    <button
+                      onClick={() => archiveToTask(task.taskID)}
+                      className="bg-violet-500 text-violet-100 hover:bg-violet-600 px-2 py-1 rounded-md flex items-center gap-x-1"
+                    >
+                      <IoArchive />
+                      Arşivle
                     </button>
                   </div>
                 </div>
