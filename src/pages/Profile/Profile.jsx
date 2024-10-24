@@ -9,8 +9,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { RiFunctionAddFill } from "react-icons/ri";
 import TeamModal from "~/components/UI/Modals/TeamModal";
 import { motion } from "framer-motion";
-
-
+import Avatar from "~/assets/noavatar.png";
 
 const Profile = () => {
   const [animationParent] = useAutoAnimate();
@@ -51,7 +50,7 @@ const Profile = () => {
               style={{
                 backgroundImage: user.photoURL
                   ? `url(${user.photoURL})`
-                  : "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7x7RFFT8-4WY26mVJxhk5lvmoTIhb_0NzAQ&s')",
+                  : `url(${Avatar}`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}

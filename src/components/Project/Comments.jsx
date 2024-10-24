@@ -71,7 +71,7 @@ const Comments = ({ projectID }) => {
               >
                 <div className=" pb-2 w-full flex gap-x-2 border-b">
                   <img
-                    src={comment.photoURL ? comment.photoURL : Avatar}
+                    src={comment.creatorImage ? comment?.creatorImage : Avatar}
                     className="w-10 h-10 object-cover rounded-full"
                   />
                   <div>
