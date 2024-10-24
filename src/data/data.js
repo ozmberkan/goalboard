@@ -69,8 +69,8 @@ export const ContactsInput = [
 export const FeedBacksInput = [
   { id: 1, placeholder: "Kullanıcı Adınız", name: "username", type: "text" },
   { id: 2, placeholder: "Takım Adınız", name: "teamName", type: "text" },
-  { id: 2, placeholder: "Proje Adınız", name: "projectName", type: "text" },
-  { id: 3, placeholder: "Mesajınız", name: "message" },
+  { id: 3, placeholder: "Proje Adınız", name: "projectName", type: "text" },
+  { id: 4, placeholder: "Mesajınız", name: "message" },
 ];
 
 export const SignInInput = [

@@ -12,7 +12,6 @@ const Admin = () => {
   const { allTeams } = useSelector((store) => store.teams);
   const { allProjects } = useSelector((store) => store.projects);
   const { allFeedbacks } = useSelector((store) => store.feedbacks);
-  const { allVerified } = useSelector((store) => store.verified);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,7 +19,6 @@ const Admin = () => {
     dispatch(getAllTeamsForAdmin());
     dispatch(getAllProjectsForAdmin());
     dispatch(getAllFeedBacksForAdmin());
-    dispatch(getAllVerifiedForAdmin());
   }, []);
 
   if (status === "loading") {
