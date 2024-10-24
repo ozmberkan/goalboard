@@ -24,7 +24,7 @@ const ProjectBox = ({ project }) => {
           <FaRegCheckCircle size={18} /> {project.completeTasks.length}
         </span>
       </div>
-      <div className="font-semibold text-sm text-zinc-600 bg-white rounded-md px-4 py-2 border shadow-md w-full flex justify-between items-center">
+      <div className="font-semibold text-sm lg:mt-0 mt-3 text-zinc-600 bg-white rounded-md px-4 py-2 border shadow-md w-full flex justify-between items-center">
         <span>Son Teslim Tarihi</span>
         <span>{project.lastDate}</span>
       </div>

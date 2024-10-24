@@ -158,13 +158,13 @@ const Tasks = ({ projectID }) => {
       <Tooltip id="username" className="z-20" />
       <div className="h-full">
         <div className="w-full py-3 border-b mb-4">
-          <h1 className="text-xl font-semibold flex items-center gap-x-1">
+          <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1">
             <FiLayout />
             Genel Bakış
           </h1>
         </div>
 
-        <div className="w-full grid lg:grid-cols-3 gap-8">
+        <div className="w-full grid lg:grid-cols-3 grid-cols-1 gap-8">
           <div className="bg-zinc-100 rounded-xl border shadow">
             <div className="w-full rounded-t-xl bg-gradient-to-r from-primary to-zinc-700  p-4 border-b border-zinc-500">
               <h1 className="text-lg text-white font-semibold flex items-center gap-x-2">
@@ -172,19 +172,19 @@ const Tasks = ({ projectID }) => {
                 Yapılacaklar
               </h1>
             </div>
-            <div className="w-full  p-3 flex flex-col gap-y-2">
-              <div className="bg-white px-4 py-2 border rounded-md text-sm flex justify-between items-center">
+            <div className="w-full p-3 flex flex-col gap-y-2">
+              <div className="bg-white w-full px-4 py-2 border rounded-md text-sm flex justify-between items-center">
                 <form
-                  className="w-full flex gap-x-1"
+                  className="w-full flex gap-x-1 "
                   onSubmit={handleSubmit(createTask)}
                 >
                   <input
                     type="text"
                     placeholder="Yapılacak gir.."
-                    className="flex-1 outline-none"
-                    {...register("task")}
+                    className="w-full outline-none"
+                    {...register("task", { required: true })}
                   />
-                  <button className="px-4 py-1 rounded-md bg-primary text-white hover:bg-primaryDark transition-colors">
+                  <button className="lg:px-4 px-2 py-1 rounded-md bg-primary text-white hover:bg-primaryDark transition-colors">
                     Ekle
                   </button>
                 </form>

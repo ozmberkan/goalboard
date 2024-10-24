@@ -75,7 +75,7 @@ const Dashboard = () => {
           className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden"
         >
           <div className="w-full justify-between items-center flex ">
-            <h1 className="font-semibold text-4xl text-primary">
+            <h1 className="font-semibold lg:text-4xl text-lg text-primary">
               {currentTeam?.teamName}
             </h1>
             <div className="flex gap-x-2 items-center">
@@ -114,7 +114,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="w-full py-6 h-full flex flex-col gap-y-3">
-            <h1 className="text-3xl font-semibold text-primaryDark ">
+            <h1 className="lg:text-3xl text-lg font-semibold text-primaryDark ">
               Projeler
             </h1>
             <div

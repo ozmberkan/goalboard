@@ -41,24 +41,24 @@ const Comments = ({ projectID }) => {
     <>
       <div className="h-full">
         <div className="w-full py-3 border-b mb-4 flex justify-between items-center">
-          <h1 className="text-xl font-semibold flex items-center gap-x-1">
+          <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1">
             <FaRegComments />
             Yorumlar
           </h1>
           <div className="flex gap-x-2">
             <button
               onClick={() => setIsCommentModal(true)}
-              className="bg-green-100 text-green-500 border-green-400 border px-4 py-2 rounded-md flex items-center gap-x-2"
+              className="bg-green-100 text-green-500 border-green-400 border lg:px-4 lg:py-2 p-1 rounded-md flex items-center gap-x-2"
             >
               <FaRegCommentDots size={20} />
-              Yeni Yorum Ekle
+              <span className="lg:flex hidden">Yeni Yorum Ekle</span>
             </button>
             <button
               onClick={cleanComments}
-              className="bg-red-100 text-red-500 border-red-400 border px-4 py-2 rounded-md flex items-center gap-x-2"
+              className="bg-red-100 text-red-500 border-red-400 border lg:px-4 lg:py-2 p-1 rounded-md flex items-center gap-x-2"
             >
               <MdDeleteOutline size={20} />
-              Yorumları Temizle
+              <span className="lg:flex hidden">Yorumları Temizle</span>
             </button>
           </div>
         </div>
