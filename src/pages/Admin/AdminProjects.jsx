@@ -1,6 +1,6 @@
 import React from "react";
 
-const Admin = () => {
+const AdminProjects = () => {
   return (
     <div className="flex flex-grow bg-white p-6  justify-center items-center">
       <div className="flex items-center gap-x-2">
@@ -20,10 +20,10 @@ const Admin = () => {
             fill="currentFill"
           />
         </svg>
-        <h1>Çok yakında...</h1>
+        <h1>Admin Tüm Projeler Çok yakında...</h1>
       </div>
     </div>
   );
 };
 
-export default Admin;
+export default AdminProjects;

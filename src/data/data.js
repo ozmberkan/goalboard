@@ -8,6 +8,9 @@ import {
   FaUser,
 } from "react-icons/fa";
 
+import { MdNotificationsActive } from "react-icons/md";
+import { TbSettingsFilled } from "react-icons/tb";
+
 export const starterTabs = [
   { id: 1, label: "İletişim", to: "/contacts" },
   { id: 2, label: "Hakkımızda", to: "/about" },
@@ -20,9 +23,14 @@ export const navTabs = [
 ];
 
 export const profileTabs = [
-  { id: 1, label: "Profilim", to: "/profile" },
-  { id: 2, label: "Gelen Davetler", to: "/invites" },
-  { id: 3, label: "Ayarlar", to: "/settings" },
+  { id: 1, label: "Profilim", to: "/profile", icon: FaUser },
+  {
+    id: 2,
+    label: "Gelen Davetler",
+    to: "/invites",
+    icon: MdNotificationsActive,
+  },
+  { id: 3, label: "Ayarlar", to: "/settings", icon: TbSettingsFilled },
 ];
 
 export const FooterSocialTabs = [

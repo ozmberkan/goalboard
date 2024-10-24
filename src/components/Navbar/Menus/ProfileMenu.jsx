@@ -5,10 +5,11 @@ import {
   MenuItems,
   Transition,
 } from "@headlessui/react";
-import { FaChevronDown, FaUser } from "react-icons/fa";
+import { FaChevronDown, FaUser, FaUserLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { profileTabs } from "~/data/data";
 import Avatar from "~/assets/noavatar.png";
+import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 
 const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
   return (
@@ -17,7 +18,7 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
         <>
           <MenuButton
             onClick={() => setDropdown(true)}
-            className="lg:px-4 lg:py-1 py-2 px-4 flex items-center border-2 hover:bg-zinc-50 border-primary hover:border-primaryDark hover:text-primaryDark  rounded-full gap-x-2 transition-all duration-300   font-medium text-primary "
+            className="lg:px-4 lg:py-1 py-2 px-4 flex items-center border-2 hover:bg-zinc-50 border-primary hover:border-primaryDark hover:text-primaryDark  rounded-md gap-x-2 transition-all duration-300   font-medium text-primary "
           >
             {isTabletOrMobile ? (
               <FaUser />
@@ -58,15 +59,31 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
                     }
                     className="hover:text-neutral-400"
                   >
-                    {tab.label}
+                    <span className="flex items-center gap-x-2">
+                      <tab.icon size={15} />
+                      <span>{tab.label}</span>
+                    </span>
                   </Link>
                 </MenuItem>
               ))}
+
+              {user.role === "admin" && (
+                <MenuItem key="admin">
+                  <Link
+                    to="/admin"
+                    className="hover:text-neutral-400 flex gap-x-2 items-center"
+                  >
+                    <FaUserLock size={15} />
+                    Admin Paneli
+                  </Link>
+                </MenuItem>
+              )}
               <MenuItem>
                 <button
                   onClick={exit}
-                  className="text-red-500 pt-4 border-t hover:text-red-400 flex"
+                  className="text-red-500 pt-4 border-t hover:text-red-400 flex items-center gap-x-2"
                 >
+                  <TbLayoutSidebarLeftCollapse />
                   Çıkış Yap
                 </button>
               </MenuItem>
