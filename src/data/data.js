@@ -57,7 +57,13 @@ export const FooterContacts = [
 export const ContactsInput = [
   { id: 1, placeholder: "Adınız", name: "name", type: "text" },
   { id: 2, placeholder: "Cep Telefonu", name: "phone", type: "text" },
-  { id: 3, placeholder: "Mesajınız", name: "message" },
+  {
+    id: 3,
+    placeholder: "Kullanıcı Adı (Opsiyonel)",
+    name: "username",
+    type: "text",
+  },
+  { id: 4, placeholder: "Mesajınız", name: "message" },
 ];
 
 export const SignInInput = [

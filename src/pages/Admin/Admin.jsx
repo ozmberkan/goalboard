@@ -22,14 +22,15 @@ const Admin = () => {
 
   if (status === "loading") {
     return (
-      <div className="flex flex-grow justify-center items-center">
+      <div className="flex flex-grow justify-center items-center bg-white">
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
       </div>
     );
   }
+  
   return (
     <div className="flex flex-grow  lg:p-6 p-2 justify-start items-start flex-col gap-y-2 bg-white">
-      <div className="w-full   px-4 py-2 flex justify-between items-center">
+      <div className="w-full   px-4 py-2 flex justify-between items-center h-18 border-b">
         <span className="lg:text-2xl text-lg font-bold text-zinc-600 lg:flex hidden">
           Hoş geldin, {user.username}
         </span>
@@ -44,7 +45,7 @@ const Admin = () => {
           </div>
         </div>
       </div>
-      <div className="grid lg:grid-cols-3 grid-cols-1 place-items-center w-full lg:mt-6 p-5 gap-6">
+      <div className="grid lg:grid-cols-3 grid-cols-1 place-items-center w-full lg:mt-6 py-5 px-4 gap-6">
         <div className="h-[200px]  w-full rounded-md bg-[#F9E5CF] p-3 ">
           <div className="w-full border-b border-orange-300 pb-2">
             <span className="text-orange-600 text-xl   font-semibold ">

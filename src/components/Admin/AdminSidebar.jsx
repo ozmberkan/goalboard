@@ -10,9 +10,12 @@ import { Link } from "react-router-dom";
 import Logo from "~/assets/Logos/DarkLogo.svg";
 import { MdOutlineVerified } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
+import { useSelector } from "react-redux";
 
 const AdminSidebar = () => {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+
+  const { allFeedbacks } = useSelector((store) => store.feedbacks);
 
   return (
     <div className="lg:w-64 px-1 bg-zinc-100 border-r border-zinc-200 flex flex-col items-start justify-start">
@@ -55,16 +58,22 @@ const AdminSidebar = () => {
       <div className="w-full lg:px-4 px-2 flex flex-col py-3 border-t ">
         <Link
           to="/admin/feedbacks"
-          className="flex items-center gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
+          className="flex items-center relative gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
         >
           <RiFeedbackLine size={20} />
+          <span className="absolute top-1 left-2 bg-primary w-4 h-4 rounded-full flex justify-center items-center text-xs text-white">
+            {allFeedbacks.length}
+          </span>
           {!isTabletOrMobile && <span>Geri Bildirimler</span>}
         </Link>
         <Link
           to="/admin/verified"
-          className="flex items-center gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
+          className="flex items-center relative gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
         >
           <MdOutlineVerified size={20} />
+          <span className="absolute top-1 left-2 bg-primary w-4 h-4 rounded-full flex justify-center items-center text-xs text-white">
+            0
+          </span>
           {!isTabletOrMobile && <span>Premium Onayları</span>}
         </Link>
         <Link

@@ -5,6 +5,7 @@ import { ContactsInput } from "~/data/data";
 import { db } from "~/firebase/firebase";
 import { contactScheme } from "~/validation/scheme";
 import toast from "react-hot-toast";
+import moment from "moment";
 
 const Contacts = () => {
   const {
@@ -19,9 +20,11 @@ const Contacts = () => {
       const contactRef = doc(collection(db, "contacts"));
       await setDoc(contactRef, {
         messageID: contactRef.id,
-        name: data.name,
         phone: data.phone,
+        name: data.name,
+        username: data.username,
         message: data.message,
+        date: moment().format("DD.MM.YYYY HH:mm"),
       });
       reset();
       toast.success("Mesajınız başarıyla gönderildi");
@@ -50,7 +53,7 @@ const Contacts = () => {
                 />
               ) : (
                 <textarea
-                  className="border px-4 py-2 rounded-md outline-none"
+                  className="border px-4 py-2 rounded-md outline-none min-h-[75px] max-h-[75px]"
                   placeholder={input.placeholder}
                   {...register(input.name)}
                 />
