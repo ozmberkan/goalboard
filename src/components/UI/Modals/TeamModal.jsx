@@ -18,19 +18,19 @@ const TeamModal = ({ setIsTeamModal }) => {
 
   const createTeamHandle = (data) => {
     try {
-      if (user.premium === "silver" && user.teams.length >= 1) {
+      if (user.premium === "Silver" && user.teams.length >= 1) {
         toast.error(
           "Gold üye olmadığınız için sadece 1 takım oluşturabilirsiniz."
         );
         return;
       }
-      if (user.premium === "gold" && user.teams.length >= 3) {
+      if (user.premium === "Gold" && user.teams.length >= 3) {
         toast.error(
           "Platinum üye olmadığınız için sadece 3 takım oluşturabilirsiniz."
         );
         return;
       }
-      if (user.premium === "platinum" && user.teams.length >= 5) {
+      if (user.premium === "Platinum" && user.teams.length >= 5) {
         toast.error("Takım sınırına ulaştınız.", {
           style: {
             padding: "7px",

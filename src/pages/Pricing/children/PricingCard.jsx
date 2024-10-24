@@ -1,13 +1,38 @@
+import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
+import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { db } from "~/firebase/firebase";
 
 const PricingCard = ({ card }) => {
+  const { user } = useSelector((store) => store.user);
+
+  const handleSelect = async (label) => {
+    try {
+      if (!user) {
+        toast.error("Lütfen giriş yapınız.");
+        return;
+      }
+
+      const userRef = doc(db, "users", user.uid);
+
+      await updateDoc(userRef, {
+        premium: label,
+      });
+      toast.success("Başarıyla katıldınız.");
+    } catch (error) {
+      console.log(error);
+      toast.error("Bir hata oluştu.");
+    }
+  };
+
   return (
     <div
       className={`lg:w-[400px] lg:h-[550px] w-full  rounded-md bg-white shadow-2xl p-4 flex flex-col items-center gap-y-5  ${
         card.label === "Gold" ? "lg:scale-105" : ""
       }`}
     >
-      <div className="w-full py-2 ">
+      <div className="w-full py-2">
         <h1
           className={`text-4xl font-extrabold text-primaryDark
           ${
@@ -22,8 +47,6 @@ const PricingCard = ({ card }) => {
             card.label === "Platinum" &&
             "bg-clip-text text-transparent bg-gradient-to-tr from-sky-700 to-slate-300"
           }
-          
-          
           `}
         >
           {card.label}
@@ -47,7 +70,10 @@ const PricingCard = ({ card }) => {
         </span>
         <span className="text-zinc-500 text-base">/ay</span>
       </div>
-      <button className="px-4 py-2 rounded-md bg-primary hover:bg-primaryDark transition-colors duration-300 text-white w-full">
+      <button
+        className="px-4 py-2 rounded-md bg-primary hover:bg-primaryDark transition-colors duration-300 text-white w-full"
+        onClick={() => handleSelect(card.label)}
+      >
         Hemen Katıl!
       </button>
     </div>

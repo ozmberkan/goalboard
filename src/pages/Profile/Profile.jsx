@@ -66,11 +66,11 @@ const Profile = () => {
             <div className="flex flex-col gap-2">
               <span className="font-semibold text-primary flex items-center gap-x-2">
                 @{user.username}{" "}
-                {user.premium !== "silver" ? (
+                {user.premium !== "Silver" ? (
                   <span
                     className={`${
-                      user.premium === "platinum" && "text-sky-500"
-                    } ${user.premium === "gold" && "text-yellow-500"}`}
+                      user.premium === "Platinum" && "text-sky-500"
+                    } ${user.premium === "Gold" && "text-yellow-500"}`}
                   >
                     <MdVerified size={20} />
                   </span>

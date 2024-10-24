@@ -5,12 +5,14 @@ import { getAllFeedBacksForAdmin } from "~/redux/slices/contactsSlice";
 import { getAllProjectsForAdmin } from "~/redux/slices/projectsSlice";
 import { getAllTeamsForAdmin } from "~/redux/slices/teamsSlice";
 import { getAllUserForAdmin } from "~/redux/slices/userSlice";
+import { getAllVerifiedForAdmin } from "~/redux/slices/verifiedSlice";
 
 const Admin = () => {
   const { user, allUsers, status } = useSelector((store) => store.user);
   const { allTeams } = useSelector((store) => store.teams);
   const { allProjects } = useSelector((store) => store.projects);
   const { allFeedbacks } = useSelector((store) => store.feedbacks);
+  const { allVerified } = useSelector((store) => store.verified);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,6 +20,7 @@ const Admin = () => {
     dispatch(getAllTeamsForAdmin());
     dispatch(getAllProjectsForAdmin());
     dispatch(getAllFeedBacksForAdmin());
+    dispatch(getAllVerifiedForAdmin());
   }, []);
 
   if (status === "loading") {
@@ -27,7 +30,7 @@ const Admin = () => {
       </div>
     );
   }
-  
+
   return (
     <div className="flex flex-grow  lg:p-6 p-2 justify-start items-start flex-col gap-y-2 bg-white">
       <div className="w-full   px-4 py-2 flex justify-between items-center h-18 border-b">
@@ -76,16 +79,7 @@ const Admin = () => {
             <span className="text-4xl text-blue-600">{allProjects.length}</span>
           </div>
         </div>
-        <div className="h-[200px]  w-full rounded-md bg-gradient-to-b from-[#F9CACB] to-[#F8E0DE] p-3  shadow-lg">
-          <div className="w-full border-b border-red-300 pb-2">
-            <span className="text-red-600 text-xl   font-semibold ">
-              Premium Onayları
-            </span>
-          </div>
-          <div className="w-full py-4  flex justify-start items-center ">
-            <span className="text-4xl text-red-600">...</span>
-          </div>
-        </div>
+
         <div className="h-[200px]  w-full rounded-md bg-gradient-to-b from-[#CFCAF9] to-[#E4E0F8] p-3 shadow-lg ">
           <div className="w-full border-b border-violet-300 pb-2">
             <span className="text-violet-600 text-xl   font-semibold ">

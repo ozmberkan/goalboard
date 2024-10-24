@@ -34,15 +34,15 @@ const InviteModal = ({ setIsInviteModal, teamID }) => {
 
       const teamDoc = await getDoc(teamRef);
 
-      if (user.premium === "silver" && teamDoc.data().members.length >= 4) {
+      if (user.premium === "Silver" && teamDoc.data().members.length >= 4) {
         toast.error("Silver üyeler en fazla 3 kişiyi takıma ekleyebilir.");
         return;
       }
-      if (user.premium === "gold" && teamDoc.data().members.length >= 6) {
+      if (user.premium === "Gold" && teamDoc.data().members.length >= 6) {
         toast.error("Silver üyeler en fazla 5 kişiyi takıma ekleyebilir.");
         return;
       }
-      if (user.premium === "platinum" && teamDoc.data().members.length >= 11) {
+      if (user.premium === "Platinum" && teamDoc.data().members.length >= 11) {
         toast.error("Silver üyeler en fazla 10 kişiyi takıma ekleyebilir.");
         return;
       }

@@ -5,7 +5,6 @@ import AdminFeedBacks from "~/pages/Admin/AdminFeedBacks";
 import AdminProjects from "~/pages/Admin/AdminProjects";
 import AdminTeams from "~/pages/Admin/AdminTeams";
 import AdminUsers from "~/pages/Admin/AdminUsers";
-import AdminVerified from "~/pages/Admin/AdminVerified";
 
 export const AdminRoute = {
   path: "/",
@@ -30,11 +29,6 @@ export const AdminRoute = {
     {
       path: "/admin/feedbacks",
       element: <AdminFeedBacks />,
-      loader: () => authLoader(["admin"]),
-    },
-    {
-      path: "/admin/verified",
-      element: <AdminVerified />,
       loader: () => authLoader(["admin"]),
     },
   ],
