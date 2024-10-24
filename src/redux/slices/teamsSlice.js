@@ -80,7 +80,7 @@ export const getAllTeams = createAsyncThunk(
       }
 
       const teamsRef = collection(db, "teams");
-      const q = query(teamsRef, where("creatorMember", "==", uid));
+      const q = query(teamsRef, where("members", "array-contains", uid));
       const teamsSnapshot = await getDocs(q);
       const teams = teamsSnapshot.docs.map((doc) => ({
         ...doc.data(),

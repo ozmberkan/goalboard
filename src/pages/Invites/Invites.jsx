@@ -3,12 +3,15 @@ import React from "react";
 import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { db } from "~/firebase/firebase";
 import { motion } from "framer-motion";
+import { getUserByID } from "~/redux/slices/userSlice";
 
 const Invites = () => {
   const { user } = useSelector((store) => store.user);
+
+  const dispatch = useDispatch();
 
   const confirmInvite = async (noti) => {
     try {
@@ -29,6 +32,7 @@ const Invites = () => {
       });
 
       toast.success("Davet kabul edildi.");
+      dispatch(getUserByID(user?.uid));
     } catch (error) {
       console.log(error);
     }
@@ -48,6 +52,8 @@ const Invites = () => {
       });
 
       toast.success("Davet reddedildi.");
+      dispatch(getUserByID(user?.uid));
+      dispa;
     } catch (error) {
       console.log(error);
     }

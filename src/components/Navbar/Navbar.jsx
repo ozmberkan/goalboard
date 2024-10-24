@@ -3,7 +3,6 @@ import { navTabs } from "~/data/data";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
-import { RiFunctionAddFill } from "react-icons/ri";
 import { GiPadlockOpen } from "react-icons/gi";
 
 import ProfileMenu from "./Menus/ProfileMenu";
@@ -11,7 +10,6 @@ import NotificationMenu from "./Menus/NotificationMenu";
 import MobileMenu from "./Menus/MobileMenu";
 import Starter from "./children/Starter";
 import Logo from "~/assets/Logos/goalBoardTextDark.svg";
-import TeamModal from "../UI/Modals/TeamModal";
 import { signOut } from "firebase/auth";
 import { auth } from "~/firebase/firebase";
 import toast from "react-hot-toast";

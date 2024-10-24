@@ -8,6 +8,7 @@ import {
 import { FaChevronDown, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { profileTabs } from "~/data/data";
+import Avatar from "~/assets/noavatar.png";
 
 const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
   return (
@@ -23,7 +24,7 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
             ) : (
               <img
                 className="w-8 h-8 object-cover rounded-full"
-                src={user?.photoURL}
+                src={user?.photoURL ? user.photoURL : Avatar}
               />
             )}
             <FaChevronDown />

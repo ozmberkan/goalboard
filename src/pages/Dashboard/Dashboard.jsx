@@ -119,7 +119,9 @@ const Dashboard = () => {
               ref={animationParent}
             >
               {projects.length > 0 ? (
-                projects.map((project) => <ProjectBox project={project} />)
+                projects.map((project) => (
+                  <ProjectBox key={project.projectID} project={project} />
+                ))
               ) : (
                 <button
                   onClick={() => setIsProjectModal(true)}

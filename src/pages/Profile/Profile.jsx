@@ -10,6 +10,8 @@ import { RiFunctionAddFill } from "react-icons/ri";
 import TeamModal from "~/components/UI/Modals/TeamModal";
 import { motion } from "framer-motion";
 
+
+
 const Profile = () => {
   const [animationParent] = useAutoAnimate();
   const { user } = useSelector((store) => store.user);
