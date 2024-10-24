@@ -17,6 +17,5 @@ export const forgotScheme = z.object({
 
 export const contactScheme = z.object({
   name: z.string().min(3, "Adınız minimum 3 karakter olmalıdır."),
-  phone: z.string().min(11, "Telefon numarası minimum 11 karakter olmalıdır."),
   message: z.string().min(10, "Mesajınız minimum 10 karakter olmalıdır."),
 });

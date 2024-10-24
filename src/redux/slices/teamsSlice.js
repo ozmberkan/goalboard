@@ -15,6 +15,7 @@ import moment from "moment";
 
 const initialState = {
   teams: [],
+  allTeams: [],
   currentTeam: null,
   status: "idle",
   errorMessage: "",
@@ -90,6 +91,23 @@ export const getAllTeams = createAsyncThunk(
   }
 );
 
+export const getAllTeamsForAdmin = createAsyncThunk(
+  "auth/getAllTeamsForAdmin",
+  async (id) => {
+    try {
+      const teamsRef = collection(db, "teams");
+      const teamsDoc = await getDocs(teamsRef);
+      const teamsData = teamsDoc.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      return teamsData;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const teamsSlice = createSlice({
   name: "teams",
   initialState,
@@ -126,6 +144,17 @@ export const teamsSlice = createSlice({
         state.currentTeam = action.payload;
       })
       .addCase(getTeamByID.rejected, (state, action) => {
+        state.status = "failed";
+        state.errorMessage = action.error.message;
+      })
+      .addCase(getAllTeamsForAdmin.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllTeamsForAdmin.fulfilled, (state, action) => {
+        state.status = "success";
+        state.allTeams = action.payload;
+      })
+      .addCase(getAllTeamsForAdmin.rejected, (state, action) => {
         state.status = "failed";
         state.errorMessage = action.error.message;
       });

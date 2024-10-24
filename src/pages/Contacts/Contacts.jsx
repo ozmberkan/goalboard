@@ -12,9 +12,7 @@ const Contacts = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    resolver: zodResolver(contactScheme),
-  });
+  } = useForm();
 
   const contactHandle = async (data) => {
     try {
@@ -28,7 +26,7 @@ const Contacts = () => {
       reset();
       toast.success("Mesajınız başarıyla gönderildi");
     } catch (error) {
-      toast.error("Bir hata oluştu");
+      toast.error("Bir hata oluştu" + error);
     }
   };
 
@@ -48,9 +46,7 @@ const Contacts = () => {
                   className="border px-4 py-2 rounded-md outline-none"
                   placeholder={input.placeholder}
                   type="text"
-                  {...register(input.name, {
-                    valueAsNumber: input.name === "phone",
-                  })}
+                  {...register(input.name)}
                 />
               ) : (
                 <textarea

@@ -11,6 +11,7 @@ import { db } from "~/firebase/firebase";
 
 const initialState = {
   projects: [],
+  allProjects: [],
   currentProject: null,
   status: "idle",
   errorMessage: "",
@@ -51,6 +52,23 @@ export const getProjectsByID = createAsyncThunk(
   }
 );
 
+export const getAllProjectsForAdmin = createAsyncThunk(
+  "auth/getAllProjectsForAdmin",
+  async (id) => {
+    try {
+      const projectsRef = collection(db, "projects");
+      const projectsDoc = await getDocs(projectsRef);
+      const projectsData = projectsDoc.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      return projectsData;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const projectsSlice = createSlice({
   name: "projects",
   initialState,
@@ -75,6 +93,16 @@ export const projectsSlice = createSlice({
         state.currentProject = action.payload;
       })
       .addCase(getProjectsByID.rejected, (state, action) => {
+        state.status = "failed";
+      })
+      .addCase(getAllProjectsForAdmin.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllProjectsForAdmin.fulfilled, (state, action) => {
+        state.status = "success";
+        state.allProjects = action.payload;
+      })
+      .addCase(getAllProjectsForAdmin.rejected, (state, action) => {
         state.status = "failed";
       });
   },

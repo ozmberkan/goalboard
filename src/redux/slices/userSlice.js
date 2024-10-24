@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
+  allUsers: [],
   status: "idle",
   errorMessage: "",
 };
@@ -116,6 +117,23 @@ export const getUserByID = createAsyncThunk("auth/getUserByID", async (id) => {
   }
 });
 
+export const getAllUserForAdmin = createAsyncThunk(
+  "auth/getAllUserForAdmin",
+  async (id) => {
+    try {
+      const userRef = collection(db, "users");
+      const userDoc = await getDocs(userRef);
+      const userData = userDoc.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      return userData;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const counterSlice = createSlice({
   name: "user",
   initialState,
@@ -155,6 +173,17 @@ export const counterSlice = createSlice({
         localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(getUserByID.rejected, (state, action) => {
+        state.status = "failed";
+        state.errorMessage = action.error.message;
+      })
+      .addCase(getAllUserForAdmin.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllUserForAdmin.fulfilled, (state, action) => {
+        state.status = "success";
+        state.allUsers = action.payload;
+      })
+      .addCase(getAllUserForAdmin.rejected, (state, action) => {
         state.status = "failed";
         state.errorMessage = action.error.message;
       });
