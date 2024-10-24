@@ -32,7 +32,7 @@ const Tasks = ({ projectID }) => {
       if (user?.uid) {
         dispatch(getProjectsByID(projectID));
       }
-    }, 60000);
+    }, 30000);
   }, [dispatch]);
 
   useEffect(() => {
@@ -157,10 +157,13 @@ const Tasks = ({ projectID }) => {
     <>
       <Tooltip id="username" className="z-20" />
       <div className="h-full">
-        <div className="w-full py-3 border-b mb-4">
+        <div className="w-full py-3 border-b mb-4 flex justify-between items-center">
           <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1">
             <FiLayout />
             Genel Bakış
+          </h1>
+          <h1 className="lg:text-xl text-lg font-bold  text-primary flex items-center gap-x-1">
+            {currentProject.projectName}
           </h1>
         </div>
 
@@ -219,6 +222,13 @@ const Tasks = ({ projectID }) => {
                       <MdOutlineSettings />
                       Test
                     </button>
+                    <button
+                      onClick={() => deleteCompletedTask(task.taskID)}
+                      className="bg-red-500 text-red-100 hover:bg-red-600 px-2 py-1 rounded-md flex items-center gap-x-1"
+                    >
+                      <MdCancel />
+                      Sil
+                    </button>
                   </div>
                 </div>
               ))}
@@ -258,6 +268,13 @@ const Tasks = ({ projectID }) => {
                     >
                       <FaCheck />
                       Tamamlandı
+                    </button>
+                    <button
+                      onClick={() => deleteCompletedTask(task.taskID)}
+                      className="bg-red-500 text-red-100 hover:bg-red-600 px-2 py-1 rounded-md flex items-center gap-x-1"
+                    >
+                      <MdCancel />
+                      Sil
                     </button>
                   </div>
                 </div>

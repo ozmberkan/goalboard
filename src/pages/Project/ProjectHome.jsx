@@ -14,6 +14,8 @@ import { useMediaQuery } from "react-responsive";
 import Comments from "~/components/Project/Comments";
 import ProjectSettings from "~/components/Project/ProjectSettings";
 import FeedBack from "~/components/Project/FeedBack";
+import Archive from "~/components/Project/Archive";
+import { IoArchiveOutline } from "react-icons/io5";
 
 const ProjectHome = () => {
   const { projectID } = useParams();
@@ -43,6 +45,11 @@ const ProjectHome = () => {
             <FaRegComments size={20} />
             {!isTabletOrMobile && <span>Yorumlar</span>}
           </Tab>
+
+          <Tab className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
+            <IoArchiveOutline size={20} />
+            {!isTabletOrMobile && <span>Arşiv</span>}
+          </Tab>
           <Tab className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
             <TbSettings size={20} />
             {!isTabletOrMobile && <span>Ayarlar</span>}
@@ -70,6 +77,9 @@ const ProjectHome = () => {
           </TabPanel>
           <TabPanel className="w-full  flex-grow py-3 px-12">
             <Comments projectID={projectID} />
+          </TabPanel>
+          <TabPanel className="w-full  flex-grow py-3 px-12">
+            <Archive />
           </TabPanel>
           <TabPanel className="w-full  flex-grow py-3 px-12">
             <ProjectSettings />
