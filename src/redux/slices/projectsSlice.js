@@ -1,5 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "~/firebase/firebase";
 
 const initialState = {
@@ -10,25 +17,27 @@ const initialState = {
 };
 
 export const getAllProjects = createAsyncThunk(
-  "projects/getAllProjects",
-  async () => {
+  "teams/getAllProjects",
+  async (teamID, thunkAPI) => {
     try {
+      if (!teamID) {
+        throw new Error("Geçersiz kullanıcı UID");
+      }
+
       const projectsRef = collection(db, "projects");
-
-      const projectsDoc = await getDocs(projectsRef);
-
-      const projects = projectsDoc.docs.map((doc) => ({
-        id: doc.id,
+      const q = query(projectsRef, where("creatorTeam", "==", teamID));
+      const projectsSnapshot = await getDocs(q);
+      const projects = projectsSnapshot.docs.map((doc) => ({
         ...doc.data(),
+        id: doc.id,
       }));
-
       return projects;
     } catch (error) {
       console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
 export const getProjectsByID = createAsyncThunk(
   "projects/getProjectsByID",
   async (projectID) => {

@@ -19,7 +19,7 @@ import toast from "react-hot-toast";
 const Navbar = () => {
   const { user } = useSelector((store) => store.user);
   const [dropdown, setDropdown] = useState(false);
- 
+
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   const exit = async () => {
@@ -39,7 +39,7 @@ const Navbar = () => {
     <>
       <div className="flex flex-col">
         <Starter />
-        <div className="py-6 lg:px-14 px-5 border-b bg-white border-neutral-300 flex justify-between items-center">
+        <div className="py-5 lg:px-14 px-5 border-b bg-white border-neutral-300 flex justify-between items-center">
           <Link to="/">
             <img src={Logo} className="w-32" />
           </Link>

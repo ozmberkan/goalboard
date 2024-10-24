@@ -27,6 +27,7 @@ const PhotoEditModal = ({ setIsEditPhoto }) => {
       });
       toast.success("Profil fotoğrafı başarıyla güncellendi.");
       dispatch(getUserByID(user.uid));
+      setIsEditPhoto(false);
     } catch (error) {
       toast.error(error);
     }

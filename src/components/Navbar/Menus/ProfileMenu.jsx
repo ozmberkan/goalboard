@@ -16,9 +16,16 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
         <>
           <MenuButton
             onClick={() => setDropdown(true)}
-            className="lg:px-4 lg:py-1 py-2 px-4 flex items-center gap-x-2 transition-all duration-300 rounded-md border-2 border-primary font-medium text-primary hover:bg-primary hover:border-transparent hover:text-white"
+            className="lg:px-4 lg:py-1 py-2 px-4 flex items-center border-2 hover:bg-zinc-50 border-primary hover:border-primaryDark hover:text-primaryDark  rounded-full gap-x-2 transition-all duration-300   font-medium text-primary "
           >
-            {isTabletOrMobile ? <FaUser /> : <span>Profilim</span>}{" "}
+            {isTabletOrMobile ? (
+              <FaUser />
+            ) : (
+              <img
+                className="w-8 h-8 object-cover rounded-full"
+                src={user?.photoURL}
+              />
+            )}
             <FaChevronDown />
           </MenuButton>
           <Transition

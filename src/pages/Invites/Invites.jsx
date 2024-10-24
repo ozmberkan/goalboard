@@ -5,6 +5,7 @@ import { FaCheck } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { db } from "~/firebase/firebase";
+import { motion } from "framer-motion";
 
 const Invites = () => {
   const { user } = useSelector((store) => store.user);
@@ -33,14 +34,38 @@ const Invites = () => {
     }
   };
 
+  const cancelInvite = async (noti) => {
+    try {
+      const userRef = doc(db, "users", user.uid);
+
+      await updateDoc(userRef, {
+        notification: arrayRemove({
+          id: noti.id,
+          from: noti.from,
+          message: noti.message,
+          teamID: noti.teamID,
+        }),
+      });
+
+      toast.success("Davet reddedildi.");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="flex-grow p-4 flex">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="flex-grow p-4 flex"
+    >
       <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
         <h1 className="text-3xl font-semibold text-primary">Gelen Davetler</h1>
         <div className="flex-grow ">
           <div className="flex flex-col gap-y-5 lg:w-1/2 w-full">
             {user.notification.length > 0 ? (
-              _user.notification?.map((noti, i) => (
+              user.notification?.map((noti, i) => (
                 <div
                   className="bg-zinc-50 border rounded-md px-4 py-2 flex justify-between items-center"
                   key={i}
@@ -58,7 +83,10 @@ const Invites = () => {
                     >
                       <FaCheck />
                     </button>
-                    <button className="bg-red-100 text-red-500 px-4 py-2 rounded-md">
+                    <button
+                      onClick={() => cancelInvite(noti)}
+                      className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
+                    >
                       <MdCancel />
                     </button>
                   </div>
@@ -74,7 +102,7 @@ const Invites = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -5,17 +5,18 @@ import PhotoEditModal from "~/components/UI/Modals/PhotoEditModal";
 import { getAllTeams } from "~/redux/slices/teamsSlice";
 import { getUserByID } from "~/redux/slices/userSlice";
 import TeamBox from "./Team/TeamBox";
-
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { RiFunctionAddFill } from "react-icons/ri";
 import TeamModal from "~/components/UI/Modals/TeamModal";
+import { motion } from "framer-motion";
 
 const Profile = () => {
+  const [animationParent] = useAutoAnimate();
   const { user } = useSelector((store) => store.user);
-  const { teams } = useSelector((store) => store.teams);
+  const { teams, status } = useSelector((store) => store.teams);
   const [isEditPhoto, setIsEditPhoto] = useState(false);
-
   const [isTeamModal, setIsTeamModal] = useState(false);
-  const [filteredTeam, setFilteredTeam] = useState([]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,9 +26,22 @@ const Profile = () => {
     }
   }, [dispatch, user?.uid]);
 
+  if (status === "loading") {
+    return (
+      <div className="flex flex-grow justify-center items-center bg-white ">
+        <l-ripples size="150" speed="2" color="#3A5ADB"></l-ripples>
+      </div>
+    );
+  }
+
   return (
     <>
-      <div className="flex-grow p-4 flex">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex-grow p-4 flex"
+      >
         <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden">
           <div className="w-full flex items-center lg:gap-5 gap-3 border-b pb-5">
             <div
@@ -67,7 +81,10 @@ const Profile = () => {
               </button>
             </div>
 
-            <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-5">
+            <div
+              className="w-full grid lg:grid-cols-4 grid-cols-1 gap-5"
+              ref={animationParent}
+            >
               {teams?.length > 0 ? (
                 teams?.map((team) => <TeamBox key={team.teamID} team={team} />)
               ) : (
@@ -78,9 +95,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
       {isEditPhoto && <PhotoEditModal setIsEditPhoto={setIsEditPhoto} />}
-
       {isTeamModal && <TeamModal setIsTeamModal={setIsTeamModal} />}
     </>
   );

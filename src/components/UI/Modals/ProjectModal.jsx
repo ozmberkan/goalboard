@@ -14,10 +14,12 @@ import {
 } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { db } from "~/firebase/firebase";
-import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
+import { getAllProjects } from "~/redux/slices/projectsSlice";
 
 const ProjectModal = ({ setIsProjectModal, teamID }) => {
   const modalRoot = document.getElementById("modal");
+  const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
 
@@ -29,6 +31,7 @@ const ProjectModal = ({ setIsProjectModal, teamID }) => {
       const teamsRef = doc(db, "teams", teamID);
 
       const projectData = {
+        creatorTeam: teamID,
         projectName: data.projectName,
         projectID: projectsRef.id,
         lastDate: formattedDate,
@@ -45,6 +48,7 @@ const ProjectModal = ({ setIsProjectModal, teamID }) => {
       });
 
       toast.success("Proje başarıyla oluşturuldu!");
+      dispatch(getAllProjects(teamID));
       setIsProjectModal(false);
     } catch (error) {
       console.log(error);

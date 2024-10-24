@@ -1,30 +1,26 @@
-import {
-  arrayRemove,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import ProjectModal from "~/components/UI/Modals/ProjectModal";
+import InviteModal from "~/components/UI/Modals/InviteModal";
+import ProjectBox from "~/components/Project/ProjectBox";
+import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { db } from "~/firebase/firebase";
 import { getTeamByID } from "~/redux/slices/teamsSlice";
 import { ripples } from "ldrs";
 import { FaUsers } from "react-icons/fa";
-import ProjectModal from "~/components/UI/Modals/ProjectModal";
-import { RiFileAddFill } from "react-icons/ri";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { getAllProjects } from "~/redux/slices/projectsSlice";
-import InviteModal from "~/components/UI/Modals/InviteModal";
+import { motion } from "framer-motion";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const Dashboard = () => {
   const { teamID } = useParams();
-  const dispatch = useDispatch();
-  const { user } = useSelector((store) => store.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [animationParent] = useAutoAnimate();
+  const { user } = useSelector((store) => store.user);
   const { currentTeam, status } = useSelector((store) => store.teams);
   const { projects } = useSelector((store) => store.projects);
   const [isInviteModal, setIsInviteModal] = useState(false);
@@ -36,9 +32,12 @@ const Dashboard = () => {
   useEffect(() => {
     if (teamID) {
       dispatch(getTeamByID(teamID));
-      dispatch(getAllProjects());
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllProjects(teamID));
+  }, []);
 
   const deleteTeam = async (teamID) => {
     try {
@@ -66,14 +65,15 @@ const Dashboard = () => {
     );
   }
 
-  const teamProjects = projects.filter((project) =>
-    currentTeam?.projects.includes(project.projectID)
-  );
-
   return (
     <>
       <div className="flex-grow p-4 flex">
-        <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden"
+        >
           <div className="w-full justify-between items-center flex ">
             <h1 className="font-semibold text-4xl text-primary">
               {currentTeam?.teamName}
@@ -114,24 +114,12 @@ const Dashboard = () => {
             <h1 className="text-3xl font-semibold text-primaryDark ">
               Projeler
             </h1>
-            <div className="w-full h-full grid grid-cols-4 gap-5 ">
-              {teamProjects.length > 0 ? (
-                teamProjects.map((project) => (
-                  <Link
-                    key={project.projectID}
-                    to={`/project/${project.projectID}`}
-                    className="bg-project-bg bg-center bg-cover hover:shadow-xl transition-all duration-300 border rounded-xl  p-5 "
-                  >
-                    <div className="flex justify-between items-center">
-                      <span className="font-semibold text-2xl text-zinc-700">
-                        {project.projectName}
-                      </span>
-                      <span className="font-semibold text-sm text-zinc-700 bg-white rounded-full px-4">
-                        {project.lastDate}
-                      </span>
-                    </div>
-                  </Link>
-                ))
+            <div
+              className="w-full h-full grid grid-cols-4 gap-5 "
+              ref={animationParent}
+            >
+              {projects.length > 0 ? (
+                projects.map((project) => <ProjectBox project={project} />)
               ) : (
                 <button
                   onClick={() => setIsProjectModal(true)}
@@ -144,7 +132,7 @@ const Dashboard = () => {
               )}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
       {isProjectModal && (
         <ProjectModal
