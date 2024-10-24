@@ -60,12 +60,13 @@ const Footer = () => {
               to="/pricing"
               className="bg-primary hover:bg-primaryDark transition-colors duration-300 text-white px-4 py-1 rounded-md"
             >
-              Ödemeler
+              Premium
             </Link>
           </div>
         </div>
-        <div className="border-t border-zinc-400  py-4 text-sm text-center">
-          <p>&copy; 2024 Goalboard. Tüm hakları saklıdır.</p>
+        <div className="border-t px-12 border-zinc-400  py-4 text-sm text-center flex justify-between items-center">
+          <p>&copy; 2024 goalBoard. Tüm hakları saklıdır.</p>
+          <p>v1.1</p>
         </div>
       </div>
     </footer>

@@ -1,4 +1,3 @@
-import React from "react";
 import { FaCheck } from "react-icons/fa";
 
 const PricingCard = ({ card }) => {
@@ -31,8 +30,8 @@ const PricingCard = ({ card }) => {
         </h1>
       </div>
       <div className="w-full flex flex-col justify-center items-center gap-y-4">
-        {card?.features?.map((feature) => (
-          <p className="flex items-center w-full gap-x-2">
+        {card?.features?.map((feature, i) => (
+          <p key={i} className="flex items-center w-full gap-x-2">
             <span className="text-green-500">
               <FaCheck />
             </span>
@@ -49,7 +48,7 @@ const PricingCard = ({ card }) => {
         <span className="text-zinc-500 text-base">/ay</span>
       </div>
       <button className="px-4 py-2 rounded-md bg-primary hover:bg-primaryDark transition-colors duration-300 text-white w-full">
-        Hemen Katıl
+        Hemen Katıl!
       </button>
     </div>
   );

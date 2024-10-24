@@ -14,14 +14,33 @@ const TeamModal = ({ setIsTeamModal }) => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((store) => store.user);
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const createTeamHandle = (data) => {
     try {
-      if (user.premium === false && user.teams.length >= 1) {
+      if (user.premium === "silver" && user.teams.length >= 1) {
         toast.error(
-          "Premium üye olmadığınız için sadece 1 takım oluşturabilirsiniz."
+          "Gold üye olmadığınız için sadece 1 takım oluşturabilirsiniz."
         );
+        return;
+      }
+      if (user.premium === "gold" && user.teams.length >= 3) {
+        toast.error(
+          "Platinum üye olmadığınız için sadece 3 takım oluşturabilirsiniz."
+        );
+        return;
+      }
+      if (user.premium === "platinum" && user.teams.length >= 5) {
+        toast.error("Takım sınırına ulaştınız.", {
+          style: {
+            padding: "7px",
+            color: "#000",
+          },
+          iconTheme: {
+            primary: "#ffdd33",
+            secondary: "#FFFAEE",
+          },
+        });
         return;
       }
       dispatch(createTeam({ teamName: data.teamName, id: user.uid }));

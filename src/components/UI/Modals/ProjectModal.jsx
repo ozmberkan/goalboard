@@ -96,6 +96,7 @@ const ProjectModal = ({ setIsProjectModal, teamID }) => {
               <input
                 type="date"
                 className=" px-4 lg:w-full w-full py-2 rounded-md border text-sm outline-none text-black"
+                min={moment().format("YYYY-MM-DD")}
                 {...register("lastDate")}
               />
               <button

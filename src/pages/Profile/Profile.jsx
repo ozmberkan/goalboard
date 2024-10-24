@@ -10,6 +10,7 @@ import { RiFunctionAddFill } from "react-icons/ri";
 import TeamModal from "~/components/UI/Modals/TeamModal";
 import { motion } from "framer-motion";
 import Avatar from "~/assets/noavatar.png";
+import { MdVerified } from "react-icons/md";
 
 const Profile = () => {
   const [animationParent] = useAutoAnimate();
@@ -63,8 +64,19 @@ const Profile = () => {
               </button>
             </div>
             <div className="flex flex-col gap-2">
-              <span className="font-semibold text-primary">
-                @{user.username}
+              <span className="font-semibold text-primary flex items-center gap-x-2">
+                @{user.username}{" "}
+                {user.premium !== "silver" ? (
+                  <span
+                    className={`${
+                      user.premium === "platinum" && "text-sky-500"
+                    } ${user.premium === "gold" && "text-yellow-500"}`}
+                  >
+                    <MdVerified size={20} />
+                  </span>
+                ) : (
+                  ""
+                )}
               </span>
               <span className="font-medium text-zinc-00">{user.email}</span>
             </div>

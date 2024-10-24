@@ -4,14 +4,17 @@ import CommentModal from "../UI/Modals/CommentModal";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjectsByID } from "~/redux/slices/projectsSlice";
 import { FaRegCommentDots } from "react-icons/fa6";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline, MdVerified } from "react-icons/md";
 
 import Avatar from "~/assets/noavatar.png";
 import { doc, updateDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { db } from "~/firebase/firebase";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const Comments = ({ projectID }) => {
+  const [animationParent] = useAutoAnimate();
+
   const [IsCommentModal, setIsCommentModal] = useState(false);
 
   const { currentProject } = useSelector((store) => store.projects);
@@ -62,7 +65,7 @@ const Comments = ({ projectID }) => {
             </button>
           </div>
         </div>
-        <div className="w-full py-2 flex flex-col gap-5">
+        <div className="w-full py-2 flex flex-col gap-5" ref={animationParent}>
           {currentProject?.comments.length > 0 ? (
             currentProject?.comments?.map((comment) => (
               <div
@@ -75,7 +78,24 @@ const Comments = ({ projectID }) => {
                     className="w-10 h-10 object-cover rounded-full"
                   />
                   <div>
-                    <h1 className="font-semibold">{comment.creatorName}</h1>
+                    <h1 className="font-semibold flex items-center gap-x-1">
+                      {comment.creatorName}{" "}
+                      <span className="font-semibold text-primary flex items-center gap-x-2">
+                        {comment.creatorPremium !== "silver" && (
+                          <span
+                            className={`${
+                              comment.creatorPremium === "platinum" &&
+                              "text-sky-500"
+                            } ${
+                              comment.creatorPremium === "gold" &&
+                              "text-yellow-500"
+                            }`}
+                          >
+                            <MdVerified size={15} />
+                          </span>
+                        )}
+                      </span>
+                    </h1>
                     <p className="text-xs text-gray-500">{comment.createdAt}</p>
                   </div>
                 </div>

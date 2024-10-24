@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { db } from "~/firebase/firebase";
 import { motion } from "framer-motion";
 import { getUserByID } from "~/redux/slices/userSlice";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const Invites = () => {
   const { user } = useSelector((store) => store.user);
+  const [animationParent] = useAutoAnimate();
 
   const dispatch = useDispatch();
 
@@ -69,7 +71,10 @@ const Invites = () => {
       <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
         <h1 className="text-3xl font-semibold text-primary">Gelen Davetler</h1>
         <div className="flex-grow ">
-          <div className="flex flex-col gap-y-5 lg:w-1/2 w-full">
+          <div
+            className="flex flex-col gap-y-5 lg:w-1/2 w-full"
+            ref={animationParent}
+          >
             {user.notification.length > 0 ? (
               user.notification?.map((noti, i) => (
                 <div

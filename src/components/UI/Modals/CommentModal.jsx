@@ -28,6 +28,7 @@ const CommentModal = ({ setIsCommentModal, projectID }) => {
         creatorID: user.uid,
         creatorName: user.username,
         creatorImage: user.photoURL,
+        creatorPremium: user.premium,
         commentID: nanoid(),
         comment: data.comment,
       };

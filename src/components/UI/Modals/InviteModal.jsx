@@ -12,6 +12,7 @@ import {
   updateDoc,
   arrayUnion,
   doc,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "~/firebase/firebase";
 import { useSelector } from "react-redux";
@@ -29,6 +30,22 @@ const InviteModal = ({ setIsInviteModal, teamID }) => {
 
       const usersRef = collection(db, "users");
       const q = query(usersRef, where("username", "==", username));
+      const teamRef = doc(db, "teams", teamID);
+
+      const teamDoc = await getDoc(teamRef);
+
+      if (user.premium === "silver" && teamDoc.data().members.length >= 4) {
+        toast.error("Silver üyeler en fazla 3 kişiyi takıma ekleyebilir.");
+        return;
+      }
+      if (user.premium === "gold" && teamDoc.data().members.length >= 6) {
+        toast.error("Silver üyeler en fazla 5 kişiyi takıma ekleyebilir.");
+        return;
+      }
+      if (user.premium === "platinum" && teamDoc.data().members.length >= 11) {
+        toast.error("Silver üyeler en fazla 10 kişiyi takıma ekleyebilir.");
+        return;
+      }
 
       const querySnapshot = await getDocs(q);
 

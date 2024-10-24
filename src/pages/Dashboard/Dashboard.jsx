@@ -104,7 +104,7 @@ const Dashboard = () => {
 
                   <button
                     onClick={() => deleteTeam(teamID)}
-                    className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md text-white bg-red-500 hover:bg-red-600 transition-colors duration-300"
+                    className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md text-white bg-red-500 hover:bg-red-600 transition-colors duration-300 flex items-center gap-x-1"
                   >
                     <FaRegTrashAlt size={18} />
                     <span className="lg:flex hidden">Takımı Sil</span>
