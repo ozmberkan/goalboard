@@ -11,6 +11,8 @@ import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 import { RiFeedbackLine } from "react-icons/ri";
 import { TbSettings } from "react-icons/tb";
 import Comments from "~/components/Project/Comments";
+import ProjectSettings from "~/components/Project/ProjectSettings";
+import FeedBack from "~/components/Project/FeedBack";
 
 const ProjectHome = () => {
   const { projectID } = useParams();
@@ -28,36 +30,21 @@ const ProjectHome = () => {
           <img src={Logo} className="w-44" />
         </Link>
         <div className="w-full px-4 flex flex-col py-3  border-b">
-          {/* <div className="px-4 h-10 rounded-md text-zinc-600 mb-3 placeholder:text-zinc-600 bg-zinc-200 border border-zinc-300 flex items-center gap-x-3">
-            <IoSearch />
-            <input
-              type="text"
-              className=" bg-transparent outline-none h-full"
-              placeholder="Yorum Ara.."
-            />
-          </div> */}
-
           <Tab className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
             <FiLayout size={20} />
             Genel Bakış
           </Tab>
-          <Tab
-            to={`/project/${projectID}`}
-            className="flex items-center gap-x-4 py-2 px-4  text-zinc-700 text-base  rounded-md font-medium hover:bg-zinc-200  data-[selected]:bg-primary data-[selected]:text-white "
-          >
+          <Tab className="flex items-center gap-x-4 py-2 px-4  text-zinc-700 text-base  rounded-md font-medium hover:bg-zinc-200  data-[selected]:bg-primary data-[selected]:text-white ">
             <FaRegComments size={20} />
             Yorumlar
           </Tab>
-          <Tab className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200  ">
+          <Tab className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
             <TbSettings size={20} />
             Proje Ayarları
           </Tab>
         </div>
         <div className="w-full px-4 flex flex-col py-3 border-t ">
-          <Tab
-            to={`/project/${projectID}`}
-            className="flex items-center gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200  "
-          >
+          <Tab className="flex items-center gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
             <RiFeedbackLine size={20} />
             Geri Bildirim
           </Tab>
@@ -77,10 +64,14 @@ const ProjectHome = () => {
             <Tasks projectID={projectID} />
           </TabPanel>
           <TabPanel className="w-full  flex-grow py-3 px-12">
-            <Comments />
+            <Comments projectID={projectID} />
           </TabPanel>
-          <TabPanel className="flex-grow">Proje Ayarları</TabPanel>
-          <TabPanel className="flex-grow">Geri Bildirim</TabPanel>
+          <TabPanel className="w-full  flex-grow py-3 px-12">
+            <ProjectSettings />
+          </TabPanel>
+          <TabPanel className="w-full  flex-grow py-3 px-12">
+            <FeedBack />
+          </TabPanel>
         </TabPanels>
       </div>
     </TabGroup>
