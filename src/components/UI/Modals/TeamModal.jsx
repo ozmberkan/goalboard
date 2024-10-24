@@ -18,7 +18,7 @@ const TeamModal = ({ setIsTeamModal }) => {
 
   const createTeamHandle = (data) => {
     try {
-      if (user.premium === false && user.teams.length >= 2) {
+      if (user.premium === false && user.teams.length >= 1) {
         toast.error(
           "Premium üye olmadığınız için sadece 1 takım oluşturabilirsiniz."
         );

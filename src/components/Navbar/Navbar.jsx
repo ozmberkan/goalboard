@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
 import { GiPadlockOpen } from "react-icons/gi";
+import { MdLogin } from "react-icons/md";
 
 import ProfileMenu from "./Menus/ProfileMenu";
 import NotificationMenu from "./Menus/NotificationMenu";
@@ -70,7 +71,15 @@ const Navbar = () => {
           )}
 
           {!user && isTabletOrMobile && (
-            <MobileMenu setDropdown={setDropdown} />
+            <div className="flex gap-x-1">
+              <MobileMenu setDropdown={setDropdown} />
+              <Link
+                to="/signin"
+                className="bg-primary flex justify-center items-center px-4 rounded-md text-white"
+              >
+                <MdLogin size={20} />
+              </Link>
+            </div>
           )}
 
           {user && (

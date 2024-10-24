@@ -75,10 +75,6 @@ export const getAllTeams = createAsyncThunk(
   "teams/getAllTeams",
   async (uid, thunkAPI) => {
     try {
-      if (!uid) {
-        throw new Error("Geçersiz kullanıcı UID");
-      }
-
       const teamsRef = collection(db, "teams");
       const q = query(teamsRef, where("members", "array-contains", uid));
       const teamsSnapshot = await getDocs(q);

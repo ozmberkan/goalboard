@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { db } from "~/firebase/firebase";
 import { getTeamByID } from "~/redux/slices/teamsSlice";
 import { ripples } from "ldrs";
-import { FaUsers } from "react-icons/fa";
+import { FaRegTrashAlt, FaTrash, FaUsers } from "react-icons/fa";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { getAllProjects } from "~/redux/slices/projectsSlice";
 import { motion } from "framer-motion";
@@ -79,9 +79,9 @@ const Dashboard = () => {
               {currentTeam?.teamName}
             </h1>
             <div className="flex gap-x-2 items-center">
-              <div className="flex items-center gap-x-2 bg-zinc-50 px-4 py-2 border rounded-md">
-                <span className="flex items-center gap-x-2 font-medium">
-                  <FaUsers />
+              <div className="flex items-center gap-x-2 bg-zinc-50 lg:px-4 lg:py-2 px-2 py-1 border rounded-md">
+                <span className="flex items-center gap-x-2 lg:font-medium text-sm">
+                  <FaUsers size={17} />
                   {currentTeam?.members.length}
                 </span>
               </div>
@@ -89,22 +89,25 @@ const Dashboard = () => {
                 <>
                   <button
                     onClick={() => setIsProjectModal(true)}
-                    className="px-4  text-sm py-2 rounded-md text-white bg-primary hover:bg-primaryDark transition-colors duration-300"
+                    className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md text-white bg-primary hover:bg-primaryDark transition-colors duration-300 flex items-center gap-x-1"
                   >
-                    Proje Oluştur
+                    <IoMdAddCircleOutline size={18} />
+                    <span className="lg:flex hidden">Proje Oluştur</span>
                   </button>
                   <button
                     onClick={() => setIsInviteModal(true)}
-                    className="px-4 py-2  text-sm rounded-md text-white bg-primary hover:bg-primaryDark transition-colors duration-300"
+                    className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md text-white bg-primary hover:bg-primaryDark transition-colors duration-300 flex items-center gap-x-1"
                   >
-                    Takıma Davet Et
+                    <FaUsers size={18} />
+                    <span className="lg:flex hidden">Takıma Davet Et</span>
                   </button>
 
                   <button
                     onClick={() => deleteTeam(teamID)}
-                    className="px-4 py-2  text-sm rounded-md text-white bg-red-500 hover:bg-red-600 transition-colors duration-300"
+                    className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md text-white bg-red-500 hover:bg-red-600 transition-colors duration-300"
                   >
-                    Takımı Sil
+                    <FaRegTrashAlt size={18} />
+                    <span className="lg:flex hidden">Takımı Sil</span>
                   </button>
                 </>
               )}
@@ -115,7 +118,7 @@ const Dashboard = () => {
               Projeler
             </h1>
             <div
-              className="w-full h-full grid grid-cols-4 gap-5 "
+              className="w-full h-full grid lg:grid-cols-4 grid-cols-1 gap-5 "
               ref={animationParent}
             >
               {projects.length > 0 ? (

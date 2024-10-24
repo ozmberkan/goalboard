@@ -164,7 +164,7 @@ const Tasks = ({ projectID }) => {
           </h1>
         </div>
 
-        <div className="w-full grid grid-cols-3 gap-8">
+        <div className="w-full grid lg:grid-cols-3 gap-8">
           <div className="bg-zinc-100 rounded-xl border shadow">
             <div className="w-full rounded-t-xl bg-gradient-to-r from-primary to-zinc-700  p-4 border-b border-zinc-500">
               <h1 className="text-lg text-white font-semibold flex items-center gap-x-2">
