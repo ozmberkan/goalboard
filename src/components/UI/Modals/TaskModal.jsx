@@ -15,7 +15,7 @@ import {
   RiStopCircleLine,
 } from "react-icons/ri";
 import { IoArchiveOutline } from "react-icons/io5";
-import Avatar from "~~/assets/noavatar.png";
+import Avatar from "~/assets/noavatar.png";
 
 const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
   const modalRoot = document.getElementById("modal");
