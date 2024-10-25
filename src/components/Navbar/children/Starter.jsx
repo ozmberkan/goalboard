@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { starterTabs } from "~/data/data";
 
 const Starter = () => {
+  const { user } = useSelector((store) => store.user);
+
   return (
     <div className="py-2.5 px-4 border-b bg-white border-neutral-300 flex  items-center justify-between ">
       <div className="flex gap-x-2 items-center">

@@ -20,7 +20,6 @@ const HomeLayout = () => {
       const unsubscribe = onSnapshot(userDocRef, (docSnap) => {
         if (docSnap.exists()) {
           dispatch(getUserByID(docSnap.id));
-          console.log("Kullanıcı verisi güncellendi");
         }
       });
 

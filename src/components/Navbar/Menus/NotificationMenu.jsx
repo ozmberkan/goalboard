@@ -37,12 +37,16 @@ const NotificationMenu = ({ user }) => {
                   <div className="flex flex-col  gap-y-3">
                     {user?.notification?.length > 0 ? (
                       user?.notification?.map((notification, index) => (
-                        <p key={index} className="text-sm text-neutral-400">
+                        <Link
+                          to="/invites"
+                          key={index}
+                          className="text-sm text-neutral-400"
+                        >
                           <span className="font-medium text-primary">
                             @{notification.from}{" "}
                           </span>
                           {notification.message}
-                        </p>
+                        </Link>
                       ))
                     ) : (
                       <p className="text-sm text-neutral-400">

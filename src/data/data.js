@@ -8,27 +8,29 @@ import {
   FaUser,
 } from "react-icons/fa";
 
-import { MdNotificationsActive } from "react-icons/md";
+import { MdNotificationAdd } from "react-icons/md";
+
 import { TbSettingsFilled } from "react-icons/tb";
 
 export const starterTabs = [
   { id: 1, label: "İletişim", to: "/contacts" },
   { id: 2, label: "Hakkımızda", to: "/about" },
+  { id: 3, label: "Premium", to: "/pricing" },
 ];
 
 export const navTabs = [
-  { id: 1, label: "Fiyatlandırma", to: "/pricing" },
+  { id: 1, label: "Premium", to: "/pricing" },
   { id: 2, label: "Duyurular", to: "/announcements" },
-  { id: 3, label: "Neden Varız?", to: "/why-us" },
+  { id: 3, label: "Neden Biz?", to: "/why-us" },
 ];
 
 export const profileTabs = [
   { id: 1, label: "Profilim", to: "/profile", icon: FaUser },
   {
     id: 2,
-    label: "Gelen Davetler",
+    label: " Bildirimler",
     to: "/invites",
-    icon: MdNotificationsActive,
+    icon: MdNotificationAdd,
   },
   { id: 3, label: "Ayarlar", to: "/settings", icon: TbSettingsFilled },
 ];

@@ -91,7 +91,9 @@ const Invites = () => {
       className="flex-grow p-4 flex"
     >
       <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
-        <h1 className="text-3xl font-semibold text-primary">Gelen Davetler</h1>
+        <h1 className="text-3xl font-semibold text-primary">
+          Gelen Bildirimler
+        </h1>
         <div className="flex-grow ">
           <div
             className="flex flex-col gap-y-5 lg:w-1/2 w-full"

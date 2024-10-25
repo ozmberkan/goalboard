@@ -19,7 +19,7 @@ import { nanoid } from "nanoid";
 const AdminNotification = () => {
   const { user } = useSelector((store) => store.user);
 
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, reset } = useForm();
 
   const sendNotification = async (data) => {
     try {
@@ -49,6 +49,7 @@ const AdminNotification = () => {
         });
 
         toast.success("Bildirim Gönderildi");
+        reset();
       } else {
         console.log("Kullanıcı bulunamadı");
         toast.error("Kullanıcı bulunamadı");
