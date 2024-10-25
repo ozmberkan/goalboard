@@ -104,7 +104,7 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
           animate={{ scale: 1 }}
           exit={{ scale: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-white text-zinc-700  p-6 rounded-lg w-full max-w-5xl h-[700px] shadow-xl cursor-default relative overflow-hidden"
+          className="bg-white text-zinc-700  p-6 rounded-lg w-full max-w-5xl lg:h-[700px] shadow-xl cursor-default relative overflow-hidden"
         >
           <div className="relative z-10 flex flex-col h-full">
             <div className=" w-full  flex justify-between items-center">
@@ -116,23 +116,27 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                 <MdCancel size={20} />
               </button>
             </div>
-            <div className="w-full flex mt-4 h-full gap-x-4">
-              <div className="w-full rounded-xl bg-zinc-50 border p-5 flex flex-col gap-5 ">
-                <div className=" w-full flex justify-between items-center border-b pb-4">
+            <div className="w-full flex mt-4 h-full gap-x-4 lg:flex-row flex-col">
+              <div className="w-full rounded-xl bg-zinc-50 border p-5 flex flex-col gap-5 h-full  ">
+                <div className=" w-full flex justify-between items-center border-b lg:pb-4 pb-1 ">
                   <div className="flex items-center gap-x-2">
                     <img
                       src={selectedTask.taskCreatorImage}
-                      className="w-10 h-10 rounded-full object-cover"
+                      className="lg:w-10 lg:h-10 w-6 h-6 rounded-full object-cover"
                     />
-                    <span className="font-semibold text-zinc-700">
+                    <span className="lg:font-semibold font-medium text-zinc-700 ">
                       {selectedTask.taskCreatorName}
                     </span>
                   </div>
-                  <h1 className="text-sm">{selectedTask.createdAt}</h1>
+                  <h1 className="lg:text-sm text-xs">
+                    {selectedTask.createdAt}
+                  </h1>
                 </div>
-                <div className="font-">{selectedTask.text}</div>
+                <div className="w-full lg:h-full h-[100px] overflow-auto break-words">
+                  {selectedTask.text}
+                </div>
               </div>
-              <div className="w-[30%]  flex flex-col items-start justify-between gap-3">
+              <div className="lg:w-[30%] lg:mt-0 mt-7  flex flex-col items-start justify-between gap-3">
                 <div className="flex flex-col items-start gap-3 w-full">
                   <button
                     onClick={() =>

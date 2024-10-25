@@ -27,15 +27,12 @@ const ProjectHome = () => {
     <TabGroup className="flex flex-grow bg-primary">
       {/* SideBar */}
       <TabList className="lg:w-72 px-1 bg-zinc-100 border-r border-zinc-200 flex flex-col items-start justify-start">
-        <Link
-          to={`/profile/${user?.username}`}
-          className="w-full flex lg:justify-start justify-center items-center lg:px-4 px-2 py-6"
-        >
+        <div className="w-full flex lg:justify-start justify-center items-center lg:px-4 px-2 py-6">
           <img
             src={!isTabletOrMobile ? Logo : LittleLogo}
             className="lg:w-44 w-12"
           />
-        </Link>
+        </div>
         <div className="w-full lg:px-4 px-2 flex flex-col py-3  border-b">
           <Tab className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
             <FiLayout size={20} />
@@ -75,16 +72,16 @@ const ProjectHome = () => {
           <TabPanel className="w-full  flex-grow py-3 lg:px-12 px-4">
             <Tasks projectID={projectID} />
           </TabPanel>
-          <TabPanel className="w-full  flex-grow py-3 px-12">
+          <TabPanel className="w-full  flex-grow py-3 lg:px-12 px-4">
             <Comments projectID={projectID} />
           </TabPanel>
-          <TabPanel className="w-full  flex-grow py-3 px-12">
+          <TabPanel className="w-full  flex-grow py-3 lg:px-12 px-4">
             <Archive projectID={projectID} />
           </TabPanel>
-          <TabPanel className="w-full  flex-grow py-3 px-12">
+          <TabPanel className="w-full  flex-grow py-3 lg:px-12 px-4">
             <ProjectSettings />
           </TabPanel>
-          <TabPanel className="w-full  flex-grow py-3 px-12">
+          <TabPanel className="w-full  flex-grow py-3 lg:px-12 px-4">
             <FeedBack />
           </TabPanel>
         </TabPanels>

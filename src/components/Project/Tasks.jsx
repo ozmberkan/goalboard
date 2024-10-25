@@ -140,10 +140,10 @@ const Tasks = ({ projectID }) => {
                 return task.status === "Yapılacaklar" ? (
                   <div
                     key={task.taskID}
-                    className="bg-white p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2"
+                    className="bg-white p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2 overflow-hidden"
                   >
                     <div className="flex gap-x-2 items-center justify-between w-full border-b pb-2">
-                      <div className="flex items-center gap-x-1">
+                      <div className="flex items-center gap-x-1 ">
                         <img
                           src={
                             task?.taskCreatorImage
@@ -163,7 +163,7 @@ const Tasks = ({ projectID }) => {
                         <IoMenu />
                       </button>
                     </div>
-                    <div>
+                    <div className="w-full lg:h-full h-[100px] overflow-auto break-words">
                       <span>{task.text.slice(0, 300)}...</span>
                     </div>
                   </div>
@@ -211,7 +211,7 @@ const Tasks = ({ projectID }) => {
                         <IoMenu />
                       </button>
                     </div>
-                    <div>
+                    <div className="w-full lg:h-full h-[100px] overflow-auto break-words">
                       <span>{task.text.slice(0, 300)}...</span>
                     </div>
                   </div>
@@ -257,7 +257,7 @@ const Tasks = ({ projectID }) => {
                         <IoMenu />
                       </button>
                     </div>
-                    <div>
+                    <div className="w-full lg:h-full h-[100px] overflow-auto break-words">
                       <span>{task.text.slice(0, 300)}...</span>
                     </div>
                   </div>
@@ -303,7 +303,7 @@ const Tasks = ({ projectID }) => {
                         <IoMenu />
                       </button>
                     </div>
-                    <div>
+                    <div className="w-full lg:h-full h-[100px] overflow-auto break-words">
                       <span>{task.text.slice(0, 300)}...</span>
                     </div>
                   </div>

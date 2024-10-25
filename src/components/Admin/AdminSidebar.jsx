@@ -6,7 +6,7 @@ import { GoProjectRoadmap } from "react-icons/go";
 import LittleLogo from "~/assets/Logos/DarkLogoLittle.svg";
 import { RiFeedbackLine } from "react-icons/ri";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "~/assets/Logos/DarkLogo.svg";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
@@ -20,69 +20,95 @@ const AdminSidebar = () => {
 
   return (
     <div className="lg:w-64 px-1 bg-zinc-100 border-r border-zinc-200 flex flex-col items-start justify-start">
-      <Link className="w-full flex lg:justify-start justify-center items-center lg:px-4 px-2 py-6">
+      <NavLink
+        className="w-full flex lg:justify-start justify-center items-center lg:px-4 px-2 py-6"
+        to="/admin"
+      >
         <img
           src={!isTabletOrMobile ? Logo : LittleLogo}
           className="lg:w-44 w-12"
         />
-      </Link>
+      </NavLink>
       <div className="w-full lg:px-4 px-2 flex flex-col py-3  border-b">
-        <Link
+        <NavLink
           to="/admin"
-          className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium  bg-zinc-200 text-zinc-700"
+              : "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium text-zinc-700 hover:bg-zinc-200"
+          }
         >
           <FiLayout size={20} />
           {!isTabletOrMobile && <span>Genel Bakış</span>}
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/admin/users"
-          className="flex items-center gap-x-4 py-2 px-4  text-zinc-700 text-base  rounded-md font-medium hover:bg-zinc-200  data-[selected]:bg-primary data-[selected]:text-white "
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium  bg-primary text-white"
+              : "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium text-zinc-700 hover:bg-zinc-200"
+          }
         >
           <TbUsers size={20} />
           {!isTabletOrMobile && <span>Kullanıcılar</span>}
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/admin/teams"
-          className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium  bg-primary text-white"
+              : "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium text-zinc-700 hover:bg-zinc-200"
+          }
         >
           <FaLayerGroup size={20} />
           {!isTabletOrMobile && <span>Takımlar</span>}
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/admin/projects"
-          className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium  bg-primary text-white"
+              : "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium text-zinc-700 hover:bg-zinc-200"
+          }
         >
           <GoProjectRoadmap size={20} />
           {!isTabletOrMobile && <span>Projeler</span>}
-        </Link>
+        </NavLink>
       </div>
-      <div className="w-full lg:px-4 px-2 flex flex-col py-3 border-t ">
-        <Link
+      <div className="w-full lg:px-4 px-2 flex flex-col py-3 border-t">
+        <NavLink
           to="/admin/feedbacks"
-          className="flex items-center relative gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium  bg-primary text-white"
+              : "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium text-zinc-700 hover:bg-zinc-200"
+          }
         >
           <RiFeedbackLine size={20} />
           <span className="absolute top-1 left-2 bg-primary w-4 h-4 rounded-full flex justify-center items-center text-xs text-white">
             {allFeedbacks.length}
           </span>
           {!isTabletOrMobile && <span>Geri Bildirimler</span>}
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/admin/notification"
-          className="flex items-center relative gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  "
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium  bg-primary text-white"
+              : "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium text-zinc-700 hover:bg-zinc-200"
+          }
         >
           <GoBell size={20} />
-
           {!isTabletOrMobile && <span>Bildirim Gönder</span>}
-        </Link>
+        </NavLink>
 
-        <Link
+        <NavLink
           to="/"
-          className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-red-700 hover:bg-red-700 hover:text-white "
+          className="flex items-center gap-x-4 py-2 px-4 text-base rounded-md font-medium text-red-700 hover:bg-red-700 hover:text-white"
         >
           <TbLayoutSidebarLeftCollapse size={20} />
           {!isTabletOrMobile && <span>Geri Dön</span>}
-        </Link>
+        </NavLink>
       </div>
     </div>
   );
