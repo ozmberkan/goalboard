@@ -22,10 +22,6 @@ const Pricing = () => {
       return;
     }
 
-    if (user.premium !== "None") {
-      toast.error("Zaten bir paket seçtiniz.");
-      return;
-    }
     if (!user) {
       toast.error("Lütfen giriş yapınız.");
       return;
