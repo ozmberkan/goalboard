@@ -114,7 +114,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="w-full py-6 h-full flex flex-col gap-y-3">
-            <h1 className="lg:text-3xl text-lg font-semibold text-primaryDark ">
+            <h1 className="lg:text-2xl text-lg font-semibold text-primaryDark ">
               Projeler
             </h1>
             <div

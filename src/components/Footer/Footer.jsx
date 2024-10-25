@@ -66,7 +66,7 @@ const Footer = () => {
         </div>
         <div className="border-t px-12 border-zinc-400  py-4 text-sm text-center flex justify-between items-center">
           <p>&copy; 2024 goalBoard. Tüm hakları saklıdır.</p>
-          <p>v1.1</p>
+          <p>v1.3</p>
         </div>
       </div>
     </footer>

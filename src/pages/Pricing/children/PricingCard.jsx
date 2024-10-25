@@ -1,31 +1,6 @@
-import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
-import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { db } from "~/firebase/firebase";
 
-const PricingCard = ({ card }) => {
-  const { user } = useSelector((store) => store.user);
-
-  const handleSelect = async (label) => {
-    try {
-      if (!user) {
-        toast.error("Lütfen giriş yapınız.");
-        return;
-      }
-
-      const userRef = doc(db, "users", user.uid);
-
-      await updateDoc(userRef, {
-        premium: label,
-      });
-      toast.success("Başarıyla katıldınız.");
-    } catch (error) {
-      console.log(error);
-      toast.error("Bir hata oluştu.");
-    }
-  };
-
+const PricingCard = ({ card, selectType }) => {
   return (
     <div
       className={`lg:w-[400px] lg:h-[550px] w-full  rounded-md bg-white shadow-2xl p-4 flex flex-col items-center gap-y-5  ${
@@ -71,8 +46,8 @@ const PricingCard = ({ card }) => {
         <span className="text-zinc-500 text-base">/ay</span>
       </div>
       <button
+        onClick={() => selectType(card)}
         className="px-4 py-2 rounded-md bg-primary hover:bg-primaryDark transition-colors duration-300 text-white w-full"
-        onClick={() => handleSelect(card.label)}
       >
         Hemen Katıl!
       </button>

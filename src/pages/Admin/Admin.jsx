@@ -5,7 +5,7 @@ import { getAllFeedBacksForAdmin } from "~/redux/slices/contactsSlice";
 import { getAllProjectsForAdmin } from "~/redux/slices/projectsSlice";
 import { getAllTeamsForAdmin } from "~/redux/slices/teamsSlice";
 import { getAllUserForAdmin } from "~/redux/slices/userSlice";
-import { getAllVerifiedForAdmin } from "~/redux/slices/verifiedSlice";
+
 
 const Admin = () => {
   const { user, allUsers, status } = useSelector((store) => store.user);

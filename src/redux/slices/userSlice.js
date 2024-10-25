@@ -7,10 +7,12 @@ import {
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { auth, db } from "~/firebase/firebase";
 import toast from "react-hot-toast";
+import { set } from "react-hook-form";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   allUsers: [],
+  selectedPaymentType: "silver",
   status: "idle",
   errorMessage: "",
 };
@@ -137,7 +139,11 @@ export const getAllUserForAdmin = createAsyncThunk(
 export const counterSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedPaymentType: (state, action) => {
+      state.selectedPaymentType = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signUpService.pending, (state) => {
@@ -190,6 +196,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const {} = counterSlice.actions;
+export const { setSelectedPaymentType } = counterSlice.actions;
 
 export default counterSlice.reducer;

@@ -15,6 +15,8 @@ export default {
         "pricing-bg": "url('~/assets/Pricing.svg')",
         "team-bg": "url('~/assets/TeamBG.svg')",
         "project-bg": "url('~/assets/ProjectBG.svg')",
+        "card-bg": "url('~/assets/CreditCard.svg')",
+        "card-gold-bg": "url('~/assets/GoldCreditCard.svg')",
       },
     },
   },

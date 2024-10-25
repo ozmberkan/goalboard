@@ -2,7 +2,6 @@ import Home from "~/pages/Home/Home";
 import HomeLayout from "~/layouts/HomeLayout";
 import Contacts from "~/pages/Contacts/Contacts";
 import About from "~/pages/About/About";
-import Pricing from "~/pages/Pricing/Pricing";
 import Announcements from "~/pages/Announcements/Announcements";
 import Profile from "~/pages/Profile/Profile";
 import Invites from "~/pages/Invites/Invites";
@@ -40,6 +39,7 @@ export const HomeRoute = {
       element: <Settings />,
       loader: () => authLoader(["admin", "user"]),
     },
+
     { path: "why-us", element: <WhyUs /> },
     { path: "services", element: <Services /> },
   ],
