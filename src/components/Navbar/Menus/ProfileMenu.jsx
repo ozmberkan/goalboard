@@ -5,11 +5,12 @@ import {
   MenuItems,
   Transition,
 } from "@headlessui/react";
-import { FaChevronDown, FaUser, FaUserLock } from "react-icons/fa";
+import { FaUser, FaUserLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { profileTabs } from "~/data/data";
 import Avatar from "~/assets/noavatar.png";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
+import { MdMenu } from "react-icons/md";
 
 const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
   return (
@@ -18,8 +19,9 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
         <>
           <MenuButton
             onClick={() => setDropdown(true)}
-            className="lg:px-4 lg:py-1 py-2 px-4 flex items-center border-2 hover:bg-zinc-50 border-primary hover:border-primaryDark hover:text-primaryDark  rounded-md gap-x-2 transition-all duration-300   font-medium text-primary "
+            className="lg:px-4 hover:shadow-lg lg:py-1 py-2 px-4 flex items-center border-2  border-primary  rounded-full gap-x-2 transition-all duration-300   font-medium text-primary "
           >
+            <MdMenu size={20} />
             {isTabletOrMobile ? (
               <FaUser />
             ) : (
@@ -28,7 +30,6 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
                 src={user?.photoURL ? user.photoURL : Avatar}
               />
             )}
-            <FaChevronDown />
           </MenuButton>
           <Transition
             show={open}
