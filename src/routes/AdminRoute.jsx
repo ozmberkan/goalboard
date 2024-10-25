@@ -1,6 +1,7 @@
 import AdminLayout from "~/layouts/AdminLayout";
 import { authLoader } from "~/loaders/AuthLoader";
 import { lazy } from "react";
+import AdminPremiumUsers from "~/pages/Admin/AdminPremiumUsers";
 
 const Admin = lazy(() => import("~/pages/Admin/Admin"));
 const AdminFeedBacks = lazy(() => import("~/pages/Admin/AdminFeedBacks"));
@@ -37,6 +38,11 @@ export const AdminRoute = {
     {
       path: "/admin/notification",
       element: <AdminNotification />,
+      loader: () => authLoader(["admin"]),
+    },
+    {
+      path: "/admin/premium-users",
+      element: <AdminPremiumUsers />,
       loader: () => authLoader(["admin"]),
     },
   ],

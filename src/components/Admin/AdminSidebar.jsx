@@ -11,6 +11,7 @@ import Logo from "~/assets/Logos/DarkLogo.svg";
 import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
 import { GoBell } from "react-icons/go";
+import { MdVerified } from "react-icons/md";
 
 const AdminSidebar = () => {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
@@ -73,6 +74,17 @@ const AdminSidebar = () => {
         >
           <GoProjectRoadmap size={20} />
           {!isTabletOrMobile && <span>Projeler</span>}
+        </NavLink>
+        <NavLink
+          to="/admin/premium-users"
+          className={({ isActive }) =>
+            isActive
+              ? "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium  bg-primary text-white"
+              : "flex items-center relative gap-x-4 py-2 px-4 text-base rounded-md font-medium text-zinc-700 hover:bg-zinc-200"
+          }
+        >
+          <MdVerified size={20} />
+          {!isTabletOrMobile && <span>Üyeler</span>}
         </NavLink>
       </div>
       <div className="w-full lg:px-4 px-2 flex flex-col py-3 border-t">

@@ -45,7 +45,7 @@ export const signUpService = createAsyncThunk(
           username: data.username,
           emailVerified: user.emailVerified,
           photoURL: "",
-          premium: "silver",
+          premium: "Silver",
           role: "user",
           notification: [],
           teams: [],

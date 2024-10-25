@@ -6,7 +6,6 @@ import { getAllProjectsForAdmin } from "~/redux/slices/projectsSlice";
 import { getAllTeamsForAdmin } from "~/redux/slices/teamsSlice";
 import { getAllUserForAdmin } from "~/redux/slices/userSlice";
 
-
 const Admin = () => {
   const { user, allUsers, status } = useSelector((store) => store.user);
   const { allTeams } = useSelector((store) => store.teams);

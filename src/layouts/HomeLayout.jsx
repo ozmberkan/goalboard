@@ -16,7 +16,8 @@ const HomeLayout = () => {
       if (user?.uid) {
         dispatch(getUserByID(user?.uid));
       }
-    }, 15000);
+      console.log("çalıştı");
+    }, 60000);
   }, [dispatch]);
 
   return (
