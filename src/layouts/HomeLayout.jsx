@@ -6,19 +6,27 @@ import Navbar from "~/components/Navbar/Navbar";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserByID } from "~/redux/slices/userSlice";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "~/firebase/firebase";
 
 const HomeLayout = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.user);
 
   useEffect(() => {
-    setInterval(() => {
-      if (user?.uid) {
-        dispatch(getUserByID(user?.uid));
-      }
-      console.log("çalıştı");
-    }, 60000);
-  }, [dispatch]);
+    if (user?.uid) {
+      const userDocRef = doc(db, "users", user.uid);
+
+      const unsubscribe = onSnapshot(userDocRef, (docSnap) => {
+        if (docSnap.exists()) {
+          dispatch(getUserByID(docSnap.id));
+          console.log("Kullanıcı verisi güncellendi");
+        }
+      });
+
+      return () => unsubscribe();
+    }
+  }, [dispatch, user?.uid]);
 
   return (
     <Container>

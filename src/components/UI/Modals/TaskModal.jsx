@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { FiAlertCircle } from "react-icons/fi";
 import { MdCancel } from "react-icons/md";
 import toast from "react-hot-toast";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
@@ -16,6 +15,7 @@ import {
   RiStopCircleLine,
 } from "react-icons/ri";
 import { IoArchiveOutline } from "react-icons/io5";
+import Avatar from "~~/assets/noavatar.png";
 
 const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
   const modalRoot = document.getElementById("modal");
@@ -121,7 +121,11 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                 <div className=" w-full flex justify-between items-center border-b lg:pb-4 pb-1 ">
                   <div className="flex items-center gap-x-2">
                     <img
-                      src={selectedTask.taskCreatorImage}
+                      src={
+                        selectedTask.taskCreatorImage
+                          ? selectedTask.taskCreatorImage
+                          : Avatar
+                      }
                       className="lg:w-10 lg:h-10 w-6 h-6 rounded-full object-cover"
                     />
                     <span className="lg:font-semibold font-medium text-zinc-700 ">
