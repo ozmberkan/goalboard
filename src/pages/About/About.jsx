@@ -1,21 +1,4 @@
-import axios from "axios";
-import { useEffect } from "react";
-
 const About = () => {
-  const databaseURL =
-    "https://goalboard-90fe7-default-rtdb.europe-west1.firebasedatabase.app";
-
-  const fetchData = () => {
-    axios
-      .get(`${databaseURL}/users/user1.json`)
-      .then((response) => {
-        console.log("Kullanıcı verisi:", response.data);
-      })
-      .catch((error) => {
-        console.error("Veri çekilirken hata oluştu:", error);
-      });
-  };
-
   return (
     <div className="flex-grow p-4 flex">
       <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-3 relative  overflow-hidden">
