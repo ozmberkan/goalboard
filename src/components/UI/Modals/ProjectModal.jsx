@@ -36,8 +36,6 @@ const ProjectModal = ({ setIsProjectModal, teamID }) => {
         projectID: projectsRef.id,
         lastDate: formattedDate,
         tasks: [],
-        testTasks: [],
-        completeTasks: [],
         archiveTasks: [],
         comments: [],
       };

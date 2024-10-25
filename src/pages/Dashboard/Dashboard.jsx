@@ -82,7 +82,7 @@ const Dashboard = () => {
               <div className="flex items-center gap-x-2 bg-zinc-50 lg:px-4 lg:py-2 px-2 py-1 border rounded-md">
                 <span className="flex items-center gap-x-2 lg:font-medium text-sm">
                   <FaUsers size={17} />
-                  {currentTeam?.members.length}
+                  {currentTeam?.members?.length}
                 </span>
               </div>
               {currentTeam?.creatorMember === user.uid && (
@@ -121,8 +121,8 @@ const Dashboard = () => {
               className="w-full h-full grid lg:grid-cols-4 grid-cols-1 gap-5 "
               ref={animationParent}
             >
-              {projects.length > 0 ? (
-                projects.map((project) => (
+              {projects?.length > 0 ? (
+                projects?.map((project) => (
                   <ProjectBox key={project.projectID} project={project} />
                 ))
               ) : (

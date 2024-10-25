@@ -54,11 +54,18 @@ const Archive = ({ projectID }) => {
                 <div className="w-full flex gap-x-2 ">
                   <div className="flex justify-between items-center w-full">
                     <h1 className="font-medium flex items-center gap-x-1 text-zinc-700">
-                      <span className="text-primary">{archive.text}</span> adlı
-                      görev{" "}
-                      {archive.createdAt.slice(0, 2) -
-                        archive.archivedDate.slice(0, 2)}{" "}
-                      günde tamamlandı!
+                      <span className="text-primary">
+                        {archive.text.slice(0, 100)}...
+                      </span>{" "}
+                      adlı görev{" "}
+                      <span className="text-primary text-sm">
+                        {archive.archivedUser}
+                      </span>{" "}
+                      tarafından
+                      <span className="text-sm text-primary">
+                        {archive.archivedDate}
+                      </span>{" "}
+                      tarihinde arşive eklendi.
                     </h1>
                   </div>
                 </div>

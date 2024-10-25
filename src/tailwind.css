@@ -5,3 +5,26 @@
 body {
     @apply bg-[#F3F3F3] text-[#202020] font-poppins
 }
+
+
+* {
+    --sb-track-color: #ffffff;
+    --sb-thumb-color: #3a5adb;
+    --sb-size: 5px;
+  }
+  
+  *::-webkit-scrollbar {
+    width: var(--sb-size)
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 1px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background: #3a5adb;
+    border-radius: 1px;
+    
+  }
+  
