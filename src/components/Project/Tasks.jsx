@@ -1,4 +1,10 @@
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import moment from "moment";
 import { nanoid } from "nanoid";
 import React, { useEffect, useState } from "react";
@@ -34,12 +40,19 @@ const Tasks = ({ projectID }) => {
   const [selectedTask, setSelectedTask] = useState(null);
 
   useEffect(() => {
-    setInterval(() => {
-      if (user?.uid) {
-        dispatch(getProjectsByID(projectID));
+    const projectRef = doc(db, "projects", projectID);
+
+    const unsubscribe = onSnapshot(projectRef, (doc) => {
+      if (doc.exists()) {
+        const projectData = doc.data();
+        dispatch(getProjectsByID(projectID, projectData));
+      } else {
+        console.log("Proje bulunamadı!");
       }
-    }, 30000);
-  }, [dispatch]);
+    });
+
+    return () => unsubscribe();
+  }, [dispatch, projectID]);
 
   useEffect(() => {
     dispatch(getProjectsByID(projectID));
