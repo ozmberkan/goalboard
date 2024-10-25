@@ -68,7 +68,7 @@ const Archive = ({ projectID }) => {
                         <span className="text-primary font-medium">
                           {archive.archivedUser}
                         </span>{" "}
-                        kişi{" "}
+                        adlı kişi{" "}
                         <span className="text-primary font-medium">
                           {archive.archivedDate}
                         </span>{" "}

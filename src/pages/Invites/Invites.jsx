@@ -69,7 +69,7 @@ const Invites = () => {
       const userRef = doc(db, "users", user.uid);
 
       const updatedNoti = user.notification.filter(
-        (n) => n.id !== noti.notificationID
+        (n) => n.notificationID !== noti.notificationID
       );
 
       await updateDoc(userRef, {
@@ -109,7 +109,7 @@ const Invites = () => {
                     </span>
                     <span>{noti.message}</span>
                   </div>
-                  {noti.message === "Sizi takıma davet ediyor." && (
+                  {noti.message === "Sizi takıma davet ediyor." ? (
                     <div className="flex gap-x-4">
                       <button
                         onClick={() => confirmInvite(noti)}
@@ -124,13 +124,14 @@ const Invites = () => {
                         <MdCancel />
                       </button>
                     </div>
+                  ) : (
+                    <button
+                      onClick={() => deleteNoti(noti)}
+                      className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
+                    >
+                      <MdCancel />
+                    </button>
                   )}
-                  <button
-                    onClick={() => deleteNoti(noti)}
-                    className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
-                  >
-                    <MdCancel />
-                  </button>
                 </div>
               ))
             ) : (

@@ -27,7 +27,10 @@ const Settings = () => {
               fill="currentFill"
             />
           </svg>
-          <h1>Çok yakında...</h1>
+          <h1>
+            Çok yakında... (üyelik iptali, dark/light mode, kullanıcı bilgileri
+            değiştirme, şifre değiştirme, e-posta validasyonu)
+          </h1>
         </div>
       </div>
     </motion.div>

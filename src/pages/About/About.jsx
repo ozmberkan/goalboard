@@ -3,7 +3,6 @@ const About = () => {
     <div className="flex-grow p-4 flex">
       <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-3 relative  overflow-hidden">
         <h1 className="text-4xl font-bold text-primary ">Hakkımızda</h1>
-        <button onClick={fetchData}>Veriyi Çek</button>
         <p className="font-medium text-base text-zinc-700">
           <strong>GoalBoard</strong>, projelerinizi daha verimli bir şekilde
           yönetmenize yardımcı olmak için geliştirilmiş, modern ve kullanıcı

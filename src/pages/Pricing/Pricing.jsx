@@ -14,13 +14,24 @@ const Pricing = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [IsPaymentModal, setIsPaymentModal] = useState(false);
+  const { user } = useSelector((store) => store.user);
 
   const selectType = (card) => {
     if (card.label === "Silver") {
       toast.error("Bu paket seçilemez. Lütfen başka bir paket seçiniz.");
       return;
     }
-    setIsPaymentModal(true);
+
+    if (user.premium !== "None") {
+      toast.error("Zaten bir paket seçtiniz.");
+      return;
+    }
+    if (!user) {
+      toast.error("Lütfen giriş yapınız.");
+      return;
+    } else {
+      setIsPaymentModal(true);
+    }
     const { id, features, ...rest } = card;
     dispatch(setSelectedPaymentType(rest));
   };

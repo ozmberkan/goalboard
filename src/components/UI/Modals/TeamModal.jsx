@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createTeam, getAllTeams } from "~/redux/slices/teamsSlice";
 import toast from "react-hot-toast";
 import { getUserByID } from "~/redux/slices/userSlice";
+import { Link } from "react-router-dom";
 
 const TeamModal = ({ setIsTeamModal }) => {
   const modalRoot = document.getElementById("modal");
@@ -83,8 +84,11 @@ const TeamModal = ({ setIsTeamModal }) => {
               <span className="flex items-center gap-x-3 w-full text-white">
                 <FiAlertCircle size={25} />
                 <span className="text-sm text-white">
-                  Premium üyesi olursan 1'den fazla kadar takım
-                  oluşturabilirsin!
+                  Premium üyeler daha fazla takım oluşturabilir. İncelemek için
+                  <Link className="underline" to="/pricing">
+                    {" "}
+                    göz atın.
+                  </Link>
                 </span>
               </span>
             </p>

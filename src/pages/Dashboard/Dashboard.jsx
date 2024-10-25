@@ -14,6 +14,7 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { getAllProjects } from "~/redux/slices/projectsSlice";
 import { motion } from "framer-motion";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { TbCircleArrowDownLeftFilled } from "react-icons/tb";
 
 const Dashboard = () => {
   const { teamID } = useParams();
@@ -57,6 +58,28 @@ const Dashboard = () => {
     }
   };
 
+  const leaveTeam = async (uid) => {
+    try {
+      const teamRef = doc(db, "teams", teamID);
+      const userRef = doc(db, "users", uid);
+
+      await updateDoc(teamRef, {
+        members: arrayRemove(uid),
+      });
+
+      await updateDoc(userRef, {
+        teams: arrayRemove(teamID),
+      });
+
+      toast.success("Takımdan ayrıldınız.");
+      setTimeout(() => {
+        navigate(`/profile/${user.username}`);
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (status === "loading") {
     return (
       <div className="flex flex-grow justify-center items-center bg-white ">
@@ -85,6 +108,13 @@ const Dashboard = () => {
                   {currentTeam?.members?.length}
                 </span>
               </div>
+              <button
+                onClick={() => leaveTeam(user.uid)}
+                className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md text-white bg-red-500 hover:bg-red-600 transition-colors duration-300 flex items-center gap-x-1"
+              >
+                <TbCircleArrowDownLeftFilled size={18} />
+                <span className="lg:flex hidden">Takımdan Ayrıl</span>
+              </button>
               {currentTeam?.creatorMember === user.uid && (
                 <>
                   <button

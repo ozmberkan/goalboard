@@ -27,7 +27,7 @@ const ProjectSettings = () => {
             fill="currentFill"
           />
         </svg>
-        <h1>Çok yakında...</h1>
+        <h1>Çok yakında... (proje silme,takım üyesi görme, takım üyesine rol verme, )</h1>
       </div>
     </div>
   );

@@ -70,10 +70,10 @@ const PaymentModal = ({ setIsPaymentModal }) => {
               <div className="w-full rounded-xl bg-zinc-50 border p-5 flex justify-between items-center gap-5">
                 <div className="flex items-center gap-x-2">
                   <img
-                    src={user.photoURL ? user.photoURL : Avatar}
+                    src={user?.photoURL ? user?.photoURL : Avatar}
                     className="w-10 h-10 rounded-full object-cover lg:block hidden"
                   />
-                  <span className="text-sm">{user.email}</span>
+                  <span className="text-sm">{user?.email}</span>
                 </div>
                 <div className="text-sm">{moment().format("DD.MM.YYYY")}</div>
               </div>
