@@ -1,8 +1,26 @@
+import axios from "axios";
+import { useEffect } from "react";
+
 const About = () => {
+  const databaseURL =
+    "https://goalboard-90fe7-default-rtdb.europe-west1.firebasedatabase.app";
+
+  const fetchData = () => {
+    axios
+      .get(`${databaseURL}/users/user1.json`)
+      .then((response) => {
+        console.log("Kullanıcı verisi:", response.data);
+      })
+      .catch((error) => {
+        console.error("Veri çekilirken hata oluştu:", error);
+      });
+  };
+
   return (
     <div className="flex-grow p-4 flex">
       <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-3 relative  overflow-hidden">
         <h1 className="text-4xl font-bold text-primary ">Hakkımızda</h1>
+        <button onClick={fetchData}>Veriyi Çek</button>
         <p className="font-medium text-base text-zinc-700">
           <strong>GoalBoard</strong>, projelerinizi daha verimli bir şekilde
           yönetmenize yardımcı olmak için geliştirilmiş, modern ve kullanıcı
