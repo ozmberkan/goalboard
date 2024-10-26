@@ -89,7 +89,15 @@ export const signInService = createAsyncThunk(
         photoURL: userDoc.data()?.photoURL || "",
         notification: userDoc.data()?.notification || [],
         teams: userDoc.data().teams || [],
+        disabled: userDoc.data().disabled || false,
       };
+
+      if (userData.disabled) {
+        toast.error(
+          "Hesabınız devre dışı bırakılmıştır. Yönetici ile iletişime geçiniz."
+        );
+        return rejectWithValue("Hesabınız devre dışı bırakılmıştır.");
+      }
 
       return userData;
     } catch (error) {

@@ -29,13 +29,13 @@ const SignIn = () => {
     try {
       dispatch(signInService(data));
     } catch (error) {
-      toast.error(error);
+      console.log(error);
     }
   };
 
   useEffect(() => {
     if (status === "failed") {
-      toast.error("Kullanıcı adı veya şifre hatalı!");
+      toast.error("Bir hata ile karşılaştık, bilgilerinizi kontrol edin.");
     }
     if (status === "success") {
       toast.success("Başarıyla giriş yaptınız, yönlendiriliyorsunuz...");

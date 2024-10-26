@@ -163,3 +163,21 @@ export const pricingCards = [
     ],
   },
 ];
+
+export const adminUserInputs = [
+  {
+    id: 1,
+    label: "Yetki",
+    name: "admin",
+    type: "select",
+    options: ["user", "admin"],
+  },
+  {
+    id: 2,
+    label: "Kullanıcı Adı",
+    name: "username",
+    type: "text",
+  },
+  { id: 3, label: "E-Posta", name: "email", type: "email" },
+  { id: 4, label: "Profil Fotoğrafı", name: "photoURL", type: "text" },
+];
