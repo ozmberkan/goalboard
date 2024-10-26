@@ -16,12 +16,19 @@ import {
 } from "react-icons/ri";
 import { IoArchiveOutline } from "react-icons/io5";
 import Avatar from "~/assets/noavatar.png";
+import { useForm } from "react-hook-form";
 
 const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
   const modalRoot = document.getElementById("modal");
 
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.user);
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      taskImportance: selectedTask.taskImportance,
+    },
+  });
 
   const updateTaskStatus = async (taskID, newStatus) => {
     try {
@@ -79,6 +86,39 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
         });
 
         toast.success("Görev arşiv aşamasına taşındı!");
+        dispatch(getProjectsByID(projectID));
+        setIsTaskModal(false);
+      } else {
+        toast.error("Bir hatayla karşılaşıldı.");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Bir hata oluştu.");
+    }
+  };
+
+  const updateImportance = async (data) => {
+    try {
+      const projectRef = doc(db, "projects", projectID);
+      const projectSnap = await getDoc(projectRef);
+      const projectData = projectSnap.data();
+
+      const taskID = selectedTask.taskID;
+
+      const taskToUpdate = projectData.tasks.find(
+        (task) => task.taskID === selectedTask.taskID
+      );
+
+      if (taskToUpdate) {
+        const updatedTasks = projectData.tasks.map((task) =>
+          task.taskID === taskID
+            ? { ...task, taskImportance: data.taskImportance }
+            : task
+        );
+
+        await updateDoc(projectRef, { tasks: updatedTasks });
+
+        toast.success(`Görevin aciliyeti değiştirildi!`);
         dispatch(getProjectsByID(projectID));
         setIsTaskModal(false);
       } else {
@@ -178,6 +218,22 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                     <RiCheckboxCircleLine />
                     Tamamlandı
                   </button>
+                  <form
+                    className="w-full flex flex-col gap-y-3 border rounded-xl bg-zinc-100 p-3"
+                    onSubmit={handleSubmit(updateImportance)}
+                  >
+                    <select
+                      {...register("taskImportance")}
+                      className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md  transition-colors text-zinc-700 "
+                    >
+                      <option value="low">Düşük</option>
+                      <option value="normal">Normal</option>
+                      <option value="high">Yüksek</option>
+                    </select>
+                    <button className="px-4 py-2 rounded-md bg-primary text-white">
+                      Kaydet
+                    </button>
+                  </form>
                 </div>
                 <button
                   onClick={() => archiveToTask(selectedTask.taskID)}

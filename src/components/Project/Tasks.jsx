@@ -69,6 +69,7 @@ const Tasks = ({ projectID }) => {
         taskCreator: user.uid,
         taskCreatorName: user.username,
         taskCreatorImage: user.photoURL,
+        taskImportance: "low",
         text: data.task,
         createdAt: formattedDate,
         status: "Yapılacaklar",
@@ -169,12 +170,32 @@ const Tasks = ({ projectID }) => {
                           {task.taskCreatorName}
                         </span>
                       </div>
-                      <button
-                        onClick={() => openModal(task)}
-                        className=" text-zinc-700 text-2xl hover:text-zinc-900 rounded-full"
-                      >
-                        <IoMenu />
-                      </button>
+                      <div className="flex items-center gap-x-3">
+                        <span
+                          className={`px-2 py-0.5 rounded-full  text-zinc-400 text-xs  ${
+                            task.taskImportance === "low" &&
+                            "bg-zinc-100 text-zinc-400 border border-zinc-300"
+                          }
+                          ${
+                            task.taskImportance === "normal" &&
+                            "bg-orange-100 text-orange-400 border border-orange-500"
+                          }
+                          ${
+                            task.taskImportance === "high" &&
+                            "bg-red-100 text-red-400 border border-red-500"
+                          }`}
+                        >
+                          {task.taskImportance === "low" && "Düşük"}
+                          {task.taskImportance === "normal" && "Normal"}
+                          {task.taskImportance === "high" && "Yüksek"}
+                        </span>
+                        <button
+                          onClick={() => openModal(task)}
+                          className=" text-zinc-700 text-2xl hover:text-zinc-900 rounded-full"
+                        >
+                          <IoMenu />
+                        </button>
+                      </div>
                     </div>
                     <div className="w-full lg:h-full h-[100px] overflow-auto break-words">
                       <span>{task.text.slice(0, 300)}...</span>
