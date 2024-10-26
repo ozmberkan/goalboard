@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from "~/assets/noavatar.png";
 import { motion } from "framer-motion";
-import { FiEdit, FiLock, FiSearch, FiUnlock } from "react-icons/fi";
+import { FiEdit, FiLock, FiUnlock } from "react-icons/fi";
 import AdminUserEditModal from "~/components/UI/Modals/Admin/AdminUserEditModal";
 import { getAllUserForAdmin } from "~/redux/slices/userSlice";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/firebase/firebase";
 import toast from "react-hot-toast";
-import { FaUsers } from "react-icons/fa6";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const AdminUsers = () => {
+  const [animationParent] = useAutoAnimate();
   const { allUsers, user } = useSelector((store) => store.user);
   const [search, setSearch] = useState("");
   const [isEditMode, setIsEditMode] = useState(false);
@@ -73,7 +74,7 @@ const AdminUsers = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-grow  lg:p-6 p-2 justify-start items-start flex-col gap-y-2 bg-white"
+        className="flex flex-col flex-grow lg:p-6 p-2  gap-y-2 bg-white "
       >
         <div className="w-full   px-4 py-2 flex justify-between items-center h-18 border-b">
           <span className="lg:text-2xl text-lg font-bold text-zinc-600 lg:flex hidden">
@@ -90,62 +91,63 @@ const AdminUsers = () => {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-start gap-x-5  items-center px-4  ">
-          <div className="bg-zinc-50 flex items-center h-10 gap-x-5 border rounded-md px-4">
-            <FiSearch />
+        <div className="w-full  h-full flex flex-col gap-y-5">
+          <div className=" w-full flex gap-x-2 items-center px-4">
             <input
-              type="text"
-              placeholder="Ara"
-              className="h-10 bg-transparent outline-none"
+              placeholder="Ara.."
               onChange={(e) => setSearch(e.target.value)}
+              className="w-1/2 px-4 bg-zinc-50 flex-1 py-2 rounded-md border focus:outline-none "
             />
+            <span className="flex px-4 gap-x-2 py-2 rounded-md border bg-zinc-50 justify-center items-center">
+              {allUsers.length}{" "}
+              <span className="lg:flex hidden">Kullanıcı</span>
+            </span>
           </div>
-          <div className="text-zinc-700  bg-zinc-100 rounded-md w-full py-1 flex justify-center items-center gap-x-1 border">
-            {allUsers.length} <span className="lg:flex hidden">Kullanıcı</span>
-          </div>
-        </div>
-        <div className="grid lg:grid-cols-4 grid-cols-1 place-items-center w-full lg:mt-2 mt-0 px-4 py-5 gap-6">
-          {filteredUsers.map((user) => (
-            <div
-              key={user.uid}
-              className=" w-full rounded-md bg-zinc-50 border p-3 "
-            >
-              <div className="w-full flex items-center justify-between gap-x-3 p ">
-                <div className="flex gap-x-3 items-center">
-                  <img
-                    src={user.photoURL ? user.photoURL : Avatar}
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <span
-                    className={` text-xl   font-semibold ${
-                      user.role === "admin"
-                        ? "bg-gradient-to-r from-sky-700 to-blue-500 bg-clip-text text-transparent"
-                        : "text-zinc-600"
-                    } `}
-                  >
-                    {user.username}
-                  </span>
-                </div>
-
-                <div className="flex gap-x-2">
-                  <button
-                    onClick={() => openModal(user)}
-                    className="bg-white rounded-md p-1 border"
-                  >
-                    <FiEdit />
-                  </button>
-                  <button
-                    onClick={() => disableUser(user)}
-                    className={`bg-zinc-200 rounded-md p-1 border ${
-                      user.disabled ? "text-green-500" : "text-zinc-700"
-                    }`}
-                  >
-                    {user?.disabled === true ? <FiUnlock /> : <FiLock />}
-                  </button>
+          <div
+            className="w-full  grid lg:grid-cols-4 grid-cols-1 place-items-start gap-6 px-4"
+            ref={animationParent}
+          >
+            {filteredUsers.map((user) => (
+              <div
+                key={user.uid}
+                className=" w-full rounded-md bg-zinc-50 border p-3 "
+              >
+                <div className="w-full  flex justify-between items-center ">
+                  <div className="flex items-center lg:gap-x-3 gap-x-2">
+                    <img
+                      src={user.photoURL ? user.photoURL : Avatar}
+                      className="lg:w-10 lg:h-10 w-7 h-7 rounded-full object-cover"
+                    />
+                    <span
+                      className={`  lg:text-base text-sm  font-semibold ${
+                        user?.role === "admin"
+                          ? "bg-clip-text text-transparent bg-gradient-to-r from-sky-700 to-blue-500"
+                          : "text-zinc-600"
+                      }  `}
+                    >
+                      {user.username}
+                    </span>
+                  </div>
+                  <div className="flex gap-x-2 items-center">
+                    <button
+                      onClick={() => openModal(user)}
+                      className="lg:p-2 p-1 rounded-md bg-white border"
+                    >
+                      <FiEdit />
+                    </button>
+                    <button
+                      onClick={() => disableUser(user)}
+                      className={`lg:p-2 p-1 rounded-md bg-white border ${
+                        !user.disabled ? "text-zinc-700" : "text-green-500"
+                      }`}
+                    >
+                      {user.disabled ? <FiUnlock /> : <FiLock />}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </motion.div>
     </>

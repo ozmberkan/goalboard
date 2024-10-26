@@ -9,6 +9,7 @@ import {
   arrayUnion,
   collection,
   doc,
+  getDoc,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
@@ -30,8 +31,11 @@ const ProjectModal = ({ setIsProjectModal, teamID }) => {
       const projectsRef = doc(collection(db, "projects"));
       const teamsRef = doc(db, "teams", teamID);
 
+      const teamData = await getDoc(teamsRef);
+
       const projectData = {
         creatorTeam: teamID,
+        creatorTeamName: teamData.data().teamName,
         projectName: data.projectName,
         projectID: projectsRef.id,
         lastDate: formattedDate,

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaEnvelope, FaHome, FaLock } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import SignInIcon from "~/assets/Auth/signin.svg";
 import { useForm } from "react-hook-form";
 import { signInScheme } from "~/validation/scheme";

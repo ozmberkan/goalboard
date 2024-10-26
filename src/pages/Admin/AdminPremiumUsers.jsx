@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Avatar from "~/assets/noavatar.png";
 import { motion } from "framer-motion";
+import { MdVerified } from "react-icons/md";
 
 const AdminPremiumUsers = () => {
   const { allUsers, user } = useSelector((store) => store.user);
@@ -15,7 +16,7 @@ const AdminPremiumUsers = () => {
     >
       <div className="w-full   px-4 py-2 flex justify-between items-center h-18 border-b">
         <span className="lg:text-2xl text-lg font-bold text-zinc-600 lg:flex hidden">
-          Kullanıcılar
+          Premium Kullanıcılar
         </span>
         <div className="lg:pl-5 py-2 lg:border-l flex items-center gap-x-3">
           <img
@@ -32,16 +33,22 @@ const AdminPremiumUsers = () => {
         {allUsers.map((user) => {
           return (
             user?.premium !== "Silver" && (
-              <div className="h-[200px]  w-full rounded-md bg-[#F9E5CF] p-3 ">
-                <div className="w-full border-b border-orange-300 pb-2">
-                  <span className="text-orange-600 text-xl   font-semibold ">
+              <div
+                key={user.uid}
+                className=" w-full rounded-md bg-zinc-50 border p-3 "
+              >
+                <div className="w-full flex gap-x-2 items-center ">
+                  <span className="text-zinc-600 text-xl   font-semibold ">
                     {user.username}
                   </span>
-                </div>
-                <div className="w-full py-4">
-                  <span className="text-4xl text-orange-600">
-                    {user.premium}
-                  </span>
+                  <MdVerified
+                    size={20}
+                    className={`${
+                      user.premium === "Gold"
+                        ? "text-yellow-500"
+                        : "text-sky-700"
+                    }`}
+                  />
                 </div>
               </div>
             )

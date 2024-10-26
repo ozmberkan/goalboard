@@ -102,7 +102,7 @@ const SignUp = () => {
                 className="flex-1 h-12 outline-none rounded-lg"
                 placeholder={input.placeholder}
                 type={input.type}
-                {...register(input.name)}
+                {...register(input.name, { minLength: 15 })}
               />
             </div>
           ))}

@@ -12,7 +12,7 @@ import { set } from "react-hook-form";
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   allUsers: [],
-  selectedPaymentType: "silver",
+  selectedPaymentType: "Silver",
   status: "idle",
   errorMessage: "",
 };
@@ -43,7 +43,7 @@ export const signUpService = createAsyncThunk(
           uid: user.uid,
           email: user.email,
           username: data.username,
-          emailVerified: user.emailVerified,
+          disabled: false,
           photoURL: "",
           premium: "Silver",
           role: "user",
@@ -75,21 +75,21 @@ export const signInService = createAsyncThunk(
 
       const user = userCredential.user;
 
-      const userRef = doc(db, "users", user.uid);
+      await user.reload();
 
+      const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
 
       const userData = {
         uid: user.uid,
         email: user.email,
-        emailVerified: user.emailVerified,
         username: userDoc.data()?.username || "Kullanıcı",
         premium: userDoc.data()?.premium || "silver",
         role: userDoc.data()?.role || "user",
         photoURL: userDoc.data()?.photoURL || "",
         notification: userDoc.data()?.notification || [],
-        teams: userDoc.data().teams || [],
-        disabled: userDoc.data().disabled || false,
+        teams: userDoc.data()?.teams || [],
+        disabled: userDoc.data()?.disabled || false,
       };
 
       if (userData.disabled) {
@@ -99,12 +99,15 @@ export const signInService = createAsyncThunk(
         return rejectWithValue("Hesabınız devre dışı bırakılmıştır.");
       }
 
+      console.log("userdata", userData);
+
       return userData;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+
 export const forgotService = createAsyncThunk(
   "auth/forgot",
   async (data, { rejectWithValue }) => {

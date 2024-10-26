@@ -18,7 +18,9 @@ const Pricing = () => {
 
   const selectType = (card) => {
     if (card.label === "Silver") {
-      toast.error("Bu paket seçilemez. Lütfen başka bir paket seçiniz.");
+      toast.error(
+        "Bu pakete zaten sahipsiniz. Lütfen başka bir paket seçiniz."
+      );
       return;
     }
 

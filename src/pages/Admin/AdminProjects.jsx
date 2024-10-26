@@ -1,19 +1,18 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import Avatar from "~/assets/noavatar.png";
 import { motion } from "framer-motion";
 
 const AdminProjects = () => {
   const { allProjects } = useSelector((store) => store.projects);
   const { user } = useSelector((store) => store.user);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-grow  lg:p-6 p-2 justify-start items-start flex-col gap-y-2 bg-white"
+      className="flex flex-grow lg:p-6 p-2 justify-start items-start flex-col gap-y-2 bg-white"
     >
-      <div className="w-full   px-4 py-2 flex justify-between items-center h-18 border-b">
+      <div className="w-full px-4 py-2 flex justify-between items-center h-18 border-b">
         <span className="lg:text-2xl text-lg font-bold text-zinc-600 lg:flex hidden">
           Projeler
         </span>
@@ -32,11 +31,14 @@ const AdminProjects = () => {
         {allProjects.map((project) => (
           <div
             key={project.projectID}
-            className=" w-full rounded-md bg-zinc-50 border p-3 "
+            className="w-full rounded-md bg-zinc-50 border p-3"
           >
-            <div className="w-full ">
-              <span className="text-zinc-600 text-xl   font-semibold ">
+            <div className="w-full flex flex-col gap-y-1">
+              <span className="text-zinc-600 text-xl font-semibold">
                 {project.projectName}
+              </span>
+              <span className="text-sm text-primary">
+                {project.creatorTeamName}
               </span>
             </div>
           </div>

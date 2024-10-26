@@ -168,9 +168,8 @@ export const adminUserInputs = [
   {
     id: 1,
     label: "Yetki",
-    name: "admin",
+    name: "role",
     type: "select",
-    options: ["user", "admin"],
   },
   {
     id: 2,

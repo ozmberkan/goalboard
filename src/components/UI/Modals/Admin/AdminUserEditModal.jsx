@@ -84,11 +84,8 @@ const AdminUserEditModal = ({ setIsEditMode, selectedUser }) => {
                         {...register(input.name)}
                         defaultValue={selectedUser.role}
                       >
-                        {input.options.map((option, index) => (
-                          <option key={index} value={option}>
-                            {option}
-                          </option>
-                        ))}
+                        <option value="admin">Yetkili</option>
+                        <option value="user">Kullanıcı</option>
                       </select>
                     ) : (
                       <input

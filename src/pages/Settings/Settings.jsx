@@ -15,7 +15,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { auth, db } from "~/firebase/firebase";
 import { getUserByID } from "~/redux/slices/userSlice";
-import { current } from "@reduxjs/toolkit";
 
 const Settings = () => {
   const { user } = useSelector((store) => store.user);
@@ -38,10 +37,13 @@ const Settings = () => {
       console.log(error);
     }
   };
+
   const confirmEmail = async () => {
     try {
       await sendEmailVerification(auth.currentUser);
-      toast.success("E-Posta Doğrulama gönderildi.");
+      toast.success(
+        "E-Posta Doğrulama gönderildi. Lütfen e-postanızı kontrol edin."
+      );
     } catch (error) {
       toast.error(
         "Çok fazla istek gönderildi. Lütfen bir süre sonra tekrar deneyin."
@@ -156,14 +158,24 @@ const Settings = () => {
                 <MdOutlineLockReset size={20} />
                 Şifre Sıfırla
               </button>
-              <button
-                type="button"
-                onClick={confirmEmail}
-                className="px-4 gap-x-2 py-2 h-12 rounded-md border hover:bg-primary hover:border-white hover:text-white transition-colors duration-300 bg-white border-primary text-primary  flex justify-start  items-center"
-              >
-                <MdOutlineVerified size={20} />
-                E-Posta Doğrula
-              </button>
+              {auth.currentUser.emailVerified === true ? (
+                <span
+                  type="button"
+                  className="px-4 gap-x-2 py-2 h-12 rounded-md border bg-primary transition-colors duration-300   text-white  flex justify-start  items-center"
+                >
+                  <MdOutlineVerified size={20} />
+                  E-Posta Doğrulanmış!
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={confirmEmail}
+                  className="px-4 gap-x-2 py-2 h-12 rounded-md border hover:bg-primary hover:border-white hover:text-white transition-colors duration-300 bg-white border-primary text-primary  flex justify-start  items-center"
+                >
+                  <MdOutlineVerified size={20} />
+                  E-Posta Doğrula
+                </button>
+              )}
               <button
                 type="button"
                 onClick={updatePremium}
