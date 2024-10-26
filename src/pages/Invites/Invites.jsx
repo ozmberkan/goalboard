@@ -44,6 +44,31 @@ const Invites = () => {
     }
   };
 
+  const confirmProjectInvite = async (noti) => {
+    try {
+      const projectRef = doc(db, "projects", noti.projectID);
+      const userRef = doc(db, "users", user.uid);
+
+      await updateDoc(projectRef, {
+        projectMembers: arrayUnion(user.uid),
+      });
+
+      await updateDoc(userRef, {
+        notification: arrayRemove({
+          id: noti.id,
+          from: noti.from,
+          message: noti.message,
+          projectID: noti.projectID,
+        }),
+      });
+
+      toast.success("Davet kabul edildi.");
+      dispatch(getUserByID(user?.uid));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const cancelInvite = async (noti) => {
     try {
       const userRef = doc(db, "users", user.uid);
@@ -54,6 +79,25 @@ const Invites = () => {
           from: noti.from,
           message: noti.message,
           teamID: noti.teamID,
+        }),
+      });
+
+      toast.success("Davet reddedildi.");
+      dispatch(getUserByID(user?.uid));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const cancelProjectInvite = async (noti) => {
+    try {
+      const userRef = doc(db, "users", user.uid);
+
+      await updateDoc(userRef, {
+        notification: arrayRemove({
+          id: noti.id,
+          from: noti.from,
+          message: noti.message,
+          projectID: noti.projectID,
         }),
       });
 
@@ -105,35 +149,55 @@ const Invites = () => {
                   className="bg-zinc-50 border rounded-md px-4 py-2 flex justify-between items-center"
                   key={i}
                 >
-                  <div className="flex items-center gap-x-1">
+                  <div className="flex   items-center gap-x-1">
                     <span className="text-primary font-medium">
                       @{noti.from}{" "}
                     </span>
                     <span>{noti.message}</span>
                   </div>
-                  {noti.message === "Sizi takıma davet ediyor." ? (
-                    <div className="flex gap-x-4">
+
+                  <div>
+                    {noti.message === "Sizi takıma davet ediyor." && (
+                      <div className="flex gap-x-4 ">
+                        <button
+                          onClick={() => confirmInvite(noti)}
+                          className="bg-green-100 text-green-500 px-4 py-2 rounded-md"
+                        >
+                          <FaCheck />
+                        </button>
+                        <button
+                          onClick={() => cancelInvite(noti)}
+                          className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
+                        >
+                          <MdCancel />
+                        </button>
+                      </div>
+                    )}
+                    {noti.from === "Admin" && (
                       <button
-                        onClick={() => confirmInvite(noti)}
-                        className="bg-green-100 text-green-500 px-4 py-2 rounded-md"
-                      >
-                        <FaCheck />
-                      </button>
-                      <button
-                        onClick={() => cancelInvite(noti)}
+                        onClick={() => deleteNoti(noti)}
                         className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
                       >
                         <MdCancel />
                       </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => deleteNoti(noti)}
-                      className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
-                    >
-                      <MdCancel />
-                    </button>
-                  )}
+                    )}
+                    {noti.message === "Sizi projeye davet ediyor." && (
+                      <div className="flex gap-x-4">
+                        <button
+                          onClick={() => confirmProjectInvite(noti)}
+                          className="bg-green-100 text-green-500 px-4 py-2 rounded-md"
+                        >
+                          <FaCheck />
+                        </button>
+                        <button
+                          onClick={() => cancelProjectInvite(noti)}
+                          className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
+                        >
+                          <MdCancel />
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))
             ) : (
