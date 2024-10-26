@@ -60,9 +60,6 @@ const Pricing = () => {
             className="text-2xl font-medium text-zinc-700 flex flex-col"
           >
             Premium üyeliğe sahip olarak daha fazla özellikten yararlanın.
-            <span className="text-center text-lg">
-              Sadece bir kez seçim yapılabilir.
-            </span>
           </motion.p>
         </div>
         <motion.div
