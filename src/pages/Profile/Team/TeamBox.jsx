@@ -1,6 +1,5 @@
 import { FaStar, FaUsers } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { IoArrowForwardCircle } from "react-icons/io5";
 
 const TeamBox = ({ team }) => {
   const { createdAt, members, teamName, teamID, projects } = team;
@@ -10,7 +9,7 @@ const TeamBox = ({ team }) => {
       onClick={() => navigate(`/dashboard/${teamID}`)}
       className="cursor-pointer"
     >
-      <div className="p-4 rounded-md border-2 hover:shadow-lg h-[150px] bg-team-bg bg-cover  flex flex-col items-center justify-between gap-y-3 transition-all duration-300">
+      <div className="p-4  border-2 hover:shadow-2xl h-[150px] bg-team-bg bg-cover bg-center  rounded-xl  flex flex-col items-center justify-between gap-y-3 transition-all duration-300">
         <div className="w-full flex justify-between items-center">
           <Link className="font-bold text-primaryDark text-2xl">
             {teamName}

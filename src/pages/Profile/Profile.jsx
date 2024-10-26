@@ -45,9 +45,9 @@ const Profile = () => {
         className="flex-grow p-4 flex"
       >
         <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden">
-          <div className="w-full flex items-center lg:gap-5 gap-3 border-b pb-5">
+          <div className="w-full flex  items-center lg:gap-5 gap-3 border-b pb-5 ">
             <div
-              className="p-12 rounded-full relative"
+              className="p-12 rounded-full relative "
               style={{
                 backgroundImage: user.photoURL
                   ? `url(${user.photoURL})`
@@ -81,9 +81,9 @@ const Profile = () => {
               <span className="font-medium text-zinc-00">{user.email}</span>
             </div>
           </div>
-          <div className="w-full lg:p-4 flex flex-col gap-y-5 ">
-            <div className="w-full flex justify-between items-center">
-              <h1 className="font-semibold text-2xl text-primaryDark">
+          <div className="w-full  flex flex-col gap-y-5 ">
+            <div className="w-full flex justify-between items-center ">
+              <h1 className="lg:text-2xl text-lg font-semibold text-primaryDark  ">
                 Takımlarım
               </h1>
               <button
