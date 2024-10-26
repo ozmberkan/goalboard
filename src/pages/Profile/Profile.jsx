@@ -47,7 +47,7 @@ const Profile = () => {
         <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden">
           <div className="w-full flex  items-center lg:gap-5 gap-3 border-b pb-5 ">
             <div
-              className="p-12 rounded-full relative "
+              className="lg:p-12 p-10 rounded-full relative "
               style={{
                 backgroundImage: user.photoURL
                   ? `url(${user.photoURL})`

@@ -85,7 +85,6 @@ export const getAllTeams = createAsyncThunk(
       }));
       return teams;
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

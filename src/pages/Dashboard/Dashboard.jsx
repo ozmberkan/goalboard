@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Avatar from "~/assets/noavatar.png";
 import ProjectModal from "~/components/UI/Modals/ProjectModal";
 import InviteModal from "~/components/UI/Modals/InviteModal";
 import ProjectBox from "~/components/Project/ProjectBox";
-import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import {
+  arrayRemove,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { db } from "~/firebase/firebase";
@@ -17,6 +28,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { TbCircleArrowDownLeftFilled } from "react-icons/tb";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { FiSettings } from "react-icons/fi";
+import { Tooltip } from "react-tooltip";
 
 const Dashboard = () => {
   const { teamID } = useParams();
@@ -27,7 +39,7 @@ const Dashboard = () => {
   const { currentTeam, status } = useSelector((store) => store.teams);
   const { projects } = useSelector((store) => store.projects);
   const [isInviteModal, setIsInviteModal] = useState(false);
-
+  const [usersData, setUsersData] = useState([]);
   const [isProjectModal, setIsProjectModal] = useState(false);
 
   ripples.register();
@@ -82,6 +94,33 @@ const Dashboard = () => {
     }
   };
 
+  const fetchUsers = async () => {
+    try {
+      const membersUIDs = currentTeam?.members || [];
+
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("uid", "in", membersUIDs));
+
+      const querySnapshot = await getDocs(q);
+      const users = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      if (currentTeam) {
+        setUsersData(users);
+      }
+    } catch (error) {
+      console.log("Kullanıcı bilgileri çekilemedi!");
+    }
+  };
+
+  useEffect(() => {
+    if (currentTeam && currentTeam.members) {
+      fetchUsers();
+    }
+  }, [currentTeam]);
+
   if (status === "loading") {
     return (
       <div className="flex flex-grow justify-center items-center bg-white ">
@@ -99,6 +138,10 @@ const Dashboard = () => {
           transition={{ duration: 0.5 }}
           className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-3 relative overflow-hidden"
         >
+          <Tooltip
+            id="my-tooltip"
+            style={{ backgroundColor: "#3A5ADB", color: "#fff" }}
+          />
           <div className="w-full font-medium ">
             <Link
               className="text-zinc-400 hover:underline"
@@ -114,58 +157,67 @@ const Dashboard = () => {
               {currentTeam?.teamName}
             </h1>
             <div className="flex gap-x-2 items-center">
-              <div className="flex items-center gap-x-2 bg-zinc-50 lg:px-4 lg:py-2 px-2 py-1 border rounded-md">
-                <span className="flex items-center gap-x-2 lg:font-medium text-sm">
-                  <FaUsers size={17} />
-                  {currentTeam?.members?.length} Kullanıcı
+              <div className="flex items-center gap-x-1 lg:py-2  py-1 ">
+                <span className="flex items-center -space-x-5 lg:font-medium text-sm">
+                  {usersData.map((user) => (
+                    <img
+                      key={user.uid}
+                      src={user.photoURL ? user.photoURL : Avatar}
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content={user.username}
+                      className="w-10 h-10 rounded-full object-cover border-4 border-zinc-100 shadow-lg"
+                    />
+                  ))}
                 </span>
               </div>
 
-              {currentTeam?.creatorMember === user.uid && (
-                <>
-                  <Popover className="relative">
-                    <PopoverButton className="lg:p-4 p-2 hover:bg-zinc-50 rounded-full lg:text-2xl text-lg">
-                      <FiSettings />
-                    </PopoverButton>
-                    <PopoverPanel
-                      anchor="bottom end"
-                      className="flex flex-col border p-4 gap-y-5 mt-1 rounded-md bg-white shadow-lg"
+              <>
+                <Popover className="relative">
+                  <PopoverButton className="lg:p-4 p-2 hover:bg-zinc-50 rounded-full lg:text-2xl text-lg">
+                    <FiSettings />
+                  </PopoverButton>
+                  <PopoverPanel
+                    anchor="bottom end"
+                    className="flex flex-col border p-4 gap-y-5 mt-1 rounded-md bg-white shadow-lg"
+                  >
+                    {currentTeam?.creatorMember === user.uid && (
+                      <>
+                        <button
+                          onClick={() => setIsProjectModal(true)}
+                          className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border  transition-colors duration-300 flex items-center gap-x-2"
+                        >
+                          <IoMdAddCircleOutline size={18} />
+                          <span>Proje Oluştur</span>
+                        </button>
+                        <button
+                          onClick={() => setIsInviteModal(true)}
+                          className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
+                        >
+                          <FaUsers size={18} />
+                          <span>Takıma Davet Et</span>
+                        </button>
+                        <button
+                          onClick={() => deleteTeam(teamID)}
+                          className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
+                        >
+                          <FaRegTrashAlt size={18} className="text-red-500" />
+                          <span className=" text-red-500">Takımı Sil</span>
+                        </button>
+                      </>
+                    )}
+                    <button
+                      onClick={() => leaveTeam(user.uid)}
+                      className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
                     >
-                      <button
-                        onClick={() => setIsProjectModal(true)}
-                        className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border  transition-colors duration-300 flex items-center gap-x-2"
-                      >
-                        <IoMdAddCircleOutline size={18} />
-                        <span>Proje Oluştur</span>
-                      </button>
-                      <button
-                        onClick={() => setIsInviteModal(true)}
-                        className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
-                      >
-                        <FaUsers size={18} />
-                        <span>Takıma Davet Et</span>
-                      </button>
-                      <button
-                        onClick={() => leaveTeam(user.uid)}
-                        className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
-                      >
-                        <TbCircleArrowDownLeftFilled
-                          size={18}
-                          className="text-red-500"
-                        />
-                        <span className=" text-red-500">Takımdan Ayrıl</span>
-                      </button>
-                      <button
-                        onClick={() => deleteTeam(teamID)}
-                        className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
-                      >
-                        <FaRegTrashAlt size={18} className="text-red-500" />
-                        <span className=" text-red-500">Takımı Sil</span>
-                      </button>
-                    </PopoverPanel>
-                  </Popover>
-                </>
-              )}
+                      <TbCircleArrowDownLeftFilled
+                        size={18}
+                        className="text-red-500"
+                      />
+                      <span className=" text-red-500">Takımdan Ayrıl</span>
+                    </button>
+                  </PopoverPanel>
+                </Popover>
+              </>
             </div>
           </div>
           <div className="w-full py-6 h-full flex flex-col gap-y-5">
@@ -178,7 +230,11 @@ const Dashboard = () => {
             >
               {projects?.length > 0 ? (
                 projects?.map((project) => (
-                  <ProjectBox key={project.projectID} project={project} />
+                  <ProjectBox
+                    key={project.projectID}
+                    project={project}
+                    usersData={usersData}
+                  />
                 ))
               ) : (
                 <button

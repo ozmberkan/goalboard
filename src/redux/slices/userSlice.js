@@ -99,8 +99,6 @@ export const signInService = createAsyncThunk(
         return rejectWithValue("Hesabınız devre dışı bırakılmıştır.");
       }
 
-      console.log("userdata", userData);
-
       return userData;
     } catch (error) {
       return rejectWithValue(error.message);
