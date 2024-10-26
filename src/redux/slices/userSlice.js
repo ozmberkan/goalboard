@@ -12,6 +12,7 @@ import { set } from "react-hook-form";
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   allUsers: [],
+  teamUsers: [],
   selectedPaymentType: "Silver",
   status: "idle",
   errorMessage: "",
@@ -152,6 +153,9 @@ export const counterSlice = createSlice({
     setSelectedPaymentType: (state, action) => {
       state.selectedPaymentType = action.payload;
     },
+    setTeamsUser: (state, action) => {
+      state.teamUsers = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -205,6 +209,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { setSelectedPaymentType } = counterSlice.actions;
+export const { setSelectedPaymentType, setTeamsUser } = counterSlice.actions;
 
 export default counterSlice.reducer;

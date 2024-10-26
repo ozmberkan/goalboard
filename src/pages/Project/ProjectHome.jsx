@@ -102,7 +102,7 @@ const ProjectHome = () => {
             <Archive projectID={projectID} />
           </TabPanel>
           <TabPanel className="w-full  flex-grow py-3 lg:px-12 px-4">
-            <ProjectSettings />
+            <ProjectSettings projectID={projectID} />
           </TabPanel>
           <TabPanel className="w-full  flex-grow py-3 lg:px-12 px-4">
             <FeedBack />

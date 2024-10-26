@@ -29,13 +29,14 @@ import { TbCircleArrowDownLeftFilled } from "react-icons/tb";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { FiSettings } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
+import { setTeamsUser } from "~/redux/slices/userSlice";
 
 const Dashboard = () => {
   const { teamID } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [animationParent] = useAutoAnimate();
-  const { user } = useSelector((store) => store.user);
+  const { user, teamUsers } = useSelector((store) => store.user);
   const { currentTeam, status } = useSelector((store) => store.teams);
   const { projects } = useSelector((store) => store.projects);
   const [isInviteModal, setIsInviteModal] = useState(false);
@@ -108,7 +109,7 @@ const Dashboard = () => {
       }));
 
       if (currentTeam) {
-        setUsersData(users);
+        dispatch(setTeamsUser(users));
       }
     } catch (error) {
       console.log("Kullanıcı bilgileri çekilemedi!");
@@ -159,7 +160,7 @@ const Dashboard = () => {
             <div className="flex gap-x-2 items-center">
               <div className="flex items-center gap-x-1 lg:py-2  py-1 ">
                 <span className="flex items-center -space-x-5 lg:font-medium text-sm">
-                  {usersData.map((user) => (
+                  {teamUsers.map((user) => (
                     <img
                       key={user.uid}
                       src={user.photoURL ? user.photoURL : Avatar}
@@ -233,7 +234,7 @@ const Dashboard = () => {
                   <ProjectBox
                     key={project.projectID}
                     project={project}
-                    usersData={usersData}
+                    teamUsers={teamUsers}
                   />
                 ))
               ) : (
