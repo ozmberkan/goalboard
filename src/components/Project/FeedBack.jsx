@@ -44,8 +44,15 @@ const FeedBack = () => {
           Geri bildirim
         </h1>
       </div>
+      <div className="w-full">
+        <p className="text-zinc-500 text-sm">
+          Geri bildirimleriniz bizim için önemlidir. Lütfen karşılaştığınız
+          hatalar ile ilgili geri bildirimde bulunun. Sizlere çok hızlı bir
+          şekilde dönüş yapacağız. Teşekkürler.
+        </p>
+      </div>
       <form
-        className="lg:w-1/2 grid grid-cols-1 gap-5"
+        className="lg:w-1/2 grid grid-cols-1 gap-5 mt-5"
         onSubmit={handleSubmit(contactHandle)}
       >
         {FeedBacksInput.map((input) => (
@@ -71,7 +78,9 @@ const FeedBack = () => {
           </div>
         ))}
 
-        <button className="bg-primary p-2 text-white rounded-md">Gönder</button>
+        <button className="bg-primary p-2 hover:bg-primaryDark transition-colors duration-300 text-white rounded-md">
+          Gönder
+        </button>
       </form>
     </div>
   );

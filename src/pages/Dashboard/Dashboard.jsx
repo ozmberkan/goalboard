@@ -97,7 +97,7 @@ const Dashboard = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden"
+          className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-3 relative overflow-hidden"
         >
           <div className="w-full font-medium ">
             <Link
@@ -124,26 +124,26 @@ const Dashboard = () => {
               {currentTeam?.creatorMember === user.uid && (
                 <>
                   <Popover className="relative">
-                    <PopoverButton className="p-4 hover:bg-zinc-50 rounded-full">
-                      <FiSettings size={30} />
+                    <PopoverButton className="lg:p-4 p-2 hover:bg-zinc-50 rounded-full lg:text-2xl text-lg">
+                      <FiSettings />
                     </PopoverButton>
                     <PopoverPanel
                       anchor="bottom end"
-                      className="flex flex-col border p-4 gap-y-5 rounded-md bg-white shadow-lg"
+                      className="flex flex-col border p-4 gap-y-5 mt-1 rounded-md bg-white shadow-lg"
                     >
                       <button
                         onClick={() => setIsProjectModal(true)}
                         className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border  transition-colors duration-300 flex items-center gap-x-2"
                       >
                         <IoMdAddCircleOutline size={18} />
-                        <span className="lg:flex hidden">Proje Oluştur</span>
+                        <span>Proje Oluştur</span>
                       </button>
                       <button
                         onClick={() => setIsInviteModal(true)}
                         className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
                       >
                         <FaUsers size={18} />
-                        <span className="lg:flex hidden">Takıma Davet Et</span>
+                        <span>Takıma Davet Et</span>
                       </button>
                       <button
                         onClick={() => leaveTeam(user.uid)}
@@ -153,18 +153,14 @@ const Dashboard = () => {
                           size={18}
                           className="text-red-500"
                         />
-                        <span className="lg:flex hidden text-red-500">
-                          Takımdan Ayrıl
-                        </span>
+                        <span className=" text-red-500">Takımdan Ayrıl</span>
                       </button>
                       <button
                         onClick={() => deleteTeam(teamID)}
                         className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
                       >
                         <FaRegTrashAlt size={18} className="text-red-500" />
-                        <span className="lg:flex hidden text-red-500">
-                          Takımı Sil
-                        </span>
+                        <span className=" text-red-500">Takımı Sil</span>
                       </button>
                     </PopoverPanel>
                   </Popover>

@@ -33,13 +33,12 @@ const Contacts = () => {
 
   return (
     <div className="flex-grow p-4 flex">
-      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
-        <h1 className="text-4xl font-bold text-primary">İletişim</h1>
-
+      <div className="w-full border bg-white rounded-md p-8 flex  gap-x-4 relative  overflow-hidden">
         <form
           className="lg:w-1/2 grid grid-cols-1 gap-4"
           onSubmit={handleSubmit(contactHandle)}
         >
+          <h1 className="text-4xl font-bold text-primary">İletişim</h1>
           {ContactsInput.map((input) => (
             <div key={input.id} className="flex flex-col">
               {input.type === "text" ? (
@@ -66,6 +65,16 @@ const Contacts = () => {
             Gönder
           </button>
         </form>
+        <div className="w-1/2 h-full px-3 flex itemst-start flex-col gap-y-5">
+          <p className="text-3xl font-semibold text-zinc-700">
+            Bizimle iletişime geçmek için soldaki formu doldurabilirsiniz.
+          </p>
+          <div className="flex flex-col gap-y-2">
+            <span>123 Hedef Sokak 34000 İzmir, </span>
+            <span>Türkiye Email: info@goalborad.com</span>
+            <span>Tel: +90 (212) 123 4567</span>
+          </div>
+        </div>
       </div>
     </div>
   );

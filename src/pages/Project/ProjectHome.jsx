@@ -1,27 +1,25 @@
-import { Link, useParams } from "react-router-dom";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import Logo from "~/assets/Logos/DarkLogo.svg";
 import LittleLogo from "~/assets/Logos/DarkLogoLittle.svg";
-
-import { useDispatch, useSelector } from "react-redux";
 import Tasks from "~/components/Project/Tasks";
+import Comments from "~/components/Project/Comments";
+import ProjectSettings from "~/components/Project/ProjectSettings";
+import FeedBack from "~/components/Project/FeedBack";
+import Archive from "~/components/Project/Archive";
+import { useDispatch, useSelector } from "react-redux";
 import { FiLayout } from "react-icons/fi";
 import { FaRegComments } from "react-icons/fa";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 import { RiFeedbackLine } from "react-icons/ri";
 import { TbSettings } from "react-icons/tb";
 import { useMediaQuery } from "react-responsive";
-import Comments from "~/components/Project/Comments";
-import ProjectSettings from "~/components/Project/ProjectSettings";
-import FeedBack from "~/components/Project/FeedBack";
-import Archive from "~/components/Project/Archive";
 import { IoArchiveOutline } from "react-icons/io5";
 import { getProjectsByID } from "~/redux/slices/projectsSlice";
 import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 const ProjectHome = () => {
   const { projectID } = useParams();
-
   const { user } = useSelector((store) => store.user);
   const { currentProject } = useSelector((store) => store.projects);
   const dispatch = useDispatch();
@@ -32,8 +30,7 @@ const ProjectHome = () => {
   }, []);
 
   return (
-    <TabGroup className="flex flex-grow bg-primary">
-      {/* SideBar */}
+    <TabGroup className="flex flex-grow">
       <TabList className="lg:w-72 px-1 bg-zinc-100 border-r border-zinc-200 flex flex-col items-start justify-start">
         <div className="w-full flex lg:justify-start justify-center items-center lg:px-4 px-2 py-6">
           <img
@@ -75,6 +72,21 @@ const ProjectHome = () => {
             <TbLayoutSidebarLeftCollapse size={20} />
             {!isTabletOrMobile && <span>Geri Dön</span>}
           </Link>
+        </div>
+        <div className="w-full lg:px-4 px-2 lg:flex hidden flex-col gap-y-2 py-3 border-t mt-auto ">
+          <div className="flex relative items-center gap-x-2 py-2 px-2 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
+            <img
+              src={user.photoURL}
+              className="w-10 h-10 rounded-md object-cover"
+            />
+            <div className="absolute left-0 top-0  w-4 h-4 bg-green-500 rounded-full border-2 border-zinc-100 ">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm">{user.username}</span>
+              <span className="text-xs">{user.email}</span>
+            </div>
+          </div>
         </div>
       </TabList>
       {/* Home */}
