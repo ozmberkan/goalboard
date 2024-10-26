@@ -219,7 +219,7 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                     Tamamlandı
                   </button>
                   <form
-                    className="w-full flex flex-col gap-y-3 border rounded-xl bg-zinc-100 p-3"
+                    className="w-full flex flex-col gap-y-3 pt-4 border-t  "
                     onSubmit={handleSubmit(updateImportance)}
                   >
                     <select
