@@ -1,5 +1,13 @@
-import { deleteDoc, doc } from "firebase/firestore";
-import React from "react";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { TbSettings } from "react-icons/tb";
 import { useSelector } from "react-redux";
@@ -9,9 +17,10 @@ import Avatar from "~/assets/noavatar.png";
 import { db } from "~/firebase/firebase";
 
 const ProjectSettings = ({ projectID }) => {
-  const { teamUsers } = useSelector((store) => store.user);
   const { user } = useSelector((store) => store.user);
   const navigate = useNavigate();
+  const [projectUsers, setProjectUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const deleteProject = async () => {
     try {
@@ -26,6 +35,34 @@ const ProjectSettings = ({ projectID }) => {
     }
   };
 
+  const getProjectUsers = async () => {
+    setLoading(true);
+    try {
+      const projectRef = doc(db, "projects", projectID);
+      const projectSnap = await getDoc(projectRef);
+      const projectMembers = projectSnap.data().projectMembers;
+
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("uid", "in", projectMembers));
+
+      const querySnapshot = await getDocs(q);
+      const users = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setProjectUsers(users);
+    } catch (error) {
+      console.error("Error fetching project users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProjectUsers();
+  }, []);
+
   return (
     <div className="h-full">
       <Tooltip id="my-tooltip" />
@@ -35,24 +72,30 @@ const ProjectSettings = ({ projectID }) => {
           Proje Ayarları
         </h1>
       </div>
-      <div className="flex items-center gap-x-2 justify-start">
+      <div className="flex items-center gap-x-2 justify-between">
         <button
           onClick={deleteProject}
           className="px-4 py-2 rounded-md bg-red-500 text-white"
         >
           Projeyi Sil
         </button>
-        <span className="flex items-center -space-x-5 lg:font-medium text-sm">
-          {teamUsers.map((user) => (
-            <img
-              key={user.uid}
-              src={user.photoURL ? user.photoURL : Avatar}
-              data-tooltip-id="my-tooltip"
-              data-tooltip-content={user.username}
-              className="w-10 h-10 rounded-full object-cover border-4 border-zinc-100 shadow-lg"
-            />
-          ))}
-        </span>
+        {loading ? (
+          <div className=" animate-pulse flex items-center -space-x-5 lg:font-medium text-sm">
+            <div className="w-10 h-10  border-4 border-zinc-100 shadow-lg  bg-gray-200 rounded-full dark:bg-gray-700 "></div>
+          </div>
+        ) : (
+          <span className="flex items-center -space-x-5 lg:font-medium text-sm">
+            {projectUsers.map((user) => (
+              <img
+                key={user.uid}
+                src={user.photoURL ? user.photoURL : Avatar}
+                data-tooltip-id="my-tooltip"
+                data-tooltip-content={user.username}
+                className="w-10 h-10 rounded-full object-cover border-4 border-zinc-100 shadow-lg"
+              />
+            ))}
+          </span>
+        )}
       </div>
     </div>
   );

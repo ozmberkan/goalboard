@@ -8,6 +8,7 @@ import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { auth, db } from "~/firebase/firebase";
 import toast from "react-hot-toast";
 import { set } from "react-hook-form";
+import moment from "moment";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -50,6 +51,7 @@ export const signUpService = createAsyncThunk(
           role: "user",
           notification: [],
           teams: [],
+          createdAt: moment().format("DD.MM.YYYY HH:mm"),
         };
 
         const userRef = doc(db, "users", user.uid);
@@ -91,6 +93,7 @@ export const signInService = createAsyncThunk(
         notification: userDoc.data()?.notification || [],
         teams: userDoc.data()?.teams || [],
         disabled: userDoc.data()?.disabled || false,
+        createdAt: userDoc.data()?.createdAt,
       };
 
       if (userData.disabled) {

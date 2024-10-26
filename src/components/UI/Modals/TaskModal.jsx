@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { MdCancel } from "react-icons/md";
 import toast from "react-hot-toast";
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "~/firebase/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjectsByID } from "~/redux/slices/projectsSlice";
@@ -118,7 +127,7 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
 
         await updateDoc(projectRef, { tasks: updatedTasks });
 
-        toast.success(`Görevin aciliyeti değiştirildi!`);
+        toast.success(`Görevin aciliyet durumu değiştirildi!`);
         dispatch(getProjectsByID(projectID));
         setIsTaskModal(false);
       } else {
@@ -235,6 +244,7 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                     </button>
                   </form>
                 </div>
+
                 <button
                   onClick={() => archiveToTask(selectedTask.taskID)}
                   className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-violet-500 transition-colors text-zinc-700 hover:text-white"

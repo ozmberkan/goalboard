@@ -39,6 +39,7 @@ const ProjectModal = ({ setIsProjectModal, teamID }) => {
         projectName: data.projectName,
         projectID: projectsRef.id,
         lastDate: formattedDate,
+        projectMembers: teamData.data().members,
         tasks: [],
         archiveTasks: [],
         comments: [],
