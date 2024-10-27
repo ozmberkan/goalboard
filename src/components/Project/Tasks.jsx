@@ -102,7 +102,11 @@ const Tasks = ({ projectID }) => {
           projectID={projectID}
         />
       )}
-      <Tooltip id="username" className="z-20" />
+      <Tooltip
+        id="username"
+        className="z-20"
+        style={{ backgroundColor: "#3a5adb" }}
+      />
       <div className="h-full">
         <div className="w-full py-3 border-b mb-4 flex justify-between items-center">
           <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1">
@@ -158,18 +162,19 @@ const Tasks = ({ projectID }) => {
                     className="bg-white p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2 overflow-hidden"
                   >
                     <div className="flex gap-x-2 items-center justify-between w-full border-b pb-2">
-                      <div className="flex items-center gap-x-1 ">
-                        <img
-                          src={
-                            task?.taskCreatorImage
-                              ? task.taskCreatorImage
-                              : Avatar
-                          }
-                          className="w-5 h-5 rounded-full object-cover"
-                        />
-                        <span className="text-sm text-zinc-700 font-medium">
-                          {task.taskCreatorName}
-                        </span>
+                      <div className="flex items-center gap-x-1 -space-x-3 ">
+                        {task?.taskAttachmentUsers.map((user) => (
+                          <img
+                            key={user.uid}
+                            data-tooltip-id="username"
+                            data-tooltip-content={user.username}
+                            src={user?.photoURL ? user.photoURL : Avatar}
+                            className="w-7 h-7 rounded-full object-cover border-2 border-zinc-100"
+                          />
+                        ))}
+                        {task?.taskAttachmentUsers.length === 0 && (
+                          <div className="text-xs">Kullanıcı Atanmadı</div>
+                        )}
                       </div>
                       <div className="flex items-center gap-x-3">
                         <span
@@ -226,18 +231,19 @@ const Tasks = ({ projectID }) => {
                     className="bg-white p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2"
                   >
                     <div className="flex gap-x-2 items-center justify-between w-full border-b pb-2">
-                      <div className="flex items-center gap-x-1">
-                        <img
-                          src={
-                            task?.taskCreatorImage
-                              ? task.taskCreatorImage
-                              : Avatar
-                          }
-                          className="w-5 h-5 rounded-full object-cover"
-                        />
-                        <span className="text-sm text-zinc-700 font-medium">
-                          {task.taskCreatorName}
-                        </span>
+                      <div className="flex items-center gap-x-1 -space-x-3 ">
+                        {task?.taskAttachmentUsers.map((user) => (
+                          <img
+                            key={user.uid}
+                            data-tooltip-id="username"
+                            data-tooltip-content={user.username}
+                            src={user?.photoURL ? user.photoURL : Avatar}
+                            className="w-7 h-7 rounded-full object-cover border-2 border-zinc-100"
+                          />
+                        ))}
+                        {task?.taskAttachmentUsers.length === 0 && (
+                          <div className="text-xs">Kullanıcı Atanmadı</div>
+                        )}
                       </div>
                       <div className="flex items-center gap-x-3">
                         <span
@@ -292,18 +298,19 @@ const Tasks = ({ projectID }) => {
                     className="bg-white p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2"
                   >
                     <div className="flex gap-x-2 items-center justify-between w-full border-b pb-2">
-                      <div className="flex items-center gap-x-1">
-                        <img
-                          src={
-                            task?.taskCreatorImage
-                              ? task.taskCreatorImage
-                              : Avatar
-                          }
-                          className="w-5 h-5 rounded-full object-cover"
-                        />
-                        <span className="text-sm text-zinc-700 font-medium">
-                          {task.taskCreatorName}
-                        </span>
+                      <div className="flex items-center gap-x-1 -space-x-3 ">
+                        {task?.taskAttachmentUsers.map((user) => (
+                          <img
+                            key={user.uid}
+                            data-tooltip-id="username"
+                            data-tooltip-content={user.username}
+                            src={user?.photoURL ? user.photoURL : Avatar}
+                            className="w-7 h-7 rounded-full object-cover border-2 border-zinc-100"
+                          />
+                        ))}
+                        {task?.taskAttachmentUsers.length === 0 && (
+                          <div className="text-xs">Kullanıcı Atanmadı</div>
+                        )}
                       </div>
                       <div className="flex items-center gap-x-3">
                         <span
@@ -358,18 +365,19 @@ const Tasks = ({ projectID }) => {
                     className="bg-white p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2"
                   >
                     <div className="flex gap-x-2 items-center justify-between w-full border-b pb-2">
-                      <div className="flex items-center gap-x-1">
-                        <img
-                          src={
-                            task?.taskCreatorImage
-                              ? task.taskCreatorImage
-                              : Avatar
-                          }
-                          className="w-5 h-5 rounded-full object-cover"
-                        />
-                        <span className="text-sm text-zinc-700 font-medium">
-                          {task.taskCreatorName}
-                        </span>
+                      <div className="flex items-center gap-x-1 -space-x-3 ">
+                        {task?.taskAttachmentUsers.map((user) => (
+                          <img
+                            key={user.uid}
+                            data-tooltip-id="username"
+                            data-tooltip-content={user.username}
+                            src={user?.photoURL ? user.photoURL : Avatar}
+                            className="w-7 h-7 rounded-full object-cover border-2 border-zinc-100"
+                          />
+                        ))}
+                        {task?.taskAttachmentUsers.length === 0 && (
+                          <div className="text-xs">Kullanıcı Atanmadı</div>
+                        )}
                       </div>
                       <div className="flex items-center gap-x-3">
                         <span

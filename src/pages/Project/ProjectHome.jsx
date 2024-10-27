@@ -17,6 +17,7 @@ import { getProjectsByID } from "~/redux/slices/projectsSlice";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import Avatar from "~/assets/noavatar.png";
 
 const ProjectHome = () => {
   const { projectID } = useParams();
@@ -76,7 +77,7 @@ const ProjectHome = () => {
         <div className="w-full lg:px-4 px-2 lg:flex hidden flex-col gap-y-2 py-3 border-t mt-auto ">
           <div className="flex relative items-center gap-x-2 py-2 px-2 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
             <img
-              src={user.photoURL}
+              src={user.photoURL ? user.photoURL : Avatar}
               className="w-10 h-10 rounded-md object-cover"
             />
             <div className="absolute left-0 top-0  w-4 h-4 bg-green-500 rounded-full border-2 border-zinc-100 ">

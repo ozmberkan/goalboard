@@ -21,9 +21,10 @@ import {
   RiCheckboxCircleLine,
   RiCircleFill,
   RiCircleLine,
+  RiFileAddFill,
   RiStopCircleLine,
 } from "react-icons/ri";
-import { IoArchiveOutline } from "react-icons/io5";
+import { IoAdd, IoArchiveOutline } from "react-icons/io5";
 import Avatar from "~/assets/noavatar.png";
 import { useForm } from "react-hook-form";
 import {
@@ -32,6 +33,7 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
+import { FaCheck } from "react-icons/fa6";
 
 const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
   const modalRoot = document.getElementById("modal");
@@ -64,15 +66,6 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
   useEffect(() => {
     getProjectUsers();
   }, []);
-
-  const attachmentUser = () => {
-    if (selectedPerson) {
-      toast.success("Görev başarıyla atandı!");
-      setIsTaskModal(false);
-    } else {
-      toast.error("Bir hata oluştu.");
-    }
-  };
 
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.user);
@@ -182,6 +175,53 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
       toast.error("Bir hata oluştu.");
     }
   };
+  const updateTaskAttachmentUsers = async () => {
+    try {
+      const projectRef = doc(db, "projects", projectID);
+      const projectSnap = await getDoc(projectRef);
+      const projectData = projectSnap.data();
+
+      const taskID = selectedTask.taskID;
+
+      const selectedData = {
+        username: selectedPerson.username,
+        uid: selectedPerson.uid,
+        photoURL: selectedPerson.photoURL,
+      };
+
+      if (projectData) {
+        const updatedTasks = projectData.tasks.map((task) => {
+          if (task.taskID === taskID) {
+            const alreadyAssigned = task.taskAttachmentUsers?.some(
+              (user) => user.uid === selectedData.uid
+            );
+
+            if (alreadyAssigned) {
+              toast.error("Bu kullanıcı zaten bu göreve atanmış.");
+              return;
+            }
+
+            const updatedAttachmentUsers = [
+              ...(task.taskAttachmentUsers || []),
+              selectedData,
+            ];
+            return { ...task, taskAttachmentUsers: updatedAttachmentUsers };
+          }
+          return task;
+        });
+
+        await updateDoc(projectRef, { tasks: updatedTasks });
+
+        toast.success(`Göreve seçilen kullanıcı atandı.`);
+        dispatch(getProjectsByID(projectID));
+        setIsTaskModal(false);
+      } else {
+        toast.error("Bir hatayla karşılaşıldı.");
+      }
+    } catch (error) {
+      toast.error("Bir hata oluştu.");
+    }
+  };
 
   return ReactDOM.createPortal(
     <AnimatePresence>
@@ -287,23 +327,27 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                       Kaydet
                     </button>
                   </form>
-                  <div className="w-full flex-col gap-3 flex">
+                  <div className="w-full  gap-3 flex items-center justify-start ">
                     <Listbox
                       value={selectedPerson}
                       onChange={setSelectedPerson}
                     >
-                      <div className="relative">
-                        <ListboxButton className="border flex items-center gap-x-1 font-medium w-full p-2 rounded-md transition-colors text-zinc-700">
-                          {selectedPerson || "Bir kişi seçin"}
+                      <div className="relative w-full">
+                        <ListboxButton className="border flex items-center flex-1 gap-x-1 font-medium w-full p-2 rounded-md transition-colors text-zinc-700">
+                          {selectedPerson?.username || "Bir kişi seçin"}
                         </ListboxButton>
                         <AnimatePresence>
-                          <ListboxOptions className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50">
+                          <ListboxOptions className="absolute mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50">
                             {projectUsers.map((user) => (
                               <ListboxOption
                                 key={user.uid}
-                                value={user.username}
+                                value={{
+                                  username: user.username,
+                                  uid: user.uid,
+                                  photoURL: user.photoURL,
+                                }}
                                 className={({ active }) =>
-                                  `cursor-pointer select-none relative py-2 pl-10 pr-4 ${
+                                  `cursor-pointer select-none relative px-4 py-2 ${
                                     active
                                       ? "text-zinc-700 bg-zinc-100"
                                       : "text-gray-900"
@@ -327,11 +371,12 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                         </AnimatePresence>
                       </div>
                     </Listbox>
+
                     <button
-                      onClick={attachmentUser}
-                      className="w-full px-4 py-2 rounded-md border-green-500 text-green-500 border-2 "
+                      onClick={updateTaskAttachmentUsers}
+                      className="px-3 rounded-md h-full bg-primary text-white"
                     >
-                      Göreve Ata
+                      <IoAdd size={20} />
                     </button>
                   </div>
                 </div>
