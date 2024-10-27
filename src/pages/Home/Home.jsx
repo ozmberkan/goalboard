@@ -7,7 +7,7 @@ const Home = () => {
   const { user } = useSelector((store) => store.user);
 
   return (
-    <div className="flex justify-center items-center lg:p-0 p-7  flex-grow lg:min-h-[790px] min-h-[600px] relative overflow-hidden">
+    <div className="flex lg:justify-center lg:items-center items-start lg:p-0 p-7  flex-grow lg:min-h-[790px] min-h-[600px] relative overflow-hidden">
       <motion.img
         initial={{ x: "-100vw", opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -33,7 +33,7 @@ const Home = () => {
           <h1 className="lg:text-[85px] text-[44px] font-extrabold text-primary drop-shadow-lg">
             {user ? "Hoş geldin!" : "goalBoard"}
           </h1>
-          <div className="lg:font-medium lg:text-zinc-800 font-semibold text-zinc-900 lg:text-xl text-xs">
+          <div className="lg:font-medium lg:text-zinc-800 font-semibold text-zinc-600 lg:text-xl text-base">
             {user ? (
               <p>
                 Hoş geldin{" "}

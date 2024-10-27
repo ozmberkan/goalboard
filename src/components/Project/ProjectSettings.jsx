@@ -16,6 +16,10 @@ import { Tooltip } from "react-tooltip";
 import Avatar from "~/assets/noavatar.png";
 import { db } from "~/firebase/firebase";
 import ProjectInviteModal from "../UI/Modals/ProjectInviteModal";
+import { FiSettings, FiTrash, FiUsers } from "react-icons/fi";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import { FaUsers } from "react-icons/fa6";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const ProjectSettings = ({ projectID }) => {
   const { user } = useSelector((store) => store.user);
@@ -82,21 +86,7 @@ const ProjectSettings = ({ projectID }) => {
             Proje Ayarları
           </h1>
         </div>
-        <div className="flex items-center gap-x-2 justify-between">
-          <div className="flex gap-x-2">
-            <button
-              onClick={deleteProject}
-              className="px-4 py-2 rounded-md bg-red-500 text-white"
-            >
-              Projeyi Sil
-            </button>
-            <button
-              onClick={() => setIsInviteModal(true)}
-              className="px-4 py-2 rounded-md bg-primary text-white"
-            >
-              Projeye Davet Et
-            </button>
-          </div>
+        <div className="flex items-center gap-x-2 justify-between border p-3 rounded-xl bg-zinc-100">
           {loading ? (
             <div className=" animate-pulse flex items-center -space-x-5 lg:font-medium text-sm">
               <div className="w-10 h-10  border-4 border-zinc-100 shadow-lg  bg-gray-200 rounded-full dark:bg-gray-700 "></div>
@@ -109,12 +99,40 @@ const ProjectSettings = ({ projectID }) => {
                   src={user.photoURL ? user.photoURL : Avatar}
                   data-tooltip-id="my-tooltip"
                   data-tooltip-content={user.username}
-                  className="w-10 h-10 rounded-full object-cover border-4 border-zinc-100 shadow-lg"
+                  className="lg:w-14 lg:h-14 w-10 h-10 rounded-full object-cover border-4 border-zinc-100 shadow-lg"
                 />
               ))}
             </span>
           )}
+          <Popover className="relative">
+            <PopoverButton className="lg:p-4 p-2 hover:bg-zinc-50 rounded-full lg:text-3xl text-lg">
+              <FiSettings />
+            </PopoverButton>
+            <PopoverPanel
+              anchor="bottom end"
+              className="flex flex-col border p-4 gap-y-5 mt-1 rounded-md bg-white shadow-lg"
+            >
+              <div className="flex flex-col gap-y-2">
+                <button
+                  onClick={() => setIsInviteModal(true)}
+                  className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border  transition-colors duration-300 flex items-center gap-x-2"
+                >
+                  <FiUsers />
+                  <span className="lg:flex ">Projeye Davet Et</span>
+                </button>
+
+                <button
+                  onClick={deleteProject}
+                  className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
+                >
+                  <FiTrash className="text-red-500" />
+                  <span className="lg:flex  text-red-500">Projeyi Sil</span>
+                </button>
+              </div>
+            </PopoverPanel>
+          </Popover>
         </div>
+        <div>{/* Kullanıcılara Rol Verme */}</div>
       </div>
     </>
   );

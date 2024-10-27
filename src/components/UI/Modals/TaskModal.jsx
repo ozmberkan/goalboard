@@ -26,6 +26,7 @@ import {
 import { IoArchiveOutline } from "react-icons/io5";
 import Avatar from "~/assets/noavatar.png";
 import { useForm } from "react-hook-form";
+import { nanoid } from "nanoid";
 
 const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
   const modalRoot = document.getElementById("modal");
@@ -139,6 +140,68 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
     }
   };
 
+  const AttachmentHandle = async (data) => {
+    try {
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("username", "==", data.username));
+      const querySnapshot = await getDocs(q);
+      const userData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      const projectRef = doc(db, "projects", projectID);
+      const projectSnap = await getDoc(projectRef);
+      const projectData = projectSnap.data();
+
+      const taskID = selectedTask.taskID;
+
+      const taskToUpdate = projectData.tasks.find(
+        (task) => task.taskID === taskID
+      );
+
+      if (taskToUpdate) {
+        const updatedTaskAssignedUsers = [
+          ...(taskToUpdate.taskAssignedUsers || []),
+          userData[0].uid,
+        ];
+
+        const updatedTask = {
+          ...taskToUpdate,
+          taskAssignedUsers: updatedTaskAssignedUsers,
+        };
+
+        const updatedTasks = projectData.tasks.map((task) =>
+          task.taskID === taskID ? updatedTask : task
+        );
+
+        await updateDoc(projectRef, {
+          tasks: updatedTasks,
+        });
+
+        const userDocRef = doc(db, "users", userData[0].id);
+
+        const notificationData = {
+          from: user.username,
+          message: "Sizi bir göreve atadı.",
+          sendTime: moment().format("DD.MM.YYYY HH:mm"),
+          notificationID: nanoid(),
+        };
+
+        await updateDoc(userDocRef, {
+          notification: arrayUnion(notificationData),
+        });
+
+        toast.success("Kullanıcı başarıyla göreve atandı.");
+        toast.success("Bildirim gönderildi.");
+      } else {
+        console.log("Görev bulunamadı.");
+      }
+    } catch (error) {
+      console.log("Bir hatayla karşılaşıldı.");
+    }
+  };
+
   return ReactDOM.createPortal(
     <AnimatePresence>
       <motion.div
@@ -228,30 +291,31 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                     Tamamlandı
                   </button>
                   <form
-                    className="w-full flex flex-col gap-y-3 pt-4 border-t  "
+                    className="w-full flex flex-col gap-y-3 pt-5 border-t"
                     onSubmit={handleSubmit(updateImportance)}
                   >
                     <select
                       {...register("taskImportance")}
-                      className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md  transition-colors text-zinc-700 "
+                      className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md  transition-colors text-zinc-700"
                     >
                       <option value="low">Düşük</option>
                       <option value="normal">Normal</option>
                       <option value="high">Yüksek</option>
                     </select>
-                    <button className="px-4 py-2 rounded-md bg-primary text-white">
+                    <button className="px-4 py-1.5 rounded-md bg-primary shadow-lg text-white">
                       Kaydet
                     </button>
                   </form>
                 </div>
-
-                <button
-                  onClick={() => archiveToTask(selectedTask.taskID)}
-                  className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-violet-500 transition-colors text-zinc-700 hover:text-white"
-                >
-                  <IoArchiveOutline />
-                  Arşiv
-                </button>
+                <div className="flex w-full">
+                  <button
+                    onClick={() => archiveToTask(selectedTask.taskID)}
+                    className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-violet-500 transition-colors text-zinc-700 hover:text-white"
+                  >
+                    <IoArchiveOutline />
+                    Arşiv
+                  </button>
+                </div>
               </div>
             </div>
           </div>

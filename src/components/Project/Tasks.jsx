@@ -69,6 +69,7 @@ const Tasks = ({ projectID }) => {
         taskCreator: user.uid,
         taskCreatorName: user.username,
         taskCreatorImage: user.photoURL,
+        taskAttachmentUsers: [],
         taskImportance: "low",
         text: data.task,
         createdAt: formattedDate,
