@@ -28,7 +28,7 @@ const AdminTeams = () => {
           </div>
         </div>
       </div>
-      <div className="grid lg:grid-cols-6 grid-cols-1 place-items-center w-full lg:mt-6 py-5 px-4 gap-6">
+      <div className="grid lg:grid-cols-5 grid-cols-1 place-items-center w-full lg:mt-3  py-5 px-4 gap-6">
         {allTeams.map((team) => (
           <div
             key={team.teamID}
@@ -41,6 +41,11 @@ const AdminTeams = () => {
             </div>
           </div>
         ))}
+        {allTeams.length === 0 && (
+          <div className="px-4 py-2 rounded-md bg-primary/25 text-primary font-medium">
+            Herhangi bir takım mevcut değil!
+          </div>
+        )}
       </div>
     </motion.div>
   );

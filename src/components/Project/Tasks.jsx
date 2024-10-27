@@ -16,7 +16,7 @@ import { db } from "~/firebase/firebase";
 import { getProjectsByID } from "~/redux/slices/projectsSlice";
 import { MdOutlineSettings, MdCancel } from "react-icons/md";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { FiLayout } from "react-icons/fi";
+import { FiAlertCircle, FiLayout } from "react-icons/fi";
 import Avatar from "~/assets/noavatar.png";
 import { IoMenu } from "react-icons/io5";
 
@@ -173,7 +173,10 @@ const Tasks = ({ projectID }) => {
                           />
                         ))}
                         {task?.taskAttachmentUsers.length === 0 && (
-                          <div className="text-xs">Kullanıcı Atanmadı</div>
+                          <div className="text-xs text-red-500 flex  items-center gap-x-2">
+                            <FiAlertCircle />
+                            Kullanıcı Atanmamış
+                          </div>
                         )}
                       </div>
                       <div className="flex items-center gap-x-3">
@@ -242,7 +245,10 @@ const Tasks = ({ projectID }) => {
                           />
                         ))}
                         {task?.taskAttachmentUsers.length === 0 && (
-                          <div className="text-xs">Kullanıcı Atanmadı</div>
+                          <div className="text-xs text-red-500 flex  items-center gap-x-2">
+                            <FiAlertCircle />
+                            Kullanıcı Atanmamış
+                          </div>
                         )}
                       </div>
                       <div className="flex items-center gap-x-3">
@@ -309,7 +315,10 @@ const Tasks = ({ projectID }) => {
                           />
                         ))}
                         {task?.taskAttachmentUsers.length === 0 && (
-                          <div className="text-xs">Kullanıcı Atanmadı</div>
+                          <div className="text-xs text-red-500 flex  items-center gap-x-2">
+                            <FiAlertCircle />
+                            Kullanıcı Atanmamış
+                          </div>
                         )}
                       </div>
                       <div className="flex items-center gap-x-3">
@@ -376,7 +385,10 @@ const Tasks = ({ projectID }) => {
                           />
                         ))}
                         {task?.taskAttachmentUsers.length === 0 && (
-                          <div className="text-xs">Kullanıcı Atanmadı</div>
+                          <div className="text-xs text-red-500 flex  items-center gap-x-2">
+                            <FiAlertCircle />
+                            Kullanıcı Atanmamış
+                          </div>
                         )}
                       </div>
                       <div className="flex items-center gap-x-3">

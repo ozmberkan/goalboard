@@ -29,7 +29,7 @@ const AdminPremiumUsers = () => {
           </div>
         </div>
       </div>
-      <div className="grid lg:grid-cols-6 grid-cols-1 place-items-center w-full lg:mt-6 py-5 px-4 gap-6">
+      <div className="grid lg:grid-cols-5 grid-cols-1 place-items-center w-full lg:mt-3 py-5 px-4 gap-6">
         {allUsers.map((user) => {
           return (
             user?.premium !== "Silver" && (
