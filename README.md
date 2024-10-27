@@ -1,7 +1,8 @@
-![DarkLogo](https://github.com/user-attachments/assets/e133d08e-1574-4909-9951-728ccce74d47)
 
 
-#### goalBoard, ekiplerin hedef belirleyip takip edebildiği, projeleri yönetebildiği hedef odaklı bir proje yönetim uygulamasıdır. Gerçek zamanlı güncellemeler ve yorum özellikleri ile ekip iş birliğini kolaylaştırır ve projelerin zamanında tamamlanmasına yardımcı olur.
+# goalBoard
+
+goalBoard, ekiplerin hedef belirleyip takip edebildiği, projeleri yönetebildiği hedef odaklı bir proje yönetim uygulamasıdır. Gerçek zamanlı güncellemeler ve yorum özellikleri ile ekip iş birliğini kolaylaştırır ve projelerin zamanında tamamlanmasına yardımcı olur.
 
 
 ## Özellikler
