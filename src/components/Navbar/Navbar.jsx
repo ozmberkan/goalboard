@@ -10,13 +10,15 @@ import ProfileMenu from "./Menus/ProfileMenu";
 import NotificationMenu from "./Menus/NotificationMenu";
 import MobileMenu from "./Menus/MobileMenu";
 import Starter from "./children/Starter";
-import Logo from "~/assets/Logos/goalBoardTextDark.svg";
+import ForLightLogo from "~/assets/Logos/goalBoardTextDark.svg";
+import ForDarkLogo from "~/assets/Logos/goalBoardTextLight.svg";
 import { signOut } from "firebase/auth";
 import { auth } from "~/firebase/firebase";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.user);
+  const { theme } = useSelector((store) => store.theme);
   const [dropdown, setDropdown] = useState(false);
 
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
@@ -38,9 +40,12 @@ const Navbar = () => {
     <>
       <div className="flex flex-col">
         <Starter />
-        <div className="py-5 lg:px-14 px-5 border-b bg-white border-neutral-300 flex justify-between items-center">
+        <div className="py-5 lg:px-14 transition-all duration-500 px-5 border-b bg-white dark:bg-darkPrimary dark:border-darkBorder border-neutral-300 flex justify-between items-center">
           <Link to="/">
-            <img src={Logo} className="w-32" />
+            <img
+              src={theme === "dark" ? ForDarkLogo : ForLightLogo}
+              className="w-32"
+            />
           </Link>
 
           {!user && (
@@ -60,7 +65,7 @@ const Navbar = () => {
                   </div>
                   <Link
                     to="/signin"
-                    className="px-4 py-1 font-semibold flex items-center gap-x-2 transition-all duration-300 rounded-md border-2 border-primary  text-primary hover:bg-primary hover:border-transparent hover:text-white"
+                    className="px-4 py-1 font-semibold flex items-center gap-x-2 transition-all duration-300 rounded-md border-2 border-primary dark:bg-darkBox dark:border-darkBorder dark:text-darkText dark:hover:text-neutral-400 text-primary hover:bg-primary hover:border-transparent hover:text-white"
                   >
                     <GiPadlockOpen />
                     Giriş Yap
@@ -75,7 +80,7 @@ const Navbar = () => {
               <MobileMenu setDropdown={setDropdown} />
               <Link
                 to="/signin"
-                className="bg-primary flex justify-center items-center px-4 rounded-md text-white"
+                className="bg-primary dark:bg-transparent dark:border dark:border-darkBorder dark:text-darkText dark:hover:text-[#959595] flex justify-center items-center px-4 rounded-md text-white"
               >
                 <MdLogin size={20} />
               </Link>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-[#F3F3F3] text-[#202020] font-poppins
+    @apply bg-[#F3F3F3] text-[#202020] font-poppins  dark:bg-darkPrimary transition-all duration-500
 }
 
 
@@ -18,9 +18,10 @@ body {
   }
   
   *::-webkit-scrollbar-track {
-    background: #fff;
-    border-radius: 1px;
+    @apply bg-white dark:bg-darkBox
   }
+
+  
   
   *::-webkit-scrollbar-thumb {
     background: #3a5adb;

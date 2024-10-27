@@ -30,12 +30,12 @@ const Home = () => {
  p-4 rounded-md  justify-center items-center text-center "
       >
         <div className="w-full flex flex-col lg:gap-2 gap-y-3 ">
-          <h1 className="lg:text-[85px] text-[44px] font-extrabold text-primary drop-shadow-lg">
+          <h1 className="lg:text-[85px] text-[44px] font-extrabold text-primary dark:drop-shadow-custom drop-shadow-lg">
             {user ? "Hoş geldin!" : "goalBoard"}
           </h1>
           <div className="lg:font-medium lg:text-zinc-800 font-semibold text-zinc-600 lg:text-xl text-base">
             {user ? (
-              <p>
+              <p className="dark:text-darkText">
                 Hoş geldin{" "}
                 <span className="font-semibold text-primary">
                   {user.username}
@@ -43,9 +43,11 @@ const Home = () => {
                 profiline giderek hemen hedeflerini oluşturabilirsin!
               </p>
             ) : (
-              `Projelerinizi yönetmenin en kolay yolu! Gerçek zamanlı
-            güncellemeler, görev atamaları ve yorumlarla ekibinizle iş birliği
-            yaparak hedeflerinize ulaşın.`
+              <p className="dark:text-darkText">
+                Projelerinizi yönetmenin en kolay yolu! Gerçek zamanlı
+                güncellemeler, görev atamaları ve yorumlarla ekibinizle iş
+                birliği yaparak hedeflerinize ulaşın.
+              </p>
             )}
           </div>
         </div>

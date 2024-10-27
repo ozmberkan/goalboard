@@ -124,7 +124,7 @@ const Dashboard = () => {
 
   if (status === "loading") {
     return (
-      <div className="flex flex-grow justify-center items-center bg-white ">
+      <div className="flex flex-grow justify-center items-center bg-white dark:bg-darkPrimary ">
         <l-ripples size="150" speed="2" color="#3A5ADB"></l-ripples>
       </div>
     );
@@ -137,7 +137,7 @@ const Dashboard = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-3 relative overflow-hidden"
+          className="w-full border bg-white dark:bg-darkBox dark:border-darkBorder rounded-md p-8 flex flex-col gap-y-3 relative overflow-hidden"
         >
           <Tooltip
             id="my-tooltip"
@@ -145,16 +145,18 @@ const Dashboard = () => {
           />
           <div className="w-full font-medium ">
             <Link
-              className="text-zinc-400 hover:underline"
+              className="text-zinc-400 dark:text-neutral-400 hover:underline"
               to={`/profile/${user.username}`}
             >
-              Profilim{" "}
+              Profilim
             </Link>
-            / <span className="text-zinc-700">Projelerim</span>
+            <span className="text-zinc-700 dark:text-neutral-400">
+              {" / "}Projelerim
+            </span>
           </div>
 
           <div className="w-full justify-between items-center flex">
-            <h1 className="font-semibold lg:text-4xl text-lg text-primary">
+            <h1 className="font-semibold lg:text-4xl text-lg text-primary dark:text-neutral-400">
               {currentTeam?.teamName}
             </h1>
             <div className="flex gap-x-2 items-center">
@@ -166,7 +168,7 @@ const Dashboard = () => {
                       src={user.photoURL ? user.photoURL : Avatar}
                       data-tooltip-id="my-tooltip"
                       data-tooltip-content={user.username}
-                      className="w-10 h-10 rounded-full object-cover border-4 border-zinc-100 shadow-lg"
+                      className="w-10 h-10 rounded-full object-cover border-4 border-zinc-100 dark:border-darkBox shadow-lg"
                     />
                   ))}
                 </span>
@@ -174,32 +176,32 @@ const Dashboard = () => {
 
               <>
                 <Popover className="relative">
-                  <PopoverButton className="lg:p-4 p-2 hover:bg-zinc-50 rounded-full lg:text-2xl text-lg">
+                  <PopoverButton className="lg:p-4 p-2 hover:bg-zinc-50 dark:text-darkText dark:hover:bg-darkPrimary rounded-full lg:text-2xl text-lg">
                     <FiSettings />
                   </PopoverButton>
                   <PopoverPanel
                     anchor="bottom end"
-                    className="flex flex-col border p-4 gap-y-5 mt-1 rounded-md bg-white shadow-lg"
+                    className="flex flex-col border p-4 gap-y-5 mt-1 rounded-md bg-white dark:bg-darkBox dark:border-darkBorder shadow-lg"
                   >
                     {currentTeam?.creatorMember === user.uid && (
                       <>
                         <button
                           onClick={() => setIsProjectModal(true)}
-                          className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border  transition-colors duration-300 flex items-center gap-x-2"
+                          className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md dark:bg-darkBox dark:border-darkBorder dark:text-darkText dark:hover:text-neutral-400 text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border  transition-colors duration-300 flex items-center gap-x-2"
                         >
                           <IoMdAddCircleOutline size={18} />
                           <span>Proje Oluştur</span>
                         </button>
                         <button
                           onClick={() => setIsInviteModal(true)}
-                          className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
+                          className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md dark:bg-darkBox dark:border-darkBorder dark:text-darkText dark:hover:text-neutral-400  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
                         >
                           <FaUsers size={18} />
                           <span>Takıma Davet Et</span>
                         </button>
                         <button
                           onClick={() => deleteTeam(teamID)}
-                          className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
+                          className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md dark:bg-darkBox dark:border-darkBorder dark:text-darkText  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
                         >
                           <FaRegTrashAlt size={18} className="text-red-500" />
                           <span className=" text-red-500">Takımı Sil</span>
@@ -208,7 +210,7 @@ const Dashboard = () => {
                     )}
                     <button
                       onClick={() => leaveTeam(user.uid)}
-                      className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
+                      className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md dark:bg-darkBox dark:border-darkBorder dark:text-darkText  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
                     >
                       <TbCircleArrowDownLeftFilled
                         size={18}
@@ -222,7 +224,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="w-full py-6 h-full flex flex-col gap-y-5">
-            <h1 className="lg:text-2xl text-lg font-semibold text-primaryDark pb-3 border-b ">
+            <h1 className="lg:text-2xl text-lg font-semibold text-primaryDark dark:text-darkText dark:border-darkBorder pb-3 border-b ">
               Projeler
             </h1>
             <div

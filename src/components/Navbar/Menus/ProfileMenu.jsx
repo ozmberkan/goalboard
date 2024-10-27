@@ -19,7 +19,7 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
         <>
           <MenuButton
             onClick={() => setDropdown(true)}
-            className="lg:px-4 hover:shadow-lg lg:py-1 py-2 px-4 flex items-center border-2  border-primary  rounded-full gap-x-2 transition-all duration-300   font-medium text-primary "
+            className="lg:px-4 hover:shadow-lg lg:py-1 py-2 px-4 flex items-center border-2 dark:border-darkBorder dark:text-darkText  border-primary  rounded-full gap-x-3 transition-all duration-300   font-medium text-primary "
           >
             <MdMenu size={20} />
             {isTabletOrMobile ? (
@@ -42,12 +42,14 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
           >
             <MenuItems
               anchor="bottom-end"
-              className="mt-2 p-5 bg-white rounded-md border border-neutral-300 shadow-lg flex flex-col gap-y-5"
+              className="mt-2 p-5 bg-white dark:bg-darkBox dark:border-darkBorder rounded-md border border-neutral-300 shadow-lg flex flex-col gap-y-5"
             >
-              <MenuItem className="border-b pb-3">
+              <MenuItem className="border-b dark:border-darkBorder pb-3">
                 <div className="flex flex-col">
-                  <span>{user?.username}</span>
-                  <span className="text-sm">{user?.email}</span>
+                  <span className="dark:text-[#959595]">{user?.username}</span>
+                  <span className="text-sm dark:text-[#959595]">
+                    {user?.email}
+                  </span>
                 </div>
               </MenuItem>
               {profileTabs.map((tab) => (
@@ -58,7 +60,7 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
                         ? `/profile/${user.username}`
                         : tab.to
                     }
-                    className="hover:text-neutral-400"
+                    className="hover:text-neutral-400 dark:text-darkText dark:hover:text-neutral-400 "
                   >
                     <span className="flex items-center gap-x-2">
                       <tab.icon size={15} />
@@ -72,7 +74,7 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
                 <MenuItem key="admin">
                   <Link
                     to="/admin"
-                    className="hover:text-neutral-400 flex gap-x-2 items-center"
+                    className="hover:text-neutral-400 dark:text-darkText dark:hover:text-neutral-400 flex gap-x-2 items-center"
                   >
                     <FaUserLock size={15} />
                     Admin Paneli
@@ -82,7 +84,7 @@ const ProfileMenu = ({ setDropdown, isTabletOrMobile, exit, user }) => {
               <MenuItem>
                 <button
                   onClick={exit}
-                  className="text-red-500 pt-4 border-t hover:text-red-400 flex items-center gap-x-2"
+                  className="text-red-500 pt-4 border-t dark:border-darkBorder hover:text-red-400 dark:hover:text-red-600 flex items-center gap-x-2"
                 >
                   <TbLayoutSidebarLeftCollapse />
                   Çıkış Yap

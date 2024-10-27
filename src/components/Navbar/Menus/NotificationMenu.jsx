@@ -13,9 +13,9 @@ const NotificationMenu = ({ user }) => {
     <Menu className="z-20">
       {({ open }) => (
         <>
-          <MenuButton className="p-2 relative  lg:text-lg text-sm rounded-full bg-primary border-2 border-transparent text-white hover:border-primary hover:bg-white hover:text-primary">
+          <MenuButton className="p-2 relative  lg:text-lg text-sm rounded-full dark:bg-darkBox dark:border dark:border-darkBorder dark:text-darkText dark:hover:text-[#959595] bg-primary border-2 border-transparent text-white hover:border-primary hover:bg-white hover:text-primary">
             <FaBell />
-            <span className="bg-primaryDark absolute -top-2.5 -right-2 text-white px-2 py-0.5 text-xs flex justify-center items-center rounded-full">
+            <span className="bg-primaryDark dark:bg-primary absolute -top-2.5 -right-2 text-white px-2 py-0.5 text-xs flex justify-center items-center rounded-full">
               {user?.notification?.length}
             </span>
           </MenuButton>
@@ -29,9 +29,9 @@ const NotificationMenu = ({ user }) => {
             leaveTo="transform opacity-0 scale-95"
           >
             <MenuItems anchor="bottom">
-              <MenuItem className="mt-2 lg:p-5 p-3 bg-white rounded-md border border-neutral-300 shadow-lg flex flex-col gap-y-5">
+              <MenuItem className="mt-2 lg:p-5 p-3 bg-white dark:bg-darkBox dark:border-darkBorder rounded-md border border-neutral-300 shadow-lg flex flex-col gap-y-5">
                 <div>
-                  <span className="text-sm font-medium pb-2 border-b">
+                  <span className="text-sm font-medium pb-2 border-b dark:text-darkText dark:border-darkBorder">
                     Bildirimler
                   </span>
                   <div className="flex flex-col  gap-y-3">
@@ -40,7 +40,7 @@ const NotificationMenu = ({ user }) => {
                         <Link
                           to="/invites"
                           key={index}
-                          className="text-sm text-neutral-400"
+                          className="text-sm text-neutral-400 dark:text-darkText "
                         >
                           <span className="font-medium text-primary">
                             @{notification.from}{" "}
@@ -49,7 +49,7 @@ const NotificationMenu = ({ user }) => {
                         </Link>
                       ))
                     ) : (
-                      <p className="text-sm text-neutral-400">
+                      <p className="text-sm text-neutral-400 dark:text-darkText">
                         Bildirim kutusu boş
                       </p>
                     )}

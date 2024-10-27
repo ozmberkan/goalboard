@@ -51,12 +51,12 @@ const SignUp = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="bg-white lg:flex hidden justify-center items-center border-r w-1/2"
+        className="bg-white dark:bg-darkPrimary dark:border-darkBorder lg:flex hidden justify-center items-center border-r w-1/2"
       >
         <img src={SignUpIcon} className="drop-shadow-xl w-[700px]" />
         <Link
           to="/"
-          className="absolute top-5 left-5 p-3 bg-zinc-50 hover:bg-zinc-100 transition-colors duration-300 rounded-md border"
+          className="absolute top-5 left-5 p-3 bg-zinc-50 dark:bg-darkBox dark:border-darkBorder dark:text-darkText dark:hover:text-neutral-400 hover:bg-zinc-100 transition-colors duration-300 rounded-md border"
         >
           <FaHome />
         </Link>

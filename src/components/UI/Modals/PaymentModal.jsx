@@ -54,30 +54,36 @@ const PaymentModal = ({ setIsPaymentModal }) => {
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-white text-zinc-700 p-6 rounded-lg w-full max-w-md h-full shadow-xl cursor-default relative overflow-auto "
+          className="bg-white dark:bg-darkPrimary text-zinc-700 p-6 rounded-lg w-full max-w-md h-full shadow-xl cursor-default relative overflow-auto "
         >
           <div className="relative z-10 flex flex-col h-full">
             <div className="w-full flex justify-between items-center">
-              <h1 className="font-semibold text-xl">Ödeme Detayları</h1>
+              <h1 className="font-semibold text-xl dark:text-neutral-400">
+                Ödeme Detayları
+              </h1>
               <button
                 onClick={() => setIsPaymentModal(false)}
-                className="p-2 bg-zinc-100 rounded-md"
+                className="p-2 bg-zinc-100 dark:bg-darkBox dark:border dark:border-darkBorder rounded-md"
               >
                 <MdCancel size={20} />
               </button>
             </div>
             <div className="w-full flex mt-4 h-full gap-4 flex-col ">
-              <div className="w-full rounded-xl bg-zinc-50 border p-5 flex justify-between items-center gap-5">
+              <div className="w-full rounded bg-zinc-50 dark:bg-darkBox dark:border-darkBorder border p-5 flex justify-between items-center gap-5">
                 <div className="flex items-center gap-x-2">
                   <img
                     src={user?.photoURL ? user?.photoURL : Avatar}
                     className="w-10 h-10 rounded-full object-cover lg:block hidden"
                   />
-                  <span className="text-sm">{user?.email}</span>
+                  <span className="text-sm dark:text-darkText">
+                    {user?.email}
+                  </span>
                 </div>
-                <div className="text-sm">{moment().format("DD.MM.YYYY")}</div>
+                <div className="text-sm dark:text-darkText">
+                  {moment().format("DD.MM.YYYY")}
+                </div>
               </div>
-              <div className="w-full rounded-xl bg-zinc-50 border p-5  gap-5 h-full flex flex-col">
+              <div className="w-full rounded-xl bg-zinc-50 dark:bg-darkBox dark:border-darkBorder dark:rounded border p-5  gap-5 h-full flex flex-col">
                 <div className="flex w-full justify-between items-center">
                   <div className="text-3xl">
                     {selectedPaymentType.label === "Platinum" && (
@@ -91,7 +97,7 @@ const PaymentModal = ({ setIsPaymentModal }) => {
                       </span>
                     )}
                   </div>
-                  <div className="text-2xl text-zinc-700 font-semibold">
+                  <div className="text-2xl text-zinc-700 dark:text-darkText font-semibold">
                     {selectedPaymentType.price}/ay
                   </div>
                 </div>
@@ -101,7 +107,7 @@ const PaymentModal = ({ setIsPaymentModal }) => {
                       selectedPaymentType.label === "Gold"
                         ? "bg-card-gold-bg"
                         : "bg-card-bg"
-                    } w-full bg-card-bg bg-cover bg-no-repeat bg-center rounded-md relative text-white shadow-xl border border- transition-transform `}
+                    } w-full bg-card-bg bg-cover bg-no-repeat bg-center rounded-md relative dark:border-darkBorder text-white shadow-xl border  transition-transform `}
                   >
                     <div className="w-full p-5 lg:absolute lg:block left-0 top-0 hidden">
                       <div className="pt-1">
@@ -136,12 +142,12 @@ const PaymentModal = ({ setIsPaymentModal }) => {
                     <input
                       type="text"
                       placeholder="Kart Üzerindeki İsim"
-                      className="p-2 rounded-md border outline-none"
+                      className="p-2 rounded-md border outline-none dark:bg-transparent dark:border-darkBorder "
                     />
                     <input
                       type="text"
                       placeholder="Kart Numarası"
-                      className="p-2 rounded-md border outline-none"
+                      className="p-2 rounded-md border outline-none dark:bg-transparent dark:border-darkBorder "
                       value={cardNumber}
                       maxLength={16}
                       onChange={(e) => setCardNumber(e.target.value)}
@@ -149,7 +155,7 @@ const PaymentModal = ({ setIsPaymentModal }) => {
                     <input
                       type="text"
                       placeholder="MM/YY"
-                      className="p-2 rounded-md border outline-none"
+                      className="p-2 rounded-md border outline-none dark:bg-transparent dark:border-darkBorder "
                       value={cardDate}
                       maxLength={5}
                       onChange={(e) => setCardDate(e.target.value)}
@@ -157,14 +163,14 @@ const PaymentModal = ({ setIsPaymentModal }) => {
                     <input
                       type="text"
                       placeholder="CVV"
-                      className="p-2 rounded-md border outline-none"
+                      className="p-2 rounded-md border outline-none dark:bg-transparent dark:border-darkBorder "
                       value={cardCvv}
                       maxLength={3}
                       onChange={(e) => setCardCvv(e.target.value)}
                     />
                     <button
                       type="submit"
-                      className="p-2 bg-primary text-white rounded-md hover:bg-primaryDark transition-colors duration-300"
+                      className="p-2 bg-primary text-white rounded-md hover:bg-primaryDark dark:hover:bg-darkPrimary transition-colors duration-300"
                     >
                       Ödeme Yap
                     </button>

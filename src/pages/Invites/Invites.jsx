@@ -134,7 +134,7 @@ const Invites = () => {
       transition={{ duration: 0.5 }}
       className="flex-grow p-4 flex"
     >
-      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
+      <div className="w-full border bg-white dark:bg-darkBox transition-all duration-500 dark:border-darkBorder rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
         <h1 className="text-3xl font-semibold text-primary">
           Gelen Bildirimler
         </h1>
@@ -146,7 +146,7 @@ const Invites = () => {
             {user.notification.length > 0 ? (
               user.notification?.map((noti, i) => (
                 <div
-                  className="bg-zinc-50 border rounded-md px-4 py-2 flex justify-between items-center"
+                  className="bg-zinc-50 dark:bg-darkPrimary dark:border-darkBorder dark:text-darkText border rounded-md px-4 py-2 flex justify-between items-center"
                   key={i}
                 >
                   <div className="flex   items-center gap-x-1">
@@ -158,16 +158,16 @@ const Invites = () => {
 
                   <div>
                     {noti.message === "Sizi takıma davet ediyor." && (
-                      <div className="flex gap-x-4 ">
+                      <div className="flex gap-x-4  ">
                         <button
                           onClick={() => confirmInvite(noti)}
-                          className="bg-green-100 text-green-500 px-4 py-2 rounded-md"
+                          className="bg-green-100 text-green-500 dark:bg-green-500 dark:text-white px-4 py-2 rounded-md"
                         >
                           <FaCheck />
                         </button>
                         <button
                           onClick={() => cancelInvite(noti)}
-                          className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
+                          className="bg-red-100 text-red-500 dark:bg-red-500 dark:text-white px-4 py-2 rounded-md"
                         >
                           <MdCancel />
                         </button>
@@ -176,7 +176,7 @@ const Invites = () => {
                     {noti.from === "Admin" && (
                       <button
                         onClick={() => deleteNoti(noti)}
-                        className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
+                        className="bg-red-100 text-red-500 dark:bg-red-500 dark:text-white px-4 py-2 rounded-md"
                       >
                         <MdCancel />
                       </button>
@@ -185,13 +185,13 @@ const Invites = () => {
                       <div className="flex gap-x-4">
                         <button
                           onClick={() => confirmProjectInvite(noti)}
-                          className="bg-green-100 text-green-500 px-4 py-2 rounded-md"
+                          className="bg-green-100 text-green-500 dark:bg-green-500 dark:text-white px-4 py-2 rounded-md"
                         >
                           <FaCheck />
                         </button>
                         <button
                           onClick={() => cancelProjectInvite(noti)}
-                          className="bg-red-100 text-red-500 px-4 py-2 rounded-md"
+                          className="bg-red-100 text-red-500 dark:bg-red-500 dark:text-white px-4 py-2 rounded-md"
                         >
                           <MdCancel />
                         </button>
@@ -201,8 +201,8 @@ const Invites = () => {
                 </div>
               ))
             ) : (
-              <div className="bg-blue-100 px-4  py-2 rounded-md">
-                <h1 className="lg:text-base text-sm font-medium text-primary">
+              <div className="bg-blue-100 transition-all duration-500 dark:bg-darkPrimary dark:border-darkBorder dark:border px-4  py-2 rounded-md">
+                <h1 className="lg:text-base text-sm font-medium text-primary dark:text-darkText">
                   Herhangi bir davetiniz ya da bildiriminiz mevcut değil!
                 </h1>
               </div>

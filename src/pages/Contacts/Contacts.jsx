@@ -33,7 +33,7 @@ const Contacts = () => {
 
   return (
     <div className="flex-grow p-4 flex">
-      <div className="w-full border bg-white rounded-md p-8 flex  gap-x-4 relative  overflow-hidden">
+      <div className="w-full border bg-white dark:bg-darkBox dark:border-darkBorder rounded-md p-8 flex  gap-x-4 relative  overflow-hidden transition-all duration-500">
         <form
           className="lg:w-1/2 grid grid-cols-1 gap-4"
           onSubmit={handleSubmit(contactHandle)}
@@ -43,14 +43,14 @@ const Contacts = () => {
             <div key={input.id} className="flex flex-col">
               {input.type === "text" ? (
                 <input
-                  className="border px-4 py-2 rounded-md outline-none"
+                  className="border px-4 dark:bg-transparent dark:border-darkBorder py-2 rounded-md outline-none"
                   placeholder={input.placeholder}
                   type="text"
                   {...register(input.name, { required: true })}
                 />
               ) : (
                 <textarea
-                  className="border px-4 py-2 rounded-md outline-none min-h-[75px] max-h-[75px]"
+                  className="border px-4 dark:bg-transparent dark:border-darkBorder py-2 rounded-md outline-none min-h-[75px] max-h-[75px]"
                   placeholder={input.placeholder}
                   {...register(input.name, { required: true })}
                 />
@@ -61,15 +61,15 @@ const Contacts = () => {
             </div>
           ))}
 
-          <button className="bg-primary p-2 text-white rounded-md border border-transparent hover:border-primary hover:text-primary hover:bg-white">
+          <button className="bg-primary p-2 text-white dark:bg-darkPrimary dark:border-darkBorder dark:text-darkText rounded-md border border-transparent hover:border-primary hover:text-primary hover:bg-white">
             Gönder
           </button>
         </form>
         <div className="w-1/2 h-full px-3 flex itemst-start flex-col gap-y-5">
-          <p className="text-3xl font-semibold text-zinc-700">
+          <p className="text-3xl font-semibold text-zinc-700 dark:text-neutral-400">
             Bizimle iletişime geçmek için soldaki formu doldurabilirsiniz.
           </p>
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 dark:text-darkText">
             <span>123 Hedef Sokak 34000 İzmir, </span>
             <span>Türkiye Email: info@goalborad.com</span>
             <span>Tel: +90 (212) 123 4567</span>

@@ -27,7 +27,6 @@ import {
   RiCircleFill,
 } from "react-icons/ri";
 import { Tooltip } from "react-tooltip";
-import { IoArchive } from "react-icons/io5";
 import TaskModal from "../UI/Modals/TaskModal";
 
 const Tasks = ({ projectID }) => {
@@ -107,7 +106,7 @@ const Tasks = ({ projectID }) => {
         className="z-20"
         style={{ backgroundColor: "#3a5adb" }}
       />
-      <div className="h-full">
+      <div className="h-full ">
         <div className="w-full py-3 border-b mb-4 flex justify-between items-center">
           <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1">
             <FiLayout />

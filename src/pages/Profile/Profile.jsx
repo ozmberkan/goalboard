@@ -30,7 +30,7 @@ const Profile = () => {
 
   if (status === "loading") {
     return (
-      <div className="flex flex-grow justify-center items-center bg-white ">
+      <div className="flex flex-grow justify-center items-center bg-white dark:bg-darkPrimary ">
         <l-ripples size="150" speed="2" color="#3A5ADB"></l-ripples>
       </div>
     );
@@ -44,8 +44,8 @@ const Profile = () => {
         transition={{ duration: 0.5 }}
         className="flex-grow p-4 flex"
       >
-        <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden">
-          <div className="w-full flex  items-center lg:gap-5 gap-3 border-b pb-5 ">
+        <div className="w-full border bg-white transition-all duration-500 dark:bg-darkBox dark:border-darkBorder rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden">
+          <div className="w-full flex  items-center lg:gap-5 gap-3 border-b dark:border-darkBorder pb-5 ">
             <div
               className="lg:p-12 p-10 rounded-full relative "
               style={{
@@ -78,12 +78,14 @@ const Profile = () => {
                   ""
                 )}
               </span>
-              <span className="font-medium text-zinc-00">{user.email}</span>
+              <span className="font-medium text-zinc-700 dark:text-darkText">
+                {user.email}
+              </span>
             </div>
           </div>
           <div className="w-full  flex flex-col gap-y-5 ">
             <div className="w-full flex justify-between items-center ">
-              <h1 className="lg:text-2xl text-lg font-semibold text-primaryDark  ">
+              <h1 className="lg:text-2xl text-lg font-semibold text-primaryDark dark:text-neutral-400  ">
                 Takımlarım
               </h1>
               <button

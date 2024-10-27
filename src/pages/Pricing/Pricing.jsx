@@ -41,7 +41,7 @@ const Pricing = () => {
       <div className="flex-grow flex items-center justify-start flex-col relative p-12 lg:p-20 lg:gap-y-5 gap-y-12">
         <Link
           to="/"
-          className="absolute top-6 left-6 p-3 bg-white border rounded-md text-2xl text-zinc-500 z-10 hover:text-zinc-700"
+          className="absolute top-6 left-6 p-3 bg-white dark:bg-darkPrimary dark:border-darkBorder border rounded-md text-2xl text-zinc-500 z-10 hover:text-zinc-700"
         >
           <MdCancel />
         </Link>
@@ -51,7 +51,7 @@ const Pricing = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-[56px] font-extrabold bg-gradient-to-tr text-transparent bg-clip-text from-primary to-primaryDark"
+            className="text-[56px] font-extrabold bg-gradient-to-tr text-transparent bg-clip-text from-primary to-primaryDark dark:from-white dark:to-neutral-400"
           >
             Premium'a Katıl!
           </motion.h1>
@@ -59,7 +59,7 @@ const Pricing = () => {
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-2xl font-medium text-zinc-700 flex flex-col"
+            className="text-2xl font-medium text-zinc-700 dark:text-darkText flex flex-col"
           >
             Premium üyeliğe sahip olarak daha fazla özellikten yararlanın.
           </motion.p>
