@@ -26,10 +26,53 @@ import {
 import { IoArchiveOutline } from "react-icons/io5";
 import Avatar from "~/assets/noavatar.png";
 import { useForm } from "react-hook-form";
-import { nanoid } from "nanoid";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/react";
 
 const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
   const modalRoot = document.getElementById("modal");
+
+  const [projectUsers, setProjectUsers] = useState([]);
+
+  const [selectedPerson, setSelectedPerson] = useState(null);
+
+  const getProjectUsers = async () => {
+    try {
+      const projectRef = doc(db, "projects", projectID);
+      const projectSnap = await getDoc(projectRef);
+      const projectMembers = projectSnap.data().projectMembers;
+
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("uid", "in", projectMembers));
+
+      const querySnapshot = await getDocs(q);
+      const users = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setProjectUsers(users);
+    } catch (error) {
+      console.error("Error fetching project users:", error);
+    }
+  };
+
+  useEffect(() => {
+    getProjectUsers();
+  }, []);
+
+  const attachmentUser = () => {
+    if (selectedPerson) {
+      toast.success("Görev başarıyla atandı!");
+      setIsTaskModal(false);
+    } else {
+      toast.error("Bir hata oluştu.");
+    }
+  };
 
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.user);
@@ -140,68 +183,6 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
     }
   };
 
-  const AttachmentHandle = async (data) => {
-    try {
-      const usersRef = collection(db, "users");
-      const q = query(usersRef, where("username", "==", data.username));
-      const querySnapshot = await getDocs(q);
-      const userData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      const projectRef = doc(db, "projects", projectID);
-      const projectSnap = await getDoc(projectRef);
-      const projectData = projectSnap.data();
-
-      const taskID = selectedTask.taskID;
-
-      const taskToUpdate = projectData.tasks.find(
-        (task) => task.taskID === taskID
-      );
-
-      if (taskToUpdate) {
-        const updatedTaskAssignedUsers = [
-          ...(taskToUpdate.taskAssignedUsers || []),
-          userData[0].uid,
-        ];
-
-        const updatedTask = {
-          ...taskToUpdate,
-          taskAssignedUsers: updatedTaskAssignedUsers,
-        };
-
-        const updatedTasks = projectData.tasks.map((task) =>
-          task.taskID === taskID ? updatedTask : task
-        );
-
-        await updateDoc(projectRef, {
-          tasks: updatedTasks,
-        });
-
-        const userDocRef = doc(db, "users", userData[0].id);
-
-        const notificationData = {
-          from: user.username,
-          message: "Sizi bir göreve atadı.",
-          sendTime: moment().format("DD.MM.YYYY HH:mm"),
-          notificationID: nanoid(),
-        };
-
-        await updateDoc(userDocRef, {
-          notification: arrayUnion(notificationData),
-        });
-
-        toast.success("Kullanıcı başarıyla göreve atandı.");
-        toast.success("Bildirim gönderildi.");
-      } else {
-        console.log("Görev bulunamadı.");
-      }
-    } catch (error) {
-      console.log("Bir hatayla karşılaşıldı.");
-    }
-  };
-
   return ReactDOM.createPortal(
     <AnimatePresence>
       <motion.div
@@ -306,8 +287,55 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                       Kaydet
                     </button>
                   </form>
+                  <div className="w-full flex-col gap-3 flex">
+                    <Listbox
+                      value={selectedPerson}
+                      onChange={setSelectedPerson}
+                    >
+                      <div className="relative">
+                        <ListboxButton className="border flex items-center gap-x-1 font-medium w-full p-2 rounded-md transition-colors text-zinc-700">
+                          {selectedPerson || "Bir kişi seçin"}
+                        </ListboxButton>
+                        <AnimatePresence>
+                          <ListboxOptions className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50">
+                            {projectUsers.map((user) => (
+                              <ListboxOption
+                                key={user.uid}
+                                value={user.username}
+                                className={({ active }) =>
+                                  `cursor-pointer select-none relative py-2 pl-10 pr-4 ${
+                                    active
+                                      ? "text-zinc-700 bg-zinc-100"
+                                      : "text-gray-900"
+                                  }`
+                                }
+                              >
+                                {({ selected }) => (
+                                  <>
+                                    <span
+                                      className={`block truncate ${
+                                        selected ? "font-medium" : "font-normal"
+                                      }`}
+                                    >
+                                      {user.username}
+                                    </span>
+                                  </>
+                                )}
+                              </ListboxOption>
+                            ))}
+                          </ListboxOptions>
+                        </AnimatePresence>
+                      </div>
+                    </Listbox>
+                    <button
+                      onClick={attachmentUser}
+                      className="w-full px-4 py-2 rounded-md border-green-500 text-green-500 border-2 "
+                    >
+                      Göreve Ata
+                    </button>
+                  </div>
                 </div>
-                <div className="flex w-full">
+                <div className="flex w-full flex-col gap-5 ">
                   <button
                     onClick={() => archiveToTask(selectedTask.taskID)}
                     className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-violet-500 transition-colors text-zinc-700 hover:text-white"

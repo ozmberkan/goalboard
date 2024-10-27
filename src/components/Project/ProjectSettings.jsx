@@ -18,8 +18,6 @@ import { db } from "~/firebase/firebase";
 import ProjectInviteModal from "../UI/Modals/ProjectInviteModal";
 import { FiSettings, FiTrash, FiUsers } from "react-icons/fi";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
-import { FaUsers } from "react-icons/fa6";
-import { FaRegTrashAlt } from "react-icons/fa";
 
 const ProjectSettings = ({ projectID }) => {
   const { user } = useSelector((store) => store.user);
