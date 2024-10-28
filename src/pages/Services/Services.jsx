@@ -7,7 +7,7 @@ const Services = () => {
         {serviceData.map((service) => (
           <div key={service.id}>
             {service.title && (
-              <h1 className="lg:text-lg font-bold text-zinc-900 dark:text-white">
+              <h1 className="lg:text-lg font-bold text-zinc-900 dark:text-neutral-400">
                 {service.title}
               </h1>
             )}
