@@ -12,7 +12,7 @@ const Footer = () => {
   const { theme } = useSelector((store) => store.theme);
 
   return (
-    <footer className="bg-white dark:bg-darkPrimary dark:border-darkBorder border-t text-gray-600 dark:text-darkText  w-full transition-all duration-500 ">
+    <footer className="bg-white dark:bg-darkPrimary dark:border-darkBorder border-t text-gray-600 dark:text-darkText  w-full transition-colors duration-500 ">
       <div className=" max-w-6xl mx-auto ">
         <div className="w-full grid lg:grid-cols-4 grid-cols-1 gap-12 p-12">
           <div className="flex flex-col gap-y-3 items-start justify-start">

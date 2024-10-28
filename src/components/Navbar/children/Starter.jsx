@@ -13,7 +13,7 @@ const Starter = () => {
     dispatch(setTheme(theme === "dark" ? "light" : "dark"));
   };
   return (
-    <div className="py-2.5 px-4 transition-all duration-500 border-b bg-white dark:bg-darkPrimary  dark:border-darkBorder border-neutral-300 flex  items-center justify-between ">
+    <div className="py-2.5 px-4 transition-colors duration-500 border-b bg-white dark:bg-darkPrimary  dark:border-darkBorder border-neutral-300 flex  items-center justify-between ">
       <div className="flex gap-x-4 items-center">
         <h1 className="px-3 py-0.5 text-xs lg:text-sm rounded-md border border-transparent dark:border-green-500 dark:shadow-2xl dark:shadow-green-500   bg-green-100 dark:bg-darkBox dark:border  text-green-500 uppercase font-extrabold">
           yakında

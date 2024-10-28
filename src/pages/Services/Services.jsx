@@ -3,7 +3,7 @@ import { serviceData } from "~/data/data";
 const Services = () => {
   return (
     <div className="flex-grow p-4 flex">
-      <div className="w-full border bg-white dark:bg-darkBox dark:border-darkBorder rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden">
+      <div className="w-full border bg-white transition-colors duration-500 dark:bg-darkBox dark:border-darkBorder rounded-md p-8 flex flex-col gap-y-4 relative overflow-hidden">
         {serviceData.map((service) => (
           <div key={service.id}>
             {service.title && (

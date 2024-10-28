@@ -39,7 +39,7 @@ const Navbar = () => {
     <>
       <div className="flex flex-col">
         <Starter />
-        <div className="py-5 lg:px-14 transition-all duration-500 px-5 border-b bg-white dark:bg-darkPrimary dark:border-darkBorder border-neutral-300 flex justify-between items-center">
+        <div className="py-5 lg:px-14 transition-colors duration-500 px-5 border-b bg-white dark:bg-darkPrimary dark:border-darkBorder border-neutral-300 flex justify-between items-center">
           <Link to="/">
             <img
               src={theme === "dark" ? ForDarkLogo : ForLightLogo}
