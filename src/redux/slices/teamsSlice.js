@@ -74,7 +74,7 @@ export const getTeamByID = createAsyncThunk(
 
 export const getAllTeams = createAsyncThunk(
   "teams/getAllTeams",
-  async (uid, thunkAPI) => {
+  async (uid, { rejectWithValue }) => {
     try {
       const teamsRef = collection(db, "teams");
       const q = query(teamsRef, where("members", "array-contains", uid));
@@ -85,14 +85,14 @@ export const getAllTeams = createAsyncThunk(
       }));
       return teams;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
 
 export const getAllTeamsForAdmin = createAsyncThunk(
   "auth/getAllTeamsForAdmin",
-  async (id) => {
+  async ({ rejectWithValue }) => {
     try {
       const teamsRef = collection(db, "teams");
       const teamsDoc = await getDocs(teamsRef);
@@ -102,7 +102,7 @@ export const getAllTeamsForAdmin = createAsyncThunk(
       }));
       return teamsData;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.message);
     }
   }
 );

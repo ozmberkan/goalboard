@@ -1,11 +1,3 @@
-import ForLightLogo from "~/assets/Logos/DarkLogo.svg";
-import ForDarkLogo from "~/assets/Logos/LightLogo.svg";
-import LittleLogo from "~/assets/Logos/DarkLogoLittle.svg";
-import Tasks from "~/components/Project/Tasks";
-import Comments from "~/components/Project/Comments";
-import ProjectSettings from "~/components/Project/ProjectSettings";
-import FeedBack from "~/components/Project/FeedBack";
-import Archive from "~/components/Project/Archive";
 import { useDispatch, useSelector } from "react-redux";
 import { FiLayout } from "react-icons/fi";
 import { FaRegComments } from "react-icons/fa";
@@ -18,6 +10,14 @@ import { getProjectsByID } from "~/redux/slices/projectsSlice";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import ForLightLogo from "~/assets/Logos/DarkLogo.svg";
+import ForDarkLogo from "~/assets/Logos/LightLogo.svg";
+import LittleLogo from "~/assets/Logos/DarkLogoLittle.svg";
+import Tasks from "~/components/Project/Tasks";
+import Comments from "~/components/Project/Comments";
+import ProjectSettings from "~/components/Project/ProjectSettings";
+import FeedBack from "~/components/Project/FeedBack";
+import Archive from "~/components/Project/Archive";
 import Avatar from "~/assets/noavatar.png";
 
 const ProjectHome = () => {

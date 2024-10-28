@@ -1,14 +1,14 @@
-import Home from "~/pages/Home/Home";
+import { authLoader } from "~/loaders/AuthLoader";
 import HomeLayout from "~/layouts/HomeLayout";
-import Contacts from "~/pages/Contacts/Contacts";
-import About from "~/pages/About/About";
-import Announcements from "~/pages/Announcements/Announcements";
+import Home from "~/pages/Home/Home";
 import Profile from "~/pages/Profile/Profile";
+import About from "~/pages/About/About";
+import Contacts from "~/pages/Contacts/Contacts";
+import Announcements from "~/pages/Announcements/Announcements";
 import Invites from "~/pages/Invites/Invites";
 import Settings from "~/pages/Settings/Settings";
 import WhyUs from "~/pages/WhyUs/WhyUs";
 import Services from "~/pages/Services/Services";
-import { authLoader } from "~/loaders/AuthLoader";
 import Dashboard from "~/pages/Dashboard/Dashboard";
 
 export const HomeRoute = {

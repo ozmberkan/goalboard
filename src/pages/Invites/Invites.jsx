@@ -1,6 +1,5 @@
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
-import React, { useEffect } from "react";
-import toast from "react-hot-toast";
+import { useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +7,7 @@ import { db } from "~/firebase/firebase";
 import { motion } from "framer-motion";
 import { getUserByID } from "~/redux/slices/userSlice";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import toast from "react-hot-toast";
 
 const Invites = () => {
   const { user } = useSelector((store) => store.user);

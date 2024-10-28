@@ -180,3 +180,77 @@ export const adminUserInputs = [
   { id: 3, label: "E-Posta", name: "email", type: "email" },
   { id: 4, label: "Profil Fotoğrafı", name: "photoURL", type: "text" },
 ];
+
+export const serviceData = [
+  {
+    id: 1,
+    title: "Hizmetlerimiz",
+    description:
+      "GoalBoard olarak, projelerinizi başarıya ulaştırmanıza yardımcı olmak için çeşitli hizmetler sunuyoruz. İster küçük bir ekip yönetin, ister büyük bir proje üzerinde çalışıyor olun, ihtiyaçlarınıza uygun esnek çözümler sunuyoruz.",
+  },
+  {
+    id: 2,
+    title: "Görev Yönetimi",
+    description:
+      "Proje görevlerinizi kolayca atayın, takip edin ve tamamlayın. Görevler arası geçişi hızlı ve sorunsuz hale getiriyoruz.",
+  },
+  {
+    id: 3,
+    title: "Zaman Takibi",
+    description:
+      "Zaman çizelgeleri ve süre takibi ile ekiplerinizi daha verimli yönetin. Her görev ve projede harcanan zamanı kolayca takip edin.",
+  },
+  {
+    id: 4,
+    title: "Ekip İş Birliği",
+    description:
+      "Ekipleriniz arasında etkili bir iletişim ve iş birliği ortamı sağlayarak verimliliği artırıyoruz. Gerçek zamanlı güncellemeler ve yorumlarla projeleriniz her an kontrol altında.",
+  },
+  {
+    id: 5,
+    title: "Raporlama ve Analiz",
+    description:
+      "Projelerinizin ilerlemesini detaylı raporlarla analiz edin ve stratejik kararlar alın. Ekibinizin performansını ölçmek artık daha kolay.",
+  },
+  {
+    id: 6,
+    description:
+      "Hedeflerinize ulaşmanız için sunduğumuz bu hizmetler ile projelerinizi daha etkili bir şekilde yönetebilirsiniz. İhtiyaçlarınıza uygun çözümlerle her zaman yanınızdayız.",
+  },
+];
+
+export const aboutData = [
+  {
+    id: 1,
+    title: "Hakkımızda",
+    description:
+      "goalBoard, projelerinizi daha verimli bir şekilde yönetmenize yardımcı olmak için geliştirilmiş, modern ve kullanıcı dostu bir proje yönetim platformudur. Amacımız, ekiplerin hedeflerine ulaşmasını kolaylaştıran, iş birliğini artıran ve üretkenliği teşvik eden bir ortam yaratmaktır.",
+  },
+  {
+    id: 2,
+    description:
+      "Yılların birikimi ve uzmanlığı ile, proje yönetiminde karşılaşılan zorlukları yakından gözlemledik. Bu deneyimlerden yola çıkarak, proje süreçlerinizi sadeleştiren ve hedeflerinize daha hızlı ulaşmanıza olanak sağlayan bir platform oluşturduk. Görev yönetimi, ekip iş birliği, zaman takibi ve gerçek zamanlı güncellemeler gibi özellikler ile projeleriniz her an kontrolünüz altında olacak.",
+  },
+  {
+    id: 3,
+    description:
+      "goalBoard, iş yerinde ve ekip içinde daha fazla şeffaflık ve iletişim sağlayarak iş akışlarını optimize eder. Bizim için öncelik, her kullanıcının projelerini en verimli şekilde yönetebilmesi ve ekiplerin hedeflerine başarıyla ulaşmasıdır.",
+  },
+  {
+    id: 4,
+    description:
+      "Kullanıcılarımızın geri bildirimlerini ve ihtiyaçlarını her zaman ön planda tutarak sürekli gelişen bir platform sunuyoruz. Yalnızca bugün değil, gelecekte de sizlere en iyi hizmeti sunmak ve iş süreçlerinizi kolaylaştırmak için buradayız.",
+  },
+  {
+    id: 5,
+    title: "Misyonumuz",
+    description:
+      "Proje yönetimini herkes için daha erişilebilir, etkili ve keyifli hale getirmek.",
+  },
+  {
+    id: 6,
+    title: "Vizyonumuz",
+    description:
+      "Tüm dünyadaki ekiplerin hedeflerine ulaşmasına yardımcı olan en güvenilir ve yenilikçi proje yönetim aracı olmak.",
+  },
+];

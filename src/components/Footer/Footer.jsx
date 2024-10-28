@@ -4,9 +4,9 @@ import {
   FooterQuickLinks,
   FooterSocialTabs,
 } from "~/data/data";
+import { useSelector } from "react-redux";
 import ForLightLogo from "~/assets/Logos/goalBoardTextDark.svg";
 import ForDarkLogo from "~/assets/Logos/goalBoardTextLight.svg";
-import { useSelector } from "react-redux";
 
 const Footer = () => {
   const { theme } = useSelector((store) => store.theme);
@@ -77,7 +77,7 @@ const Footer = () => {
         </div>
         <div className="border-t px-12 border-zinc-400 dark:border-darkBorder  py-4 text-sm text-center flex justify-between items-center">
           <p>&copy; 2024 goalBoard. Tüm hakları saklıdır.</p>
-          <p>v1.4</p>
+          <p>v1.5</p>
         </div>
       </div>
     </footer>

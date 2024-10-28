@@ -7,7 +7,6 @@ import {
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { auth, db } from "~/firebase/firebase";
 import toast from "react-hot-toast";
-import { set } from "react-hook-form";
 import moment from "moment";
 
 const initialState = {
@@ -102,7 +101,6 @@ export const signInService = createAsyncThunk(
         );
         return rejectWithValue("Hesabınız devre dışı bırakılmıştır.");
       }
-
       return userData;
     } catch (error) {
       return rejectWithValue(error.message);

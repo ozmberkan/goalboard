@@ -10,7 +10,7 @@ const initialState = {
 
 export const getAllFeedBacksForAdmin = createAsyncThunk(
   "auth/getAllFeedBacksForAdmin",
-  async (id) => {
+  async () => {
     try {
       const contactsRef = collection(db, "contacts");
       const contactsDoc = await getDocs(contactsRef);
@@ -38,7 +38,7 @@ export const feedbacksSlice = createSlice({
         state.status = "success";
         state.allFeedbacks = action.payload;
       })
-      .addCase(getAllFeedBacksForAdmin.rejected, (state, action) => {
+      .addCase(getAllFeedBacksForAdmin.rejected, (state) => {
         state.status = "failed";
       });
   },

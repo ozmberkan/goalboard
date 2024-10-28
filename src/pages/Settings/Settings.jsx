@@ -3,7 +3,6 @@ import { collection, doc, getDocs, updateDoc, where } from "firebase/firestore";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { FaRegSave } from "react-icons/fa";
 import { IoBackspaceOutline } from "react-icons/io5";
 import { sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
@@ -15,15 +14,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { auth, db } from "~/firebase/firebase";
 import { getUserByID } from "~/redux/slices/userSlice";
-import { setTheme } from "~/redux/slices/themeSlice";
+import toast from "react-hot-toast";
 
 const Settings = () => {
   const { user } = useSelector((store) => store.user);
-  const dispatch = useDispatch();
-
-  const { theme } = useSelector((store) => store.theme);
-
   const [editMode, setEditMode] = useState(false);
+  const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm({
     defaultValues: {

@@ -1,6 +1,4 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import Case from "~/assets/case.png";
 
 const WhyUs = () => {
   return (

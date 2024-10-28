@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Avatar from "~/assets/noavatar.png";
 import ProjectModal from "~/components/UI/Modals/ProjectModal";
@@ -9,7 +9,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
   getDocs,
   query,
   updateDoc,

@@ -1,14 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { FaEnvelope, FaHome } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import ForgotIcon from "~/assets/Auth/forgot.svg";
 import { forgotService } from "~/redux/slices/userSlice";
 import { forgotScheme } from "~/validation/scheme";
 import { motion } from "framer-motion";
+import ForgotIcon from "~/assets/Auth/forgot.svg";
+import toast from "react-hot-toast";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();

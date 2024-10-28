@@ -1,15 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
-import SignInIcon from "~/assets/Auth/signin.svg";
 import { useForm } from "react-hook-form";
 import { signInScheme } from "~/validation/scheme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { signInService } from "~/redux/slices/userSlice";
 import { motion } from "framer-motion";
 import { SignInButtons, SignInInput } from "~/data/data";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
+import SignInIcon from "~/assets/Auth/signin.svg";
 
 const SignIn = () => {
   const dispatch = useDispatch();

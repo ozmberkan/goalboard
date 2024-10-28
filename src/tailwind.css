@@ -1,31 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 body {
     @apply bg-[#F3F3F3] text-[#202020] font-poppins  dark:bg-darkPrimary transition-all duration-500
 }
-
-
 * {
     --sb-track-color: #ffffff;
     --sb-thumb-color: #3a5adb;
     --sb-size: 5px;
-  }
-  
-  *::-webkit-scrollbar {
+}
+*::-webkit-scrollbar {
     width: var(--sb-size)
-  }
-  
-  *::-webkit-scrollbar-track {
+}
+*::-webkit-scrollbar-track {
     @apply bg-white dark:bg-darkBox
-  }
-
-  
-  
-  *::-webkit-scrollbar-thumb {
+}
+*::-webkit-scrollbar-thumb {
     background: #3a5adb;
     border-radius: 1px;
-    
-  }
+}
   

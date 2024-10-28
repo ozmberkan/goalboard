@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import PhotoEditModal from "~/components/UI/Modals/PhotoEditModal";
 import { getAllTeams } from "~/redux/slices/teamsSlice";
 import { getUserByID } from "~/redux/slices/userSlice";
-import TeamBox from "./Team/TeamBox";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { RiFunctionAddFill } from "react-icons/ri";
-import TeamModal from "~/components/UI/Modals/TeamModal";
 import { motion } from "framer-motion";
-import Avatar from "~/assets/noavatar.png";
 import { MdVerified } from "react-icons/md";
+import TeamModal from "~/components/UI/Modals/TeamModal";
+import PhotoEditModal from "~/components/UI/Modals/PhotoEditModal";
+import TeamBox from "./Team/TeamBox";
+import Avatar from "~/assets/noavatar.png";
 
 const Profile = () => {
   const [animationParent] = useAutoAnimate();

@@ -1,14 +1,13 @@
-import AdminLayout from "~/layouts/AdminLayout";
-import { authLoader } from "~/loaders/AuthLoader";
 import { lazy } from "react";
-import AdminPremiumUsers from "~/pages/Admin/AdminPremiumUsers";
-
+import { authLoader } from "~/loaders/AuthLoader";
+import AdminLayout from "~/layouts/AdminLayout";
 const Admin = lazy(() => import("~/pages/Admin/Admin"));
+const AdminUsers = lazy(() => import("~/pages/Admin/AdminUsers"));
+const AdminTeams = lazy(() => import("~/pages/Admin/AdminTeams"));
+const AdminProjects = lazy(() => import("~/pages/Admin/AdminProjects"));
 const AdminFeedBacks = lazy(() => import("~/pages/Admin/AdminFeedBacks"));
 const AdminNotification = lazy(() => import("~/pages/Admin/AdminNotification"));
-const AdminProjects = lazy(() => import("~/pages/Admin/AdminProjects"));
-const AdminTeams = lazy(() => import("~/pages/Admin/AdminTeams"));
-const AdminUsers = lazy(() => import("~/pages/Admin/AdminUsers"));
+const AdminPremiumUsers = lazy(() => import("~/pages/Admin/AdminPremiumUsers"));
 
 export const AdminRoute = {
   path: "/",

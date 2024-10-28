@@ -30,7 +30,7 @@ const Home = () => {
  p-4 rounded-md  justify-center items-center text-center "
       >
         <div className="w-full flex flex-col lg:gap-2 gap-y-3 ">
-          <h1 className="lg:text-[85px] text-[44px] font-extrabold text-primary dark:drop-shadow-custom drop-shadow-lg">
+          <h1 className="lg:text-[85px] text-[44px] font-extrabold text-primary dark:drop-shadow-custom drop-shadow-lg ">
             {user ? "Hoş geldin!" : "goalBoard"}
           </h1>
           <div className="lg:font-medium lg:text-zinc-800 font-semibold text-zinc-600 lg:text-xl text-base">

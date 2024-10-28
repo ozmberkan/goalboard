@@ -1,15 +1,15 @@
-import { FaEnvelope, FaHome, FaLock, FaUser } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpScheme } from "~/validation/scheme";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpService } from "~/redux/slices/userSlice";
-import SignUpIcon from "~/assets/Auth/signup.svg";
-import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { SignUpInput } from "~/data/data";
 import { useEffect } from "react";
+import SignUpIcon from "~/assets/Auth/signup.svg";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const SignUp = () => {
   }, [status]);
 
   return (
-    <div className="flex-grow flex w-full ">
+    <div className="flex-grow flex w-full">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

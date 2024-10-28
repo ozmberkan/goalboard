@@ -70,9 +70,9 @@ const Contacts = () => {
             Bizimle iletişime geçmek için soldaki formu doldurabilirsiniz.
           </p>
           <div className="flex flex-col gap-y-2 dark:text-darkText">
-            <span>123 Hedef Sokak 34000 İzmir, </span>
-            <span>Türkiye Email: info@goalborad.com</span>
-            <span>Tel: +90 (212) 123 4567</span>
+            <span className="text-sm">123 Hedef Sokak 34000 İzmir, </span>
+            <span className="text-sm">Türkiye Email: info@goalborad.com</span>
+            <span className="text-sm">Tel: +90 (212) 123 4567</span>
           </div>
         </div>
       </div>

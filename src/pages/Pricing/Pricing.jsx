@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import Bubble from "~/assets/Bubble.svg";
-import PricingCard from "./children/PricingCard";
+import { useState } from "react";
 import { MdCancel } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { pricingCards } from "~/data/data";
 import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import PaymentModal from "~/components/UI/Modals/PaymentModal";
 import { setSelectedPaymentType } from "~/redux/slices/userSlice";
+import Bubble from "~/assets/Bubble.svg";
+import PricingCard from "./children/PricingCard";
+import PaymentModal from "~/components/UI/Modals/PaymentModal";
 
 const Pricing = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [IsPaymentModal, setIsPaymentModal] = useState(false);
   const { user } = useSelector((store) => store.user);
 

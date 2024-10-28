@@ -19,7 +19,7 @@ const initialState = {
 
 export const getAllProjects = createAsyncThunk(
   "teams/getAllProjects",
-  async (teamID, thunkAPI) => {
+  async (teamID, { rejectWithValue }) => {
     try {
       if (!teamID) {
         throw new Error("Geçersiz kullanıcı UID");
@@ -35,7 +35,7 @@ export const getAllProjects = createAsyncThunk(
       return projects;
     } catch (error) {
       console.log(error);
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -54,7 +54,7 @@ export const getProjectsByID = createAsyncThunk(
 
 export const getAllProjectsForAdmin = createAsyncThunk(
   "auth/getAllProjectsForAdmin",
-  async (id) => {
+  async () => {
     try {
       const projectsRef = collection(db, "projects");
       const projectsDoc = await getDocs(projectsRef);
@@ -82,7 +82,7 @@ export const projectsSlice = createSlice({
         state.status = "success";
         state.projects = action.payload;
       })
-      .addCase(getAllProjects.rejected, (state, action) => {
+      .addCase(getAllProjects.rejected, (state) => {
         state.status = "failed";
       })
       .addCase(getProjectsByID.pending, (state) => {
@@ -92,7 +92,7 @@ export const projectsSlice = createSlice({
         state.status = "success";
         state.currentProject = action.payload;
       })
-      .addCase(getProjectsByID.rejected, (state, action) => {
+      .addCase(getProjectsByID.rejected, (state) => {
         state.status = "failed";
       })
       .addCase(getAllProjectsForAdmin.pending, (state) => {
@@ -102,7 +102,7 @@ export const projectsSlice = createSlice({
         state.status = "success";
         state.allProjects = action.payload;
       })
-      .addCase(getAllProjectsForAdmin.rejected, (state, action) => {
+      .addCase(getAllProjectsForAdmin.rejected, (state) => {
         state.status = "failed";
       });
   },
