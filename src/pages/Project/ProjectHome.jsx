@@ -46,7 +46,7 @@ const ProjectHome = () => {
             />
           )}
         </div>
-        <div className="w-full lg:px-4 px-2 flex flex-col py-3  border-b">
+        <div className="w-full lg:px-4 px-2 flex flex-col py-3  border-b dark:border-darkBorder">
           <Tab className="flex items-center gap-x-4 py-2 px-4  text-base  rounded-md font-medium text-zinc-700 hover:bg-zinc-200 dark:hover:bg-darkPrimary dark:text-darkText data-[selected]:bg-primary data-[selected]:text-white dark:data-[selected]:text-white dark:data-[selected]:bg-darkPrimary ">
             <FiLayout size={20} />
             {!isTabletOrMobile && <span>Genel Bakış</span>}
@@ -68,7 +68,7 @@ const ProjectHome = () => {
             {!isTabletOrMobile && <span>Ayarlar</span>}
           </Tab>
         </div>
-        <div className="w-full lg:px-4 px-2 flex flex-col gap-y-2 py-3 border-t ">
+        <div className="w-full lg:px-4 px-2 flex flex-col gap-y-2 py-3   ">
           <Tab className="flex items-center gap-x-4 py-2 px-4 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 dark:hover:bg-darkPrimary dark:text-darkText data-[selected]:bg-primary data-[selected]:text-white dark:data-[selected]:text-white dark:data-[selected]:bg-darkPrimary   ">
             <RiFeedbackLine size={20} />
             {!isTabletOrMobile && <span>Geri Bildirim</span>}
@@ -81,18 +81,20 @@ const ProjectHome = () => {
             {!isTabletOrMobile && <span>Geri Dön</span>}
           </Link>
         </div>
-        <div className="w-full lg:px-4 px-2 lg:flex hidden flex-col gap-y-2 py-3 border-t mt-auto ">
-          <div className="flex relative items-center gap-x-2 py-2 px-2 text-zinc-700 text-base  rounded-md font-medium  hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
+        <div className="w-full lg:px-4 px-2 lg:flex hidden flex-col gap-y-2 py-3 border-t mt-auto dark:border-darkBorder ">
+          <div className="flex relative items-center gap-x-2 py-2 px-2 text-zinc-700 text-base  rounded-md font-medium  dark:hover:bg-darkPrimary hover:bg-zinc-200 data-[selected]:bg-primary data-[selected]:text-white  ">
             <img
               src={user.photoURL ? user.photoURL : Avatar}
               className="w-10 h-10 rounded-md object-cover"
             />
-            <div className="absolute left-0 top-0  w-4 h-4 bg-green-500 rounded-full border-2 border-zinc-100 ">
+            <div className="absolute left-0 top-0  w-4 h-4 bg-green-500 rounded-full border-2 border-zinc-100 dark:border-darkBorder ">
               <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
             </div>
             <div className="flex flex-col">
-              <span className="text-sm">{user.username}</span>
-              <span className="text-xs">{user.email}</span>
+              <span className="text-sm dark:text-darkText">
+                {user.username}
+              </span>
+              <span className="text-xs dark:text-darkText">{user.email}</span>
             </div>
           </div>
         </div>

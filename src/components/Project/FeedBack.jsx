@@ -38,14 +38,14 @@ const FeedBack = () => {
 
   return (
     <div className="h-full">
-      <div className="w-full py-3 border-b mb-4">
-        <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1">
+      <div className="w-full py-3 border-b mb-4 dark:border-darkBorder">
+        <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1 dark:text-darkText">
           <RiFeedbackLine />
           Geri bildirim
         </h1>
       </div>
       <div className="w-full">
-        <p className="text-zinc-500 text-sm">
+        <p className="text-zinc-500 dark:text-white text-sm">
           Geri bildirimleriniz bizim için önemlidir. Lütfen karşılaştığınız
           hatalar ile ilgili geri bildirimde bulunun. Sizlere çok hızlı bir
           şekilde dönüş yapacağız. Teşekkürler.
@@ -59,7 +59,7 @@ const FeedBack = () => {
           <div key={input.id} className="flex flex-col">
             {input.type === "text" ? (
               <input
-                className="border px-4 py-2 rounded-md outline-none"
+                className="border px-4 py-2 rounded-md outline-none dark:bg-transparent dark:border-darkBorder dark:text-darkText"
                 placeholder={input.placeholder}
                 defaultValue={input.name === "username" ? user.username : ""}
                 type="text"
@@ -67,7 +67,7 @@ const FeedBack = () => {
               />
             ) : (
               <textarea
-                className="border px-4 py-2 rounded-md outline-none min-h-[75px] max-h-[75px]"
+                className="border px-4 py-2 rounded-md outline-none min-h-[75px] max-h-[75px] dark:bg-transparent dark:border-darkBorder dark:text-darkText"
                 placeholder={input.placeholder}
                 {...register(input.name)}
               />
@@ -78,7 +78,7 @@ const FeedBack = () => {
           </div>
         ))}
 
-        <button className="bg-primary p-2 hover:bg-primaryDark transition-colors duration-300 text-white rounded-md">
+        <button className="bg-primary p-2 hover:bg-primaryDark dark:hover:bg-darkPrimary dark:border-darkBorder border border-transparent dark:hover:text-darkText transition-colors duration-300 text-white rounded-md">
           Gönder
         </button>
       </form>

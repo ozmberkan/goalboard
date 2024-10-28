@@ -237,21 +237,23 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
           animate={{ scale: 1 }}
           exit={{ scale: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-white text-zinc-700  p-6 rounded-lg w-full max-w-5xl lg:h-[700px] shadow-xl cursor-default relative overflow-hidden"
+          className="bg-white dark:bg-darkBox border border-transparent dark:border-darkBorder text-zinc-700  p-6 rounded-lg w-full max-w-5xl lg:h-[700px] shadow-xl cursor-default relative overflow-hidden"
         >
           <div className="relative z-10 flex flex-col h-full">
             <div className=" w-full  flex justify-between items-center">
-              <h1 className="font-semibold text-xl">Görev Detayları</h1>
+              <h1 className="font-semibold text-xl dark:text-white">
+                Görev Detayları
+              </h1>
               <button
                 onClick={() => setIsTaskModal(false)}
-                className="p-2 bg-zinc-100 rounded-md"
+                className="p-2 bg-zinc-100 dark:bg-darkPrimary dark:text-darkText dark:hover:text-neutral-400 rounded-md"
               >
                 <MdCancel size={20} />
               </button>
             </div>
             <div className="w-full flex mt-4 h-full gap-x-4 lg:flex-row flex-col">
-              <div className="w-full rounded-xl bg-zinc-50 border p-5 flex flex-col gap-5 h-full  ">
-                <div className=" w-full flex justify-between items-center border-b lg:pb-4 pb-1 ">
+              <div className="w-full rounded-xl bg-zinc-50 dark:bg-darkPrimary dark:border-darkBorder border p-5 flex flex-col gap-5 h-full  ">
+                <div className=" w-full flex justify-between items-center border-b  dark:border-darkBorder lg:pb-4 pb-1 ">
                   <div className="flex items-center gap-x-2">
                     <img
                       src={
@@ -261,15 +263,15 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                       }
                       className="lg:w-10 lg:h-10 w-6 h-6 rounded-full object-cover"
                     />
-                    <span className="lg:font-semibold font-medium text-zinc-700 ">
+                    <span className="lg:font-semibold font-medium text-zinc-700 dark:text-darkText ">
                       {selectedTask.taskCreatorName}
                     </span>
                   </div>
-                  <h1 className="lg:text-sm text-xs">
+                  <h1 className="lg:text-sm text-xs dark:text-darkText">
                     {selectedTask.createdAt}
                   </h1>
                 </div>
-                <div className="w-full lg:h-full h-[100px] overflow-auto break-words">
+                <div className="w-full lg:h-full h-[100px] dark:text-white overflow-auto break-words">
                   {selectedTask.text}
                 </div>
               </div>
@@ -279,7 +281,7 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                     onClick={() =>
                       updateTaskStatus(selectedTask.taskID, "Yapılacaklar")
                     }
-                    className="border flex items-center gap-x-1 font-medium w-full p-2 rounded-md hover:bg-primary transition-colors text-zinc-700 hover:text-white"
+                    className="border dark:hover:text-white dark:border-darkBorder dark:text-darkText flex items-center gap-x-1 font-medium w-full p-2 rounded-md hover:bg-primary transition-colors text-zinc-700 hover:text-white"
                   >
                     <RiCircleLine />
                     Yapılacaklar
@@ -288,7 +290,7 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                     onClick={() =>
                       updateTaskStatus(selectedTask.taskID, "Devam Etmekte")
                     }
-                    className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-purple-500 transition-colors text-zinc-700 hover:text-white"
+                    className="border dark:hover:text-white dark:border-darkBorder dark:text-darkText flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-purple-500 transition-colors text-zinc-700 hover:text-white"
                   >
                     <RiCircleFill />
                     Devam Etmekte
@@ -297,7 +299,7 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                     onClick={() =>
                       updateTaskStatus(selectedTask.taskID, "Test Aşamasında")
                     }
-                    className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-orange-500 transition-colors text-zinc-700 hover:text-white"
+                    className="border dark:hover:text-white dark:border-darkBorder dark:text-darkText flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-orange-500 transition-colors text-zinc-700 hover:text-white"
                   >
                     <RiStopCircleLine />
                     Test Aşamasında
@@ -306,18 +308,18 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                     onClick={() =>
                       updateTaskStatus(selectedTask.taskID, "Tamamlandı")
                     }
-                    className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-green-500 transition-colors text-zinc-700 hover:text-white"
+                    className="border dark:hover:text-white dark:border-darkBorder dark:text-darkText flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-green-500 transition-colors text-zinc-700 hover:text-white"
                   >
                     <RiCheckboxCircleLine />
                     Tamamlandı
                   </button>
                   <form
-                    className="w-full flex flex-col gap-y-3 pt-5 border-t"
+                    className="w-full flex flex-col gap-y-3 pt-5 border-t dark:border-darkBorder"
                     onSubmit={handleSubmit(updateImportance)}
                   >
                     <select
                       {...register("taskImportance")}
-                      className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md  transition-colors text-zinc-700"
+                      className="border dark:bg-transparent dark:text-darkText dark:border-darkBorder flex items-center gap-x-1 font-medium w-full  p-2 rounded-md  transition-colors text-zinc-700"
                     >
                       <option value="low">Düşük</option>
                       <option value="normal">Normal</option>
@@ -333,11 +335,11 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                       onChange={setSelectedPerson}
                     >
                       <div className="relative w-full">
-                        <ListboxButton className="border flex items-center flex-1 gap-x-1 font-medium w-full p-2 rounded-md transition-colors text-zinc-700">
+                        <ListboxButton className="border dark:border-darkBorder dark:text-white flex items-center flex-1 gap-x-1 font-medium w-full p-2 rounded-md transition-colors text-zinc-700">
                           {selectedPerson?.username || "Bir kişi seçin"}
                         </ListboxButton>
                         <AnimatePresence>
-                          <ListboxOptions className="absolute mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50">
+                          <ListboxOptions className="absolute mt-1 w-full overflow-auto rounded-md bg-white  dark:bg-darkPrimary dark:text-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50">
                             {projectUsers.map((user) => (
                               <ListboxOption
                                 key={user.uid}
@@ -349,8 +351,8 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                                 className={({ active }) =>
                                   `cursor-pointer select-none relative px-4 py-2 ${
                                     active
-                                      ? "text-zinc-700 bg-zinc-100"
-                                      : "text-gray-900"
+                                      ? "text-zinc-700 bg-zinc-100 dark:text-white dark:bg-darkPrimary"
+                                      : "text-gray-900 dark:text-white"
                                   }`
                                 }
                               >
@@ -383,7 +385,7 @@ const TaskModal = ({ setIsTaskModal, selectedTask, projectID }) => {
                 <div className="flex w-full flex-col gap-5 ">
                   <button
                     onClick={() => archiveToTask(selectedTask.taskID)}
-                    className="border flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-violet-500 transition-colors text-zinc-700 hover:text-white"
+                    className="border dark:border-darkBorder dark:text-darkText dark:hover:text-white flex items-center gap-x-1 font-medium w-full  p-2 rounded-md hover:bg-violet-500 transition-colors text-zinc-700 hover:text-white"
                   >
                     <IoArchiveOutline />
                     Arşiv

@@ -78,16 +78,16 @@ const ProjectSettings = ({ projectID }) => {
       )}
       <div className="h-full">
         <Tooltip id="my-tooltip" />
-        <div className="w-full py-3 border-b mb-4">
-          <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1">
+        <div className="w-full py-3 dark:border-darkBorder border-b mb-4">
+          <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1 dark:text-darkText ">
             <TbSettings />
             Proje Ayarları
           </h1>
         </div>
-        <div className="flex items-center gap-x-2 justify-between border p-3 rounded-xl bg-zinc-100">
+        <div className="flex items-center gap-x-2 justify-between border p-3 rounded-xl bg-zinc-100 dark:bg-darkBox dark:border-darkBorder">
           {loading ? (
             <div className=" animate-pulse flex items-center -space-x-5 lg:font-medium text-sm">
-              <div className="w-10 h-10  border-4 border-zinc-100 shadow-lg  bg-gray-200 rounded-full dark:bg-gray-700 "></div>
+              <div className="lg:w-14 lg:h-14 w-10 h-10 border-4 border-zinc-100 dark:border-darkBorder shadow-lg  bg-gray-200 rounded-full dark:bg-gray-700 "></div>
             </div>
           ) : (
             <span className="flex items-center -space-x-5 lg:font-medium text-sm">
@@ -97,23 +97,23 @@ const ProjectSettings = ({ projectID }) => {
                   src={user.photoURL ? user.photoURL : Avatar}
                   data-tooltip-id="my-tooltip"
                   data-tooltip-content={user.username}
-                  className="lg:w-14 lg:h-14 w-10 h-10 rounded-full object-cover border-4 border-zinc-100 shadow-lg"
+                  className="lg:w-14 lg:h-14 w-10 h-10 rounded-full object-cover border-4 border-zinc-100 dark:border-darkBox shadow-lg"
                 />
               ))}
             </span>
           )}
           <Popover className="relative">
-            <PopoverButton className="lg:p-4 p-2 hover:bg-zinc-50 rounded-full lg:text-3xl text-lg">
+            <PopoverButton className="lg:p-4 p-2 dark:text-darkText hover:bg-zinc-50 dark:hover:bg-darkPrimary rounded-full lg:text-3xl text-lg">
               <FiSettings />
             </PopoverButton>
             <PopoverPanel
               anchor="bottom end"
-              className="flex flex-col border p-4 gap-y-5 mt-1 rounded-md bg-white shadow-lg"
+              className="flex flex-col border p-4 gap-y-5 mt-1 rounded-md bg-white dark:bg-darkBox dark:border-darkBorder shadow-lg"
             >
               <div className="flex flex-col gap-y-2">
                 <button
                   onClick={() => setIsInviteModal(true)}
-                  className="lg:px-4 lg:py-2 px-2 py-1 text-sm  rounded-md text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border  transition-colors duration-300 flex items-center gap-x-2"
+                  className="lg:px-4 lg:py-2 px-2 py-1 text-sm dark:bg-darkPrimary dark:text-darkText dark:border-darkBorder  rounded-md text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border  transition-colors duration-300 flex items-center gap-x-2"
                 >
                   <FiUsers />
                   <span className="lg:flex ">Projeye Davet Et</span>
@@ -121,7 +121,7 @@ const ProjectSettings = ({ projectID }) => {
 
                 <button
                   onClick={deleteProject}
-                  className="lg:px-4 lg:py-2 px-2 py-1  text-sm rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
+                  className="lg:px-4 lg:py-2 px-2 py-1  text-sm dark:bg-darkPrimary dark:text-darkText dark:border-darkBorder rounded-md  text-zinc-700 bg-zinc-50 hover:bg-zinc-100 border transition-colors duration-300 flex items-center gap-x-2"
                 >
                   <FiTrash className="text-red-500" />
                   <span className="lg:flex  text-red-500">Projeyi Sil</span>

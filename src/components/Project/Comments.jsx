@@ -43,22 +43,22 @@ const Comments = ({ projectID }) => {
   return (
     <>
       <div className="h-full">
-        <div className="w-full py-3 border-b mb-4 flex justify-between items-center">
-          <h1 className="lg:text-xl text-lg font-semibold flex items-center gap-x-1">
+        <div className="w-full py-3 border-b dark:border-darkBorder mb-4 flex justify-between items-center">
+          <h1 className="lg:text-xl dark:text-darkText text-lg font-semibold flex items-center gap-x-1">
             <FaRegComments />
             Yorumlar
           </h1>
           <div className="flex gap-x-2">
             <button
               onClick={() => setIsCommentModal(true)}
-              className="bg-green-100 text-green-500 border-green-400 border lg:px-4 lg:py-1 p-1 rounded-md flex items-center gap-x-2"
+              className="bg-green-100 text-green-500 dark:bg-green-500 dark:text-green-100 dark:border-darkBorder border-green-400 border lg:px-4 lg:py-1 p-1 rounded-md flex items-center gap-x-2"
             >
               <FaRegCommentDots size={20} />
               <span className="lg:flex hidden text-sm">Yeni Yorum Ekle</span>
             </button>
             <button
               onClick={cleanComments}
-              className="bg-red-100 text-red-500 border-red-400 border lg:px-4 lg:py-1 p-1 rounded-md flex items-center gap-x-2"
+              className="bg-red-100 text-red-500 dark:bg-red-500 dark:text-red-100 dark:border-darkBorder border-red-400 border lg:px-4 lg:py-1 p-1 rounded-md flex items-center gap-x-2"
             >
               <MdDeleteOutline size={20} />
               <span className="lg:flex hidden text-sm">Yorumları Temizle</span>
@@ -69,16 +69,16 @@ const Comments = ({ projectID }) => {
           {currentProject?.comments.length > 0 ? (
             currentProject?.comments?.map((comment) => (
               <div
-                className={`bg-zinc-100 flex flex-col items-center text-black rounded-xl w-full p-4 border`}
+                className={`bg-zinc-100 dark:bg-darkBox flex flex-col items-center text-black rounded-xl w-full p-4 border dark:border-darkBorder`}
                 key={comment.commentID}
               >
-                <div className=" pb-2 w-full flex gap-x-2 border-b">
+                <div className=" pb-2 w-full flex gap-x-2 border-b dark:border-darkBorder">
                   <img
                     src={comment.creatorImage ? comment?.creatorImage : Avatar}
                     className="w-10 h-10 object-cover rounded-full"
                   />
                   <div>
-                    <h1 className="font-semibold flex items-center gap-x-1">
+                    <h1 className="font-semibold flex items-center gap-x-1 dark:text-white">
                       {comment.creatorName}{" "}
                       <span className="font-semibold text-primary flex items-center gap-x-2">
                         {comment.creatorPremium !== "silver" && (
@@ -99,13 +99,13 @@ const Comments = ({ projectID }) => {
                     <p className="text-xs text-gray-500">{comment.createdAt}</p>
                   </div>
                 </div>
-                <div className="text-sm font-medium w-full py-4">
+                <div className="text-sm font-medium w-full py-4 dark:text-white">
                   {comment.comment}
                 </div>
               </div>
             ))
           ) : (
-            <div className="bg-zinc-100 p-4 rounded-md border border-zinc-200">
+            <div className="bg-zinc-100 dark:bg-darkBox  dark:border-darkBorder dark:text-darkText p-4 rounded-md border border-zinc-200">
               <span>Henüz yorum yapılmamış.</span>
             </div>
           )}
