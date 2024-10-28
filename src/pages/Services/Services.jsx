@@ -3,9 +3,9 @@ import React from "react";
 const Services = () => {
   return (
     <div className="flex-grow p-4 flex">
-      <div className="w-full border bg-white rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
+      <div className="w-full border bg-white dark:bg-darkBox dark:border-darkBorder rounded-md p-8 flex flex-col gap-y-4 relative  overflow-hidden">
         <h1 className="text-4xl font-bold text-primary ">Hizmetlerimiz</h1>
-        <p className="font-medium text-lg text-zinc-700">
+        <p className="font-medium text-lg text-zinc-700 dark:text-darkText">
           GoalBoard olarak, projelerinizi başarıya ulaştırmanıza yardımcı olmak
           için çeşitli hizmetler sunuyoruz. İster küçük bir ekip yönetin, ister
           büyük bir proje üzerinde çalışıyor olun, ihtiyaçlarınıza uygun esnek
