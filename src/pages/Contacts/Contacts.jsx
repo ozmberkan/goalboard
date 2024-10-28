@@ -33,7 +33,7 @@ const Contacts = () => {
 
   return (
     <div className="flex-grow p-4 flex">
-      <div className="w-full border bg-white dark:bg-darkBox dark:border-darkBorder rounded-md p-8 flex  gap-x-4 relative  overflow-hidden transition-all duration-500">
+      <div className="w-full border bg-white dark:bg-darkBox dark:border-darkBorder rounded-md p-8 flex lg:flex-row flex-col gap-y-5  gap-x-4 relative  overflow-hidden transition-all duration-500">
         <form
           className="lg:w-1/2 grid grid-cols-1 gap-4"
           onSubmit={handleSubmit(contactHandle)}
@@ -65,8 +65,8 @@ const Contacts = () => {
             Gönder
           </button>
         </form>
-        <div className="w-1/2 h-full px-3 flex itemst-start flex-col gap-y-5">
-          <p className="text-3xl font-semibold text-zinc-700 dark:text-neutral-400">
+        <div className="lg:w-1/2 h-full px-3 flex itemst-start flex-col gap-y-5">
+          <p className="lg:text-3xl font-semibold text-zinc-700 dark:text-neutral-400">
             Bizimle iletişime geçmek için soldaki formu doldurabilirsiniz.
           </p>
           <div className="flex flex-col gap-y-2 dark:text-darkText">
