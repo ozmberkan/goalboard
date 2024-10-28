@@ -1,8 +1,7 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import Avatar from "~/assets/noavatar.png";
 import { motion } from "framer-motion";
 import { MdVerified } from "react-icons/md";
+import Avatar from "~/assets/noavatar.png";
 
 const AdminPremiumUsers = () => {
   const { allUsers, user } = useSelector((store) => store.user);

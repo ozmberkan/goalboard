@@ -1,9 +1,8 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import Avatar from "~/assets/noavatar.png";
 import { motion } from "framer-motion";
 import { GoProjectRoadmap } from "react-icons/go";
 import { FaLayerGroup, FaUser } from "react-icons/fa6";
+import Avatar from "~/assets/noavatar.png";
 
 const AdminFeedBacks = () => {
   const { allFeedbacks } = useSelector((store) => store.feedbacks);

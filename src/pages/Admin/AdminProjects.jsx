@@ -27,7 +27,7 @@ const AdminProjects = () => {
           </div>
         </div>
       </div>
-      <div className="grid lg:grid-cols-5 grid-cols-1 place-items-center w-full lg:mt-3 py-5 px-4 gap-6">
+      <div className="grid lg:grid-cols-2 grid-cols-1 place-items-center w-full lg:mt-3 py-5 px-4 gap-6">
         {allProjects.map((project) => (
           <div
             key={project.projectID}

@@ -254,3 +254,10 @@ export const aboutData = [
       "Tüm dünyadaki ekiplerin hedeflerine ulaşmasına yardımcı olan en güvenilir ve yenilikçi proje yönetim aracı olmak.",
   },
 ];
+
+export const adminDashboard = [
+  { id: 1, label: "Kullanıcı Sayısı", key: "users" },
+  { id: 2, label: "Takım Sayısı", key: "teams" },
+  { id: 3, label: "Proje Sayısı", key: "projects" },
+  { id: 4, label: "Geribildirim Sayısı", key: "feedbacks" },
+];

@@ -92,17 +92,17 @@ export const getAllTeams = createAsyncThunk(
 
 export const getAllTeamsForAdmin = createAsyncThunk(
   "auth/getAllTeamsForAdmin",
-  async ({ rejectWithValue }) => {
+  async () => {
     try {
       const teamsRef = collection(db, "teams");
       const teamsDoc = await getDocs(teamsRef);
-      const teamsData = teamsDoc.docs.map((doc) => ({
+      const teamData = teamsDoc.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      return teamsData;
+      return teamData;
     } catch (error) {
-      return rejectWithValue(error.message);
+      console.log(error);
     }
   }
 );

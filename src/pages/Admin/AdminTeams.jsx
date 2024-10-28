@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import Avatar from "~/assets/noavatar.png";
 import { motion } from "framer-motion";
@@ -6,6 +5,7 @@ import { motion } from "framer-motion";
 const AdminTeams = () => {
   const { allTeams } = useSelector((store) => store.teams);
   const { user } = useSelector((store) => store.user);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

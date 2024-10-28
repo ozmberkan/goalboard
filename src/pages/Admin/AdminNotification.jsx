@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import Avatar from "~/assets/noavatar.png";
 import { useForm } from "react-hook-form";
 import {
   arrayUnion,
@@ -12,9 +11,10 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "~/firebase/firebase";
+import { nanoid } from "nanoid";
+import Avatar from "~/assets/noavatar.png";
 import toast from "react-hot-toast";
 import moment from "moment";
-import { nanoid } from "nanoid";
 
 const AdminNotification = () => {
   const { user } = useSelector((store) => store.user);

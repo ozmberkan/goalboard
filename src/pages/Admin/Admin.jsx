@@ -1,6 +1,11 @@
-import React, { useEffect } from "react";
+import { all } from "axios";
+import { set } from "firebase/database";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from "~/assets/noavatar.png";
+import { adminDashboard } from "~/data/data";
+import { db } from "~/firebase/firebase";
 import { getAllFeedBacksForAdmin } from "~/redux/slices/contactsSlice";
 import { getAllProjectsForAdmin } from "~/redux/slices/projectsSlice";
 import { getAllTeamsForAdmin } from "~/redux/slices/teamsSlice";
@@ -15,9 +20,9 @@ const Admin = () => {
 
   useEffect(() => {
     dispatch(getAllUserForAdmin());
-    dispatch(getAllTeamsForAdmin());
     dispatch(getAllProjectsForAdmin());
     dispatch(getAllFeedBacksForAdmin());
+    dispatch(getAllTeamsForAdmin());
   }, []);
 
   if (status === "loading") {
@@ -46,49 +51,53 @@ const Admin = () => {
         </div>
       </div>
       <div className="grid lg:grid-cols-3 grid-cols-1 place-items-center w-full lg:mt-6 py-5 px-4 gap-6">
-        <div className="h-[200px]  w-full rounded-md bg-[#F9E5CF] p-3 ">
-          <div className="w-full border-b border-orange-300 pb-2">
-            <span className="text-orange-600 text-xl   font-semibold ">
-              Kullanıcı Sayısı
-            </span>
+        {adminDashboard.map((item) => (
+          <div
+            key={item.id}
+            className={`h-[200px] w-full rounded-md bg-gradient-to-b p-3 
+          ${item.key === "users" && "from-[#C0F4E6] to-[#D9F4E5]"}
+          ${item.key === "teams" && "from-[#FFD3B5] to-[#FFEEE6]"}
+          ${item.key === "projects" && "from-[#CAEFF9] to-[#DFF3F8]"}
+          ${item.key === "feedbacks" && "from-[#CFCAF9] to-[#E4E0F8] "}
+          `}
+          >
+            <div
+              className={`w-full border-b border-orange-300 pb-2
+              ${item.key === "users" && "border-green-500"}
+              ${item.key === "teams" && "border-orange-500"}
+              ${item.key === "projects" && "border-blue-500"}
+              ${item.key === "feedbacks" && "border-purple-500"}
+              
+              `}
+            >
+              <span
+                className={` text-xl   font-semibold 
+                ${item.key === "users" && "text-green-500"} 
+                ${item.key === "teams" && "text-orange-500"}
+                ${item.key === "projects" && "text-blue-500"}
+                ${item.key === "feedbacks" && "text-purple-500"}
+                `}
+              >
+                {item.label}
+              </span>
+            </div>
+            <div className="w-full py-4">
+              <span
+                className={`text-4xl 
+                ${item.key === "users" && "text-green-500"}
+                ${item.key === "teams" && "text-orange-500"}
+                ${item.key === "projects" && "text-blue-500"}
+                ${item.key === "feedbacks" && "text-purple-500"} 
+                `}
+              >
+                {item.key === "users" && allUsers.length}
+                {item.key === "teams" && allTeams.length}
+                {item.key === "projects" && allProjects.length}
+                {item.key === "feedbacks" && allFeedbacks.length}
+              </span>
+            </div>
           </div>
-          <div className="w-full py-4">
-            <span className="text-4xl text-orange-600">{allUsers.length}</span>
-          </div>
-        </div>
-        <div className="h-[200px]  w-full rounded-md bg-gradient-to-b from-[#C0F4E6] to-[#D9F4E5] p-3 shadow-lg ">
-          <div className="w-full border-b border-green-300 pb-2">
-            <span className="text-green-600 text-xl   font-semibold ">
-              Takım Sayısı
-            </span>
-          </div>
-          <div className="w-full py-4">
-            <span className="text-4xl text-green-600">{allTeams.length}</span>
-          </div>
-        </div>
-        <div className="h-[200px]  w-full rounded-md bg-gradient-to-b from-[#CAEFF9] to-[#DFF3F8] p-3 shadow-lg ">
-          <div className="w-full border-b border-blue-300 pb-2">
-            <span className="text-blue-600 text-xl   font-semibold ">
-              Proje Sayısı
-            </span>
-          </div>
-          <div className="w-full py-4  flex justify-start items-center ">
-            <span className="text-4xl text-blue-600">{allProjects.length}</span>
-          </div>
-        </div>
-
-        <div className="h-[200px]  w-full rounded-md bg-gradient-to-b from-[#CFCAF9] to-[#E4E0F8] p-3 shadow-lg ">
-          <div className="w-full border-b border-violet-300 pb-2">
-            <span className="text-violet-600 text-xl   font-semibold ">
-              Geribildirim Sayısı
-            </span>
-          </div>
-          <div className="w-full py-4  flex justify-start items-center ">
-            <span className="text-4xl text-violet-600">
-              {allFeedbacks.length}
-            </span>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

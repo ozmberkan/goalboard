@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Avatar from "~/assets/noavatar.png";
 import { motion } from "framer-motion";
 import { FiEdit, FiLock, FiUnlock } from "react-icons/fi";
-import AdminUserEditModal from "~/components/UI/Modals/Admin/AdminUserEditModal";
 import { getAllUserForAdmin } from "~/redux/slices/userSlice";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/firebase/firebase";
-import toast from "react-hot-toast";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import AdminUserEditModal from "~/components/UI/Modals/Admin/AdminUserEditModal";
+import toast from "react-hot-toast";
+import Avatar from "~/assets/noavatar.png";
 
 const AdminUsers = () => {
   const [animationParent] = useAutoAnimate();
