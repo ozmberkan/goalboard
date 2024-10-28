@@ -74,13 +74,13 @@ const AdminUsers = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col flex-grow lg:p-6 p-2  gap-y-2 bg-white "
+        className="flex flex-col flex-grow lg:p-6 p-2  gap-y-2 bg-white dark:bg-darkPrimary "
       >
-        <div className="w-full   px-4 py-2 flex justify-between items-center h-18 border-b">
-          <span className="lg:text-2xl text-lg font-bold text-zinc-600 lg:flex hidden">
+        <div className="w-full px-4 py-2 flex justify-between items-center h-18 border-b dark:border-darkBorder">
+          <span className="lg:text-2xl text-lg font-bold text-zinc-600 dark:text-darkText lg:flex hidden">
             Kullanıcılar
           </span>
-          <div className="lg:pl-5 py-2 lg:border-l flex items-center gap-x-3">
+          <div className="lg:pl-5 py-2 lg:border-l dark:border-darkBorder flex items-center gap-x-3">
             <img
               src={user.photoURL ? user.photoURL : Avatar}
               className="rounded-full w-10 h-10 object-cover"
@@ -96,9 +96,9 @@ const AdminUsers = () => {
             <input
               placeholder="Ara.."
               onChange={(e) => setSearch(e.target.value)}
-              className="w-1/2 px-4 bg-zinc-50 flex-1 py-2 rounded-md border focus:outline-none "
+              className="w-1/2 px-4 bg-zinc-50 dark:bg-transparent dark:border-darkBorder dark:text-white flex-1 py-2 rounded-md border focus:outline-none "
             />
-            <span className="flex px-4 gap-x-2 py-2 rounded-md border bg-zinc-50 justify-center items-center">
+            <span className="flex px-4 gap-x-2 py-2 rounded-md border bg-zinc-50 dark:bg-darkBox dark:text-darkText dark:border-darkBorder justify-center items-center">
               {allUsers.length}{" "}
               <span className="lg:flex hidden">Kullanıcı</span>
             </span>
@@ -110,7 +110,7 @@ const AdminUsers = () => {
             {filteredUsers.map((user) => (
               <div
                 key={user.uid}
-                className=" w-full rounded-md bg-zinc-50 border p-3 "
+                className=" w-full rounded-md bg-zinc-50 dark:bg-darkBox dark:text-darkText dark:border-darkBorder border p-3 "
               >
                 <div className="w-full  flex justify-between items-center ">
                   <div className="flex items-center lg:gap-x-3 gap-x-2">
@@ -131,13 +131,13 @@ const AdminUsers = () => {
                   <div className="flex gap-x-2 items-center">
                     <button
                       onClick={() => openModal(user)}
-                      className="lg:p-2 p-1 rounded-md bg-white border"
+                      className="lg:p-2 p-1 rounded-md bg-white dark:bg-darkPrimary dark:border-darkBorder border"
                     >
                       <FiEdit />
                     </button>
                     <button
                       onClick={() => disableUser(user)}
-                      className={`lg:p-2 p-1 rounded-md bg-white border ${
+                      className={`lg:p-2 p-1 rounded-md bg-white dark:bg-darkPrimary dark:border-darkBorder border ${
                         !user.disabled ? "text-zinc-700" : "text-green-500"
                       }`}
                     >
