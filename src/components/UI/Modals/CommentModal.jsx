@@ -58,10 +58,10 @@ const CommentModal = ({ setIsCommentModal, projectID }) => {
           animate={{ scale: 1, rotate: "0deg" }}
           exit={{ scale: 0, rotate: "0deg" }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-gradient-to-br from-primary to-primaryDark  p-6 rounded-lg w-full max-w-5xl shadow-xl cursor-default relative overflow-hidden"
+          className="bg-gradient-to-br from-primary to-primaryDark dark:from-darkPrimary dark:to-darkBox border border-transparent dark:border-darkBorder  p-6 rounded-lg w-full max-w-5xl shadow-xl cursor-default relative overflow-hidden"
         >
           <div className="relative z-10 flex items-start flex-col gap-y-3 justify-start">
-            <h3 className="lg:text-3xl text-2xl font-bold text-center mb-2 text-white">
+            <h3 className="lg:text-3xl text-2xl font-bold text-center mb-2 text-white dark:text-darkText">
               Yeni Yorum Ekle
             </h3>
           </div>
@@ -70,21 +70,21 @@ const CommentModal = ({ setIsCommentModal, projectID }) => {
             onSubmit={handleSubmit(createComment)}
           >
             <textarea
-              className="min-h-32 max-h-44 w-full rounded-md border p-2 outline-none "
+              className="min-h-32 max-h-44 w-full rounded-md border p-2 outline-none dark:bg-transparent dark:border-darkBorder dark:text-white"
               placeholder="Mesajınız"
               {...register("comment", { required: true })}
             />
             <div className="w-full flex justify-start items-center gap-x-2">
               <button
                 type="submit"
-                className="px-4 py-2 rounded-md bg-white text-black hover:bg-zinc-200"
+                className="px-4 py-2 rounded-md bg-white text-black dark:bg-darkPrimary dark:text-darkText  border border-transparent dark:border-darkBorder hover:bg-zinc-200"
               >
                 Gönder
               </button>
               <button
                 type="button"
                 onClick={() => setIsCommentModal(false)}
-                className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600"
+                className="px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 dark:bg-darkPrimary dark:text-red-500 border border-transparent dark:border-darkBorder"
               >
                 Vazgeç
               </button>

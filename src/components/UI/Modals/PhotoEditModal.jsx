@@ -63,7 +63,7 @@ const PhotoEditModal = ({ setIsEditPhoto }) => {
           animate={{ scale: 1, rotate: "0deg" }}
           exit={{ scale: 0, rotate: "0deg" }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-gradient-to-br from-primary  to-primaryDark p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative "
+          className="bg-gradient-to-br from-primary dark:from-darkPrimary dark:to-darkBox  border border-transparent dark:border-darkBorder  to-primaryDark p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative "
         >
           <div className="relative z-10 flex items-start flex-col gap-y-3 justify-start">
             <h3 className="lg:text-3xl text-xl font-bold text-center mb-2 text-white">
