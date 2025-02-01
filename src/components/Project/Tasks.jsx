@@ -150,14 +150,14 @@ const Tasks = ({ projectID }) => {
               </div>
             </div>
             <div
-              className="w-full  p-3  flex flex-col gap-y-2 overflow-y-auto max-h-[600px]"
+              className="w-full  p-3  flex flex-col gap-y-2  overflow-auto h-[500px]"
               ref={animationParent}
             >
               {currentProject?.tasks?.map((task) => {
                 return task.status === "Yapılacaklar" ? (
                   <div
                     key={task.taskID}
-                    className="bg-white dark:bg-darkPrimary dark:border-darkBorder p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2 overflow-hidden"
+                    className="bg-white dark:bg-darkPrimary dark:border-darkBorder p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2 overflow-hidden min-h-32"
                   >
                     <div className="flex gap-x-2 items-center justify-between w-full border-b dark:border-darkBorder pb-2">
                       <div className="flex items-center gap-x-1 -space-x-3 ">
@@ -204,7 +204,7 @@ const Tasks = ({ projectID }) => {
                         </button>
                       </div>
                     </div>
-                    <div className="w-full lg:h-full h-[100px] overflow-auto break-words">
+                    <div className="w-full ">
                       <span className="dark:text-white">
                         {task.text.slice(0, 300)}...
                       </span>
@@ -231,7 +231,7 @@ const Tasks = ({ projectID }) => {
                 return task.status === "Devam Etmekte" ? (
                   <div
                     key={task.taskID}
-                    className="bg-white dark:bg-darkPrimary dark:border-darkBorder p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2"
+                    className="bg-white dark:bg-darkPrimary dark:border-darkBorder p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2 overflow-hidden min-h-32"
                   >
                     <div className="flex gap-x-2 items-center justify-between w-full border-b dark:border-darkBorder pb-2">
                       <div className="flex items-center gap-x-1 -space-x-3 ">
@@ -303,7 +303,7 @@ const Tasks = ({ projectID }) => {
                 return task.status === "Test Aşamasında" ? (
                   <div
                     key={task.taskID}
-                    className="bg-white dark:bg-darkPrimary dark:border-darkBorder p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2"
+                    className="bg-white dark:bg-darkPrimary dark:border-darkBorder p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2 overflow-hidden min-h-32"
                   >
                     <div className="flex gap-x-2 items-center justify-between w-full border-b dark:border-darkBorder pb-2">
                       <div className="flex items-center gap-x-1 -space-x-3 ">
@@ -375,7 +375,7 @@ const Tasks = ({ projectID }) => {
                 return task.status === "Tamamlandı" ? (
                   <div
                     key={task.taskID}
-                    className="bg-white dark:bg-darkPrimary dark:border-darkBorder p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2"
+                    className="bg-white dark:bg-darkPrimary dark:border-darkBorder p-5 border rounded-md text-sm flex flex-col items-start justify-start gap-2 overflow-hidden min-h-32"
                   >
                     <div className="flex gap-x-2 items-center justify-between w-full border-b dark:border-darkBorder pb-2">
                       <div className="flex items-center gap-x-1 -space-x-3 ">
